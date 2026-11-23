@@ -13,13 +13,13 @@
 body{margin:0}
 </style>
 </helmet>
-<div style="width: 2000px; height: 2290px; box-sizing: border-box; background: #f6f3ec; color: #1c1b18; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column">
+<div style="width: 2000px; height: 2380px; box-sizing: border-box; background: #f6f3ec; color: #1c1b18; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column">
 
 <!-- HEADER -->
 <div style="background: #1c1b18; color: #f6f3ec; padding: 34px 48px 30px 48px; display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end; gap: 48px">
 <div style="display: flex; flex-direction: column; gap: 12px; max-width: 1560px">
 <div style="font-size: 18px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #d9c9a3">ROB535 course project · nuScenes · three released camera-only 3D detectors</div>
-<div style="font-size: 22px; color: #e8e2d2">[Author names] · [Department, University]</div>
+<div style="font-size: 22px; color: #e8e2d2">Max L Han · Papa Yaw Wireko Boampong · Jiachen Ni · Tim William Bense · Robotics, University of Michigan</div>
 <div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 58px; font-weight: 700; line-height: 1.05; text-wrap: balance">Camera Failure and Recovery in Three Camera-Only 3D Detectors</div>
 <div style="font-size: 26px; line-height: 1.3; color: #e8e2d2">A camera stream can go dark; when it returns, a temporal detector may still carry features built from the damaged inputs. After a front-camera outage, how quickly does detection recover, and how much does the answer depend on the model's temporal history?</div>
 </div>
@@ -46,7 +46,7 @@ body{margin:0}
 </div>
 <div style="padding: 22px 28px; display: flex; flex-direction: column; gap: 6px">
 <div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 52px; font-weight: 700; line-height: 1">43 – 77 %</div>
-<div style="font-size: 20px; line-height: 1.3"><b>of damaged events have incomplete follow-up</b>, and some of them still recover. After 2 s outages 32–38 % stay unconfirmed: right-censored, not failures.</div>
+<div style="font-size: 20px; line-height: 1.3"><b>of damaged events have incomplete follow-up</b>, and some of them still recover. After 2 s outages 32–39 % stay unconfirmed overall (32–38 % with incomplete follow-up): right-censored, not failures.</div>
 </div>
 </div>
 
@@ -356,7 +356,7 @@ body{margin:0}
 <span style="display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; background: #e8b4b0; border: 1px solid #1c1b18; display: inline-block; flex-shrink: 0"></span>not recovered, follow-up complete (1 event)</span>
 </div>
 </div>
-<div style="font-size: 18px; line-height: 1.4">Damaged events after a 2 s outage (93 / 79 / 100). 32–38 % remain unconfirmed because follow-up is incomplete (the broader 43–77 % across durations includes events that still recover). Where follow-up <i>is</i> complete, recovery is confirmed in 209 of 210 events. Unconfirmed events are <b>right-censored, not failures</b>; the complete-follow-up events are a selected subset.</div>
+<div style="font-size: 18px; line-height: 1.4">Damaged events after a 2 s outage (93 / 79 / 100). 32–39 % remain unconfirmed overall and 32–38 % are unconfirmed with incomplete follow-up (StreamPETR: 31/79 = 39.2 % unconfirmed, 30/79 = 38.0 % with incomplete follow-up; the one other event had complete follow-up without recovery). The broader 43–77 % across durations includes events that still recover. Where follow-up <i>is</i> complete, recovery is confirmed in 209 of 210 events. Unconfirmed events are <b>right-censored, not failures</b>; the complete-follow-up events are a selected subset.</div>
 </div>
 
 </div>
@@ -374,7 +374,7 @@ body{margin:0}
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2000,"height":2290}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2000,"height":2380}}'>
 class Component extends DCLogic {
 renderVals() {
 return {};
