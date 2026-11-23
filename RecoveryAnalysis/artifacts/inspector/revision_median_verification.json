@@ -1,0 +1,30 @@
+{
+ "summary_reproduced": true,
+ "primary_results_unchanged": true,
+ "median_check": {
+  "sparsebev": {
+   "B": 10000,
+   "unreached": 2,
+   "ci95": [
+    1.0,
+    2.0
+   ]
+  },
+  "streampetr": {
+   "B": 10000,
+   "unreached": 235,
+   "ci95": [
+    1.0,
+    4.0
+   ]
+  },
+  "bevformer": {
+   "B": 10000,
+   "unreached": 20,
+   "ci95": [
+    0.5,
+    2.0
+   ]
+  }
+ }
+}

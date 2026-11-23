@@ -1,0 +1,17 @@
+flash-attention commit d95ee1a95da2b138073b5eef0f09ce4de615ba5e (tag v0.2.2)
+Created: 2026-11-21 (conda env streampetr_fa = 'conda create --clone streampetr', then:)
+  conda install -n streampetr_fa -c nvidia/label/cuda-11.8.0 cuda-nvcc cuda-cudart-dev cuda-libraries-dev cuda-nvrtc-dev   (log: cuda.log)
+  pip install ninja   (conda gxx_linux-64 failed on a binutils conflict, gcc.log / gcc2.log; system g++-11/gcc-11 used instead)
+  git clone https://github.com/HazyResearch/flash-attention fa_src; git checkout v0.2.2; git submodule update --init --recursive
+  (cd fa_src && CUDA_HOME=$HOME/anaconda3/envs/streampetr_fa CC=gcc-11 CXX=g++-11 CUDAHOSTCXX=g++-11 MAX_JOBS=24 \
+     PATH=$HOME/anaconda3/envs/streampetr_fa/bin:$PATH pip install -v --no-build-isolation .)      (log: build.log, rc=0)
+Patch attempted on setup.py (see setup_py.patch; it only matched the function DEFINITION line, so the minor-version check
+was not actually bypassed by it -- the build passed without needing it; the check function evidently is not invoked in v0.2.2's
+install path). Toolchain:
+Cuda compilation tools, release 11.8, V11.8.89 Build cuda_11.8.r11.8/compiler.31833905_0 
+g++-11 (Ubuntu 11.5.0-1ubuntu1~24.04.1) 11.5.0
+torch 1.9.0+cu111 11.1
+Installed extension: /home/rockhan/anaconda3/envs/streampetr_fa/lib/python3.8/site-packages/flash_attn_cuda.cpython-38-x86_64-linux-gnu.so
+  sha256 46a7049f3e62136b031134ab75b7310c65debe0c64bac12167d1748b1b225d0b
+Runs that started BEFORE the run.json provenance fields were added (rf_pilot_a, rf_val_d05, rf_val_d10 and val_realflash) record
+flash_attn.version = null and populated shim fields; they used the SAME env/extension above (module path recorded in run.json).

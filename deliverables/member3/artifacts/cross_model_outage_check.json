@@ -1,0 +1,187 @@
+{
+ "pilot_a": {
+  "sparsebev": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 0,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "bevformer": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 0,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "streampetr_pilot": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 0,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  }
+ },
+ "pilot_d05": {
+  "sparsebev": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 11,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "bevformer": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 11,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "streampetr_pilot": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 11,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  }
+ },
+ "pilot_d10": {
+  "sparsebev": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 21,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "bevformer": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 21,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "streampetr_pilot": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 21,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  }
+ },
+ "pilot_d20": {
+  "sparsebev": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 42,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "bevformer": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 42,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "streampetr_pilot": {
+   "n_records": 2412,
+   "n_unique_images": 2412,
+   "n_black": 42,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  }
+ },
+ "val_a": {
+  "sparsebev": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 0,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "bevformer": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 0,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "streampetr_val": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 0,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  }
+ },
+ "val_d05": {
+  "sparsebev": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 168,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "bevformer": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 168,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "streampetr_val": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 168,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  }
+ },
+ "val_d10": {
+  "sparsebev": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 326,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "bevformer": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 326,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "streampetr_val": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 326,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  }
+ },
+ "val_d20": {
+  "sparsebev": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 635,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "bevformer": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 635,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  },
+  "streampetr_val": {
+   "n_records": 36114,
+   "n_unique_images": 36114,
+   "n_black": 635,
+   "consumed_set_equals_sparsebev": true,
+   "black_set_equals_sparsebev": true
+  }
+ },
+ "ALL_IDENTICAL": true
+}

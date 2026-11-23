@@ -1,0 +1,517 @@
+{
+ "note": "Before/after record of the four Inspector corrections (Member 4 review 1). Superseded files are in artifacts/superseded_before_inspector_review2/.",
+ "correction1_median_interval": {
+  "sparsebev": {
+   "0.5": {
+    "before": [
+     0.0,
+     0.5
+    ],
+    "before_fraction_reached": 1.0,
+    "after": [
+     0.0,
+     0.5
+    ],
+    "after_unreached": 0,
+    "B": 10000,
+    "after_conditional_supplemental": [
+     0.0,
+     0.5
+    ]
+   },
+   "1.0": {
+    "before": [
+     0.5,
+     1.0
+    ],
+    "before_fraction_reached": 1.0,
+    "after": [
+     0.5,
+     1.0
+    ],
+    "after_unreached": 0,
+    "B": 10000,
+    "after_conditional_supplemental": [
+     0.5,
+     1.0
+    ]
+   },
+   "2.0": {
+    "before": [
+     1.0,
+     2.0
+    ],
+    "before_fraction_reached": 1.0,
+    "after": [
+     1.0,
+     2.0
+    ],
+    "after_unreached": 2,
+    "B": 10000,
+    "after_conditional_supplemental": [
+     1.0,
+     2.0
+    ]
+   }
+  },
+  "streampetr": {
+   "0.5": {
+    "before": [
+     0.0,
+     0.5
+    ],
+    "before_fraction_reached": 1.0,
+    "after": [
+     0.0,
+     0.5
+    ],
+    "after_unreached": 0,
+    "B": 10000,
+    "after_conditional_supplemental": [
+     0.0,
+     0.5
+    ]
+   },
+   "1.0": {
+    "before": [
+     0.0,
+     1.0
+    ],
+    "before_fraction_reached": 1.0,
+    "after": [
+     0.0,
+     1.5
+    ],
+    "after_unreached": 1,
+    "B": 10000,
+    "after_conditional_supplemental": [
+     0.0,
+     1.5
+    ]
+   },
+   "2.0": {
+    "before": [
+     1.0,
+     3.0
+    ],
+    "before_fraction_reached": 0.975,
+    "after": [
+     1.0,
+     4.0
+    ],
+    "after_unreached": 235,
+    "B": 10000,
+    "after_conditional_supplemental": [
+     1.0,
+     3.0
+    ]
+   }
+  },
+  "bevformer": {
+   "0.5": {
+    "before": [
+     0.0,
+     0.5
+    ],
+    "before_fraction_reached": 1.0,
+    "after": [
+     0.0,
+     0.5
+    ],
+    "after_unreached": 0,
+    "B": 10000,
+    "after_conditional_supplemental": [
+     0.0,
+     0.5
+    ]
+   },
+   "1.0": {
+    "before": [
+     0.5,
+     1.0
+    ],
+    "before_fraction_reached": 1.0,
+    "after": [
+     0.5,
+     1.0
+    ],
+    "after_unreached": 0,
+    "B": 10000,
+    "after_conditional_supplemental": [
+     0.5,
+     1.0
+    ]
+   },
+   "2.0": {
+    "before": [
+     0.5,
+     2.0
+    ],
+    "before_fraction_reached": 0.999,
+    "after": [
+     0.5,
+     2.0
+    ],
+    "after_unreached": 20,
+    "B": 10000,
+    "after_conditional_supplemental": [
+     0.5,
+     2.0
+    ]
+   }
+  }
+ },
+ "correction2_profile": {
+  "sparsebev": {
+   "before_latency_ms": 187.97567599540344,
+   "after_latency_ms": 190.4211130022304,
+   "checks": {
+    "fresh_copy_equals_pristine": true,
+    "forward_mutated_its_input_copy_frames": 320,
+    "n_forwards": 320,
+    "output_max_abs_diff_warmup_vs_measured": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "output_max_abs_diff_between_measured_passes": [
+     0.0,
+     0.0
+    ],
+    "pristine_templates_unchanged_after_all_passes": true,
+    "interpretation": "forward_mutated_its_input_copy_frames > 0 means the model's forward edits its inputs in place, which is why every forward gets a fresh copy; output differences are bitwise repeatability of detections across passes (0 = identical)"
+   }
+  },
+  "bevformer": {
+   "before_latency_ms": 128.2545764988754,
+   "after_latency_ms": 130.91885850735707,
+   "checks": {
+    "fresh_copy_equals_pristine": true,
+    "forward_mutated_its_input_copy_frames": 320,
+    "n_forwards": 320,
+    "output_max_abs_diff_warmup_vs_measured": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "output_max_abs_diff_between_measured_passes": [
+     0.0,
+     0.0
+    ],
+    "pristine_templates_unchanged_after_all_passes": true,
+    "interpretation": "forward_mutated_its_input_copy_frames > 0 means the model's forward edits its inputs in place, which is why every forward gets a fresh copy; output differences are bitwise repeatability of detections across passes (0 = identical)"
+   }
+  },
+  "streampetr": {
+   "before_latency_ms": 77.60833400243428,
+   "after_latency_ms": 78.62492850836134,
+   "checks": {
+    "fresh_copy_equals_pristine": true,
+    "forward_mutated_its_input_copy_frames": 0,
+    "n_forwards": 320,
+    "output_max_abs_diff_warmup_vs_measured": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "output_max_abs_diff_between_measured_passes": [
+     0.0,
+     0.0
+    ],
+    "pristine_templates_unchanged_after_all_passes": true,
+    "interpretation": "forward_mutated_its_input_copy_frames > 0 means the model's forward edits its inputs in place, which is why every forward gets a fresh copy; output differences are bitwise repeatability of detections across passes (0 = identical)"
+   }
+  }
+ },
+ "correction3_same_object": {
+  "sparsebev": {
+   "0.5": {
+    "before_recovered": {
+     "value": 0.8095238095238095,
+     "ci95": [
+      0.675,
+      0.9285714285714286
+     ],
+     "numerator": 68,
+     "denominator": 84,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again in bin 0.0"
+    },
+    "after_recovered": {
+     "value": 0.946236559139785,
+     "ci95": [
+      0.8977272727272727,
+      0.9882352941176471
+     ],
+     "numerator": 88,
+     "denominator": 93,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again at the restored later observation"
+    },
+    "event_accounting": {
+     "events_with_during_sample": 150,
+     "events_with_last_during_and_later_restored": 150,
+     "events_unavailable_same_sample_as_bin0": 6,
+     "events_unavailable_bin0_front_still_black": 0,
+     "events_unavailable_no_restored_later_sample": 0,
+     "events_after_is_bin0": 132,
+     "events_after_is_later_bin": 18
+    }
+   },
+   "1.0": {
+    "before_recovered": {
+     "value": 0.8598130841121495,
+     "ci95": [
+      0.783328313253012,
+      0.9230769230769231
+     ],
+     "numerator": 92,
+     "denominator": 107,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again in bin 0.0"
+    },
+    "after_recovered": {
+     "value": 0.8947368421052632,
+     "ci95": [
+      0.8362068965517241,
+      0.9457364341085271
+     ],
+     "numerator": 119,
+     "denominator": 133,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again at the restored later observation"
+    },
+    "event_accounting": {
+     "events_with_during_sample": 150,
+     "events_with_last_during_and_later_restored": 150,
+     "events_unavailable_same_sample_as_bin0": 4,
+     "events_unavailable_bin0_front_still_black": 0,
+     "events_unavailable_no_restored_later_sample": 0,
+     "events_after_is_bin0": 124,
+     "events_after_is_later_bin": 26
+    }
+   },
+   "2.0": {
+    "before_recovered": {
+     "value": 0.7522123893805309,
+     "ci95": [
+      0.6484375,
+      0.8461538461538461
+     ],
+     "numerator": 85,
+     "denominator": 113,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again in bin 0.0"
+    },
+    "after_recovered": {
+     "value": 0.8509316770186336,
+     "ci95": [
+      0.8,
+      0.8986486486486487
+     ],
+     "numerator": 137,
+     "denominator": 161,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again at the restored later observation"
+    },
+    "event_accounting": {
+     "events_with_during_sample": 150,
+     "events_with_last_during_and_later_restored": 150,
+     "events_unavailable_same_sample_as_bin0": 6,
+     "events_unavailable_bin0_front_still_black": 0,
+     "events_unavailable_no_restored_later_sample": 0,
+     "events_after_is_bin0": 115,
+     "events_after_is_later_bin": 35
+    }
+   }
+  },
+  "streampetr": {
+   "0.5": {
+    "before_recovered": {
+     "value": 0.7096774193548387,
+     "ci95": [
+      0.5416495901639344,
+      0.8607682841068917
+     ],
+     "numerator": 44,
+     "denominator": 62,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again in bin 0.0"
+    },
+    "after_recovered": {
+     "value": 0.8714285714285714,
+     "ci95": [
+      0.7777777777777778,
+      0.9452054794520548
+     ],
+     "numerator": 61,
+     "denominator": 70,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again at the restored later observation"
+    },
+    "event_accounting": {
+     "events_with_during_sample": 150,
+     "events_with_last_during_and_later_restored": 150,
+     "events_unavailable_same_sample_as_bin0": 6,
+     "events_unavailable_bin0_front_still_black": 0,
+     "events_unavailable_no_restored_later_sample": 0,
+     "events_after_is_bin0": 132,
+     "events_after_is_later_bin": 18
+    }
+   },
+   "1.0": {
+    "before_recovered": {
+     "value": 0.7848101265822784,
+     "ci95": [
+      0.6521739130434783,
+      0.8974358974358975
+     ],
+     "numerator": 62,
+     "denominator": 79,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again in bin 0.0"
+    },
+    "after_recovered": {
+     "value": 0.7959183673469388,
+     "ci95": [
+      0.7012949693984177,
+      0.8809523809523809
+     ],
+     "numerator": 78,
+     "denominator": 98,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again at the restored later observation"
+    },
+    "event_accounting": {
+     "events_with_during_sample": 150,
+     "events_with_last_during_and_later_restored": 150,
+     "events_unavailable_same_sample_as_bin0": 4,
+     "events_unavailable_bin0_front_still_black": 0,
+     "events_unavailable_no_restored_later_sample": 0,
+     "events_after_is_bin0": 124,
+     "events_after_is_later_bin": 26
+    }
+   },
+   "2.0": {
+    "before_recovered": {
+     "value": 0.6129032258064516,
+     "ci95": [
+      0.4946207018787664,
+      0.7272727272727273
+     ],
+     "numerator": 57,
+     "denominator": 93,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again in bin 0.0"
+    },
+    "after_recovered": {
+     "value": 0.7007874015748031,
+     "ci95": [
+      0.625,
+      0.7796649043694605
+     ],
+     "numerator": 89,
+     "denominator": 127,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again at the restored later observation"
+    },
+    "event_accounting": {
+     "events_with_during_sample": 150,
+     "events_with_last_during_and_later_restored": 150,
+     "events_unavailable_same_sample_as_bin0": 6,
+     "events_unavailable_bin0_front_still_black": 0,
+     "events_unavailable_no_restored_later_sample": 0,
+     "events_after_is_bin0": 115,
+     "events_after_is_later_bin": 35
+    }
+   }
+  },
+  "bevformer": {
+   "0.5": {
+    "before_recovered": {
+     "value": 0.7872340425531915,
+     "ci95": [
+      0.66,
+      0.896551724137931
+     ],
+     "numerator": 74,
+     "denominator": 94,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again in bin 0.0"
+    },
+    "after_recovered": {
+     "value": 0.8854166666666666,
+     "ci95": [
+      0.8191489361702128,
+      0.9433962264150944
+     ],
+     "numerator": 85,
+     "denominator": 96,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again at the restored later observation"
+    },
+    "event_accounting": {
+     "events_with_during_sample": 150,
+     "events_with_last_during_and_later_restored": 150,
+     "events_unavailable_same_sample_as_bin0": 6,
+     "events_unavailable_bin0_front_still_black": 0,
+     "events_unavailable_no_restored_later_sample": 0,
+     "events_after_is_bin0": 132,
+     "events_after_is_later_bin": 18
+    }
+   },
+   "1.0": {
+    "before_recovered": {
+     "value": 0.8392857142857143,
+     "ci95": [
+      0.7647058823529411,
+      0.9057971014492754
+     ],
+     "numerator": 94,
+     "denominator": 112,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again in bin 0.0"
+    },
+    "after_recovered": {
+     "value": 0.875,
+     "ci95": [
+      0.8169934640522876,
+      0.9285829493087556
+     ],
+     "numerator": 119,
+     "denominator": 136,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again at the restored later observation"
+    },
+    "event_accounting": {
+     "events_with_during_sample": 150,
+     "events_with_last_during_and_later_restored": 150,
+     "events_unavailable_same_sample_as_bin0": 4,
+     "events_unavailable_bin0_front_still_black": 0,
+     "events_unavailable_no_restored_later_sample": 0,
+     "events_after_is_bin0": 124,
+     "events_after_is_later_bin": 26
+    }
+   },
+   "2.0": {
+    "before_recovered": {
+     "value": 0.7407407407407407,
+     "ci95": [
+      0.6203703703703703,
+      0.8478260869565217
+     ],
+     "numerator": 80,
+     "denominator": 108,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again in bin 0.0"
+    },
+    "after_recovered": {
+     "value": 0.8163265306122449,
+     "ci95": [
+      0.75,
+      0.8767148104030176
+     ],
+     "numerator": 120,
+     "denominator": 147,
+     "reading": "of continuing objects the clean run detected at both samples and the outage run missed during the outage: fraction detected again at the restored later observation"
+    },
+    "event_accounting": {
+     "events_with_during_sample": 150,
+     "events_with_last_during_and_later_restored": 150,
+     "events_unavailable_same_sample_as_bin0": 6,
+     "events_unavailable_bin0_front_still_black": 0,
+     "events_unavailable_no_restored_later_sample": 0,
+     "events_after_is_bin0": 115,
+     "events_after_is_later_bin": 35
+    }
+   }
+  }
+ },
+ "correction4_orchestration": {
+  "tests": "recovery/tests/test_orchestrate.py",
+  "real_gate": "python -m recovery.orchestrate all exited 0: 30 runs pass with full SHA-256 pins; schedules identical"
+ }
+}

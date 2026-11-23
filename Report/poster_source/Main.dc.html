@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Camera Failure and Recovery Poster</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 2000px; height: 2290px; box-sizing: border-box; background: #f6f3ec; color: #1c1b18; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column">
+
+<!-- HEADER -->
+<div style="background: #1c1b18; color: #f6f3ec; padding: 34px 48px 30px 48px; display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 1560px">
+<div style="font-size: 18px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #d9c9a3">ROB535 course project · nuScenes · three released camera-only 3D detectors</div>
+<div style="font-size: 22px; color: #e8e2d2">[Author names] · [Department, University]</div>
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 58px; font-weight: 700; line-height: 1.05; text-wrap: balance">Camera Failure and Recovery in Three Camera-Only 3D Detectors</div>
+<div style="font-size: 26px; line-height: 1.3; color: #e8e2d2">A camera stream can go dark; when it returns, a temporal detector may still carry features built from the damaged inputs. After a front-camera outage, how quickly does detection recover, and how much does the answer depend on the model's temporal history?</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; text-align: right; font-size: 20px; line-height: 1.35; color: #e8e2d2; white-space: nowrap">
+<div><b style="color: #ffffff">150</b> validation scenes · <b style="color: #ffffff">6,019</b> samples</div>
+<div><b style="color: #ffffff">3</b> outage durations · <b style="color: #ffffff">9</b> model–duration conditions</div>
+<div>No retraining · bit-exact repeatable runs</div>
+</div>
+</div>
+
+<!-- KEY FINDINGS -->
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; background: #e9e3d3; border-bottom: 2px solid #1c1b18">
+<div style="padding: 22px 28px; display: flex; flex-direction: column; gap: 6px; border-right: 1px solid #c9c1ab">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 52px; font-weight: 700; line-height: 1">0.09 – 0.22</div>
+<div style="font-size: 20px; line-height: 1.3"><b>Every model loses front-region recall</b> while the camera is black; the loss grows with outage length and all 95% intervals exclude zero.</div>
+</div>
+<div style="padding: 22px 28px; display: flex; flex-direction: column; gap: 6px; border-right: 1px solid #c9c1ab">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 52px; font-weight: 700; line-height: 1">≤ 0.05</div>
+<div style="font-size: 20px; line-height: 1.3"><b>Pooled recovery is fast:</b> back inside the 0.05 margin from the first bin after restoration. The exceptions are SparseBEV and StreamPETR at 0.0 s after 2 s outages (0.07).</div>
+</div>
+<div style="padding: 22px 28px; display: flex; flex-direction: column; gap: 6px; border-right: 1px solid #c9c1ab">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 52px; font-weight: 700; line-height: 1">3.5 s</div>
+<div style="font-size: 20px; line-height: 1.3"><b>No step when history clears:</b> SparseBEV's 8-keyframe window is clean again ≈ 3.5 s after restoration, yet pooled recall shows no measurable loss at 3.0 – 4.0 s.</div>
+</div>
+<div style="padding: 22px 28px; display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 52px; font-weight: 700; line-height: 1">43 – 77 %</div>
+<div style="font-size: 20px; line-height: 1.3"><b>of damaged events have incomplete follow-up</b>, and some of them still recover. After 2 s outages 32–38 % stay unconfirmed: right-censored, not failures.</div>
+</div>
+</div>
+
+<!-- BODY -->
+<div style="flex-grow: 1; display: grid; grid-template-columns: 620px 620px 584px; column-gap: 40px; padding: 30px 48px 0 48px; min-height: 0">
+
+<!-- COLUMN 1 -->
+<div style="display: flex; flex-direction: column; gap: 26px">
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; border-bottom: 3px solid #1c1b18; padding-bottom: 6px">Three released detectors, three kinds of history</div>
+<div style="display: grid; grid-template-columns: 150px minmax(0, 1fr) 130px; font-size: 19px; line-height: 1.3; border: 1.5px solid #1c1b18; background: #fbf9f3">
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">Detector</div>
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">Temporal information</div>
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">Clean val NDS</div>
+<div style="padding: 10px 12px; border-top: 1px solid #c9c1ab; display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #1b9e77; display: inline-block; flex-shrink: 0"></span><b>SparseBEV</b></div>
+<div style="padding: 10px 12px; border-top: 1px solid #c9c1ab">Finite window: current keyframe + 7 previous keyframes</div>
+<div style="padding: 10px 12px; border-top: 1px solid #c9c1ab">0.556</div>
+<div style="padding: 10px 12px; border-top: 1px solid #c9c1ab; display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #d95f02; display: inline-block; flex-shrink: 0"></span><b>StreamPETR</b></div>
+<div style="padding: 10px 12px; border-top: 1px solid #c9c1ab">Propagated object-centric memory (recurrent)</div>
+<div style="padding: 10px 12px; border-top: 1px solid #c9c1ab">0.537</div>
+<div style="padding: 10px 12px; border-top: 1px solid #c9c1ab; display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #7570b3; display: inline-block; flex-shrink: 0"></span><b>BEVFormer</b></div>
+<div style="padding: 10px 12px; border-top: 1px solid #c9c1ab">Recurrent cached BEV representation (tiny)</div>
+<div style="padding: 10px 12px; border-top: 1px solid #c9c1ab">0.355</div>
+</div>
+<div style="font-size: 16px; line-height: 1.35; color: #4a463f">Each clean baseline reproduces the released score within ±0.010 (a gate declared before the result; SparseBEV on NDS only, as its release publishes no mAP).</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; border-bottom: 3px solid #1c1b18; padding-bottom: 6px">One outage schedule for every model</div>
+<svg viewBox="0 0 560 190" width="100%" role="img" aria-label="Timeline: clean history, a black front camera outage of 0.5, 1 or 2 seconds starting at keyframe 6, then ten follow-up bins from 0.0 to 4.5 seconds after restoration" style="font-family: Inter, system-ui, sans-serif">
+<rect x="6" y="70" width="184" height="44" fill="#e4dfd3" stroke="#1c1b18" stroke-width="1.5"/>
+<text x="98" y="97" text-anchor="middle" font-size="16" fill="#1c1b18">clean history</text>
+<rect x="190" y="70" width="120" height="44" fill="#1c1b18"/>
+<text x="250" y="89" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff">camera black</text>
+<text x="250" y="106" text-anchor="middle" font-size="14" fill="#ffffff">d = 0.5 / 1 / 2 s</text>
+<rect x="310" y="70" width="240" height="44" fill="#dbe8f4" stroke="#1c1b18" stroke-width="1.5"/>
+<line x1="334" y1="70" x2="334" y2="114" stroke="#1c1b18" stroke-width="1"/><line x1="358" y1="70" x2="358" y2="114" stroke="#1c1b18" stroke-width="1"/><line x1="382" y1="70" x2="382" y2="114" stroke="#1c1b18" stroke-width="1"/><line x1="406" y1="70" x2="406" y2="114" stroke="#1c1b18" stroke-width="1"/><line x1="430" y1="70" x2="430" y2="114" stroke="#1c1b18" stroke-width="1"/><line x1="454" y1="70" x2="454" y2="114" stroke="#1c1b18" stroke-width="1"/><line x1="478" y1="70" x2="478" y2="114" stroke="#1c1b18" stroke-width="1"/><line x1="502" y1="70" x2="502" y2="114" stroke="#1c1b18" stroke-width="1"/><line x1="526" y1="70" x2="526" y2="114" stroke="#1c1b18" stroke-width="1"/>
+<text x="322" y="134" text-anchor="middle" font-size="14" fill="#1c1b18">0.0</text>
+<text x="430" y="134" text-anchor="middle" font-size="14" fill="#1c1b18">2.0 s</text>
+<text x="538" y="134" text-anchor="middle" font-size="14" fill="#1c1b18">4.5</text>
+<text x="430" y="162" text-anchor="middle" font-size="16" font-weight="600" fill="#1c1b18">10 recovery bins</text>
+<line x1="190" y1="36" x2="190" y2="70" stroke="#1c1b18" stroke-width="1.5"/>
+<text x="190" y="18" text-anchor="middle" font-size="15" font-weight="600" fill="#1c1b18">t_start = CAM_FRONT time</text>
+<text x="190" y="34" text-anchor="end" font-size="14" fill="#1c1b18" dx="-8">of keyframe 6</text>
+<line x1="310" y1="44" x2="310" y2="70" stroke="#1c1b18" stroke-width="1.5"/>
+<text x="316" y="52" font-size="15" font-weight="600" fill="#1c1b18">restoration</text>
+<text x="98" y="162" text-anchor="middle" font-size="15" fill="#4a463f">other 5 cameras untouched</text>
+</svg>
+<div style="font-size: 18px; line-height: 1.4">Same start for every duration and every model. Images in the half-open window [t_start, t_start + d) are replaced by black <i>before</i> resize and normalisation; every consumed image is audited (black counts 168 / 326 / 635).</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; border-bottom: 3px solid #1c1b18; padding-bottom: 6px">Method</div>
+<div style="display: flex; flex-direction: column; gap: 7px; font-size: 19px; line-height: 1.35">
+<div><b>Region.</b> Objects within 50 m in CAM_FRONT's view; 2 m one-to-one matching on a single ego ground plane.</div>
+<div><b>Operating point.</b> One score threshold per model, calibrated on pilot training scenes, never tuned on validation.</div>
+<div><b>Loss.</b> L = R<sub>clean</sub> − R<sub>outage</sub> on the same eligible objects, per 0.5 s bin after restoration.</div>
+<div><b>Event rules (frozen).</b> Damaged if L &gt; 0.05 with ≥ 5 objects; recovery onset = first bin with L ≤ 0.05 whose next bin also qualifies.</div>
+<div><b>Uncertainty.</b> Paired complete-scene bootstrap, B = 10,000, one shared resample for all models and durations.</div>
+<div><b>Checks.</b> Independent table rebuild (64,350 cells per model), a run-integrity gate, bit-exact reproduction of a pilot outage.</div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; border-bottom: 3px solid #1c1b18; padding-bottom: 6px">Cost on an RTX 3060 (12 GB), batch 1</div>
+<div style="display: grid; grid-template-columns: 170px repeat(2, minmax(0, 1fr)); font-size: 19px; border: 1.5px solid #1c1b18; background: #fbf9f3">
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">Model</div>
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">Latency (ms)</div>
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">Peak GPU (MB)</div>
+<div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">SparseBEV</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">190</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">2,652</div>
+<div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">StreamPETR</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">79</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">375</div>
+<div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">BEVFormer</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">131</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">617</div>
+</div>
+</div>
+
+</div>
+
+<!-- COLUMN 2 -->
+<div style="display: flex; flex-direction: column; gap: 26px">
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; border-bottom: 3px solid #1c1b18; padding-bottom: 6px">A · Recall loss while the camera is black</div>
+<div style="display: flex; flex-direction: row; gap: 28px; font-size: 19px; align-items: center">
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; background: #1b9e77; display: inline-block; flex-shrink: 0"></span>SparseBEV</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; background: #d95f02; display: inline-block; flex-shrink: 0"></span>StreamPETR</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; background: #7570b3; display: inline-block; flex-shrink: 0"></span>BEVFormer</span>
+<span style="color: #4a463f; font-size: 17px">pooled loss, bars = 95% interval</span>
+</div>
+<svg viewBox="0 0 600 262" width="100%" role="img" aria-label="Grouped bar chart of pooled recall loss during the outage for each model and outage duration, with 95 percent intervals" style="font-family: Inter, system-ui, sans-serif">
+<line x1="56" y1="224.0" x2="590" y2="224.0" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="229.0" text-anchor="end" font-size="15" fill="#4a463f">0.00</text>
+<line x1="56" y1="185.5" x2="590" y2="185.5" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="190.5" text-anchor="end" font-size="15" fill="#4a463f">0.05</text>
+<line x1="56" y1="147.1" x2="590" y2="147.1" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="152.1" text-anchor="end" font-size="15" fill="#4a463f">0.10</text>
+<line x1="56" y1="108.6" x2="590" y2="108.6" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="113.6" text-anchor="end" font-size="15" fill="#4a463f">0.15</text>
+<line x1="56" y1="70.2" x2="590" y2="70.2" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="75.2" text-anchor="end" font-size="15" fill="#4a463f">0.20</text>
+<line x1="56" y1="31.7" x2="590" y2="31.7" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="36.7" text-anchor="end" font-size="15" fill="#4a463f">0.25</text>
+<rect x="78.0" y="112.6" width="40" height="111.4" fill="#1b9e77"/>
+<line x1="98.0" y1="132.4" x2="98.0" y2="92.8" stroke="#1c1b18" stroke-width="2"/><line x1="93.0" y1="132.4" x2="103.0" y2="132.4" stroke="#1c1b18" stroke-width="2"/><line x1="93.0" y1="92.8" x2="103.0" y2="92.8" stroke="#1c1b18" stroke-width="2"/>
+<text x="98.0" y="86.8" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.14</text>
+<rect x="125.0" y="152.8" width="40" height="71.2" fill="#d95f02"/>
+<line x1="145.0" y1="171.4" x2="145.0" y2="134.9" stroke="#1c1b18" stroke-width="2"/><line x1="140.0" y1="171.4" x2="150.0" y2="171.4" stroke="#1c1b18" stroke-width="2"/><line x1="140.0" y1="134.9" x2="150.0" y2="134.9" stroke="#1c1b18" stroke-width="2"/>
+<text x="145.0" y="128.9" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.09</text>
+<rect x="172.0" y="95.0" width="40" height="129.0" fill="#7570b3"/>
+<line x1="192.0" y1="115.2" x2="192.0" y2="73.6" stroke="#1c1b18" stroke-width="2"/><line x1="187.0" y1="115.2" x2="197.0" y2="115.2" stroke="#1c1b18" stroke-width="2"/><line x1="187.0" y1="73.6" x2="197.0" y2="73.6" stroke="#1c1b18" stroke-width="2"/>
+<text x="192.0" y="67.6" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.17</text>
+<text x="145.0" y="250" text-anchor="middle" font-size="16" font-weight="600" fill="#1c1b18">0.5 s outage</text>
+<rect x="256.0" y="92.5" width="40" height="131.5" fill="#1b9e77"/>
+<line x1="276.0" y1="114.1" x2="276.0" y2="71.1" stroke="#1c1b18" stroke-width="2"/><line x1="271.0" y1="114.1" x2="281.0" y2="114.1" stroke="#1c1b18" stroke-width="2"/><line x1="271.0" y1="71.1" x2="281.0" y2="71.1" stroke="#1c1b18" stroke-width="2"/>
+<text x="276.0" y="65.1" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.17</text>
+<rect x="303.0" y="133.3" width="40" height="90.7" fill="#d95f02"/>
+<line x1="323.0" y1="150.5" x2="323.0" y2="116.6" stroke="#1c1b18" stroke-width="2"/><line x1="318.0" y1="150.5" x2="328.0" y2="150.5" stroke="#1c1b18" stroke-width="2"/><line x1="318.0" y1="116.6" x2="328.0" y2="116.6" stroke="#1c1b18" stroke-width="2"/>
+<text x="323.0" y="110.6" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.12</text>
+<rect x="350.0" y="74.5" width="40" height="149.5" fill="#7570b3"/>
+<line x1="370.0" y1="93.4" x2="370.0" y2="54.3" stroke="#1c1b18" stroke-width="2"/><line x1="365.0" y1="93.4" x2="375.0" y2="93.4" stroke="#1c1b18" stroke-width="2"/><line x1="365.0" y1="54.3" x2="375.0" y2="54.3" stroke="#1c1b18" stroke-width="2"/>
+<text x="370.0" y="48.3" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.19</text>
+<text x="323.0" y="250" text-anchor="middle" font-size="16" font-weight="600" fill="#1c1b18">1 s outage</text>
+<rect x="434.0" y="60.4" width="40" height="163.6" fill="#1b9e77"/>
+<line x1="454.0" y1="80.3" x2="454.0" y2="40.6" stroke="#1c1b18" stroke-width="2"/><line x1="449.0" y1="80.3" x2="459.0" y2="80.3" stroke="#1c1b18" stroke-width="2"/><line x1="449.0" y1="40.6" x2="459.0" y2="40.6" stroke="#1c1b18" stroke-width="2"/>
+<text x="454.0" y="34.6" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.21</text>
+<rect x="481.0" y="109.6" width="40" height="114.4" fill="#d95f02"/>
+<line x1="501.0" y1="127.8" x2="501.0" y2="90.7" stroke="#1c1b18" stroke-width="2"/><line x1="496.0" y1="127.8" x2="506.0" y2="127.8" stroke="#1c1b18" stroke-width="2"/><line x1="496.0" y1="90.7" x2="506.0" y2="90.7" stroke="#1c1b18" stroke-width="2"/>
+<text x="501.0" y="84.7" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.15</text>
+<rect x="528.0" y="51.5" width="40" height="172.5" fill="#7570b3"/>
+<line x1="548.0" y1="71.7" x2="548.0" y2="29.5" stroke="#1c1b18" stroke-width="2"/><line x1="543.0" y1="71.7" x2="553.0" y2="71.7" stroke="#1c1b18" stroke-width="2"/><line x1="543.0" y1="29.5" x2="553.0" y2="29.5" stroke="#1c1b18" stroke-width="2"/>
+<text x="548.0" y="23.5" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.22</text>
+<text x="501.0" y="250" text-anchor="middle" font-size="16" font-weight="600" fill="#1c1b18">2 s outage</text>
+<line x1="56" y1="224" x2="590" y2="224" stroke="#1c1b18" stroke-width="1.5"/>
+</svg>
+<div style="font-size: 18px; line-height: 1.4">Recall on eligible front-region objects at each model's fixed operating point. Relative to clean recall, the models lose 29–79 % of what they otherwise detect. <b>StreamPETR loses least; BEVFormer most.</b></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; border-bottom: 3px solid #1c1b18; padding-bottom: 6px">B · Recovery curves: loss against time after restoration</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 10px; row-gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 20px; font-weight: 700">0.5 s outage</div>
+<svg viewBox="0 0 305 250" width="100%" role="img" aria-label="Pooled recall loss during and after a 0.5 second outage for three models with 95 percent bootstrap bands" style="font-family: Inter, system-ui, sans-serif">
+<line x1="46" y1="174.9" x2="298" y2="174.9" stroke="#1c1b18" stroke-width="1.3"/><text x="40" y="179.9" text-anchor="end" font-size="14" fill="#4a463f">0.00</text>
+<line x1="46" y1="143.5" x2="298" y2="143.5" stroke="#b3261e" stroke-width="1.8" stroke-dasharray="6 4"/><text x="40" y="148.5" text-anchor="end" font-size="14" fill="#4a463f">0.05</text>
+<line x1="46" y1="112.1" x2="298" y2="112.1" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="117.1" text-anchor="end" font-size="14" fill="#4a463f">0.10</text>
+<line x1="46" y1="80.8" x2="298" y2="80.8" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="85.8" text-anchor="end" font-size="14" fill="#4a463f">0.15</text>
+<line x1="46" y1="49.4" x2="298" y2="49.4" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="54.4" text-anchor="end" font-size="14" fill="#4a463f">0.20</text>
+<line x1="46" y1="18.0" x2="298" y2="18.0" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="23.0" text-anchor="end" font-size="14" fill="#4a463f">0.25</text>
+<line x1="96.0" y1="14" x2="96.0" y2="200" stroke="#1c1b18" stroke-width="1.2" stroke-dasharray="2 3"/>
+<text x="101.0" y="26" font-size="13" font-weight="600" fill="#1c1b18">restored</text>
+<polygon points="62.0,67.9 104.0,148.9 125.6,165.1 147.1,168.8 168.7,170.9 190.2,166.3 211.8,172.6 233.3,179.1 254.9,170.6 276.4,174.9 298.0,174.9 298.0,174.9 276.4,174.9 254.9,174.9 233.3,193.6 211.8,185.2 190.2,178.9 168.7,181.0 147.1,182.4 125.6,181.1 104.0,171.4 62.0,100.2" fill="#1b9e77" fill-opacity="0.16"/>
+<polygon points="62.0,102.2 104.0,150.8 125.6,165.8 147.1,170.5 168.7,171.8 190.2,166.5 211.8,170.0 233.3,176.5 254.9,170.9 276.4,172.1 298.0,171.5 298.0,181.9 276.4,181.4 254.9,186.8 233.3,190.0 211.8,183.2 190.2,179.8 168.7,184.8 147.1,182.7 125.6,183.8 104.0,174.0 62.0,132.0" fill="#d95f02" fill-opacity="0.16"/>
+<polygon points="62.0,52.2 104.0,152.5 125.6,166.4 147.1,170.7 168.7,170.2 190.2,172.3 211.8,171.2 233.3,172.3 254.9,174.9 276.4,172.1 298.0,174.9 298.0,177.6 276.4,174.9 254.9,179.2 233.3,174.9 211.8,176.5 190.2,174.9 168.7,179.6 147.1,180.5 125.6,178.7 104.0,178.8 62.0,86.1" fill="#7570b3" fill-opacity="0.16"/>
+<polyline points="62.0,84.0 104.0,160.2 125.6,173.3 147.1,175.7 168.7,175.7 190.2,172.4 211.8,178.8 233.3,186.2 254.9,173.2 276.4,174.9 298.0,174.9" fill="none" stroke="#1b9e77" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="62" cy="84.0" r="4.2" fill="#1b9e77"/><circle cx="104.0" cy="160.2" r="4.2" fill="#1b9e77"/>
+<polyline points="62.0,116.8 104.0,162.8 125.6,174.9 147.1,176.6 168.7,178.2 190.2,173.2 211.8,176.5 233.3,183.0 254.9,179.0 276.4,176.6 298.0,176.5" fill="none" stroke="#d95f02" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="62" cy="116.8" r="4.2" fill="#d95f02"/><circle cx="104.0" cy="162.8" r="4.2" fill="#d95f02"/>
+<polyline points="62.0,69.6 104.0,166.3 125.6,172.4 147.1,175.7 168.7,174.9 190.2,174.1 211.8,174.1 233.3,174.1 254.9,176.6 276.4,174.0 298.0,175.7" fill="none" stroke="#7570b3" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="62" cy="69.6" r="4.2" fill="#7570b3"/><circle cx="104.0" cy="166.3" r="4.2" fill="#7570b3"/>
+<text x="62" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">during</text>
+<text x="104.0" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">0</text>
+<text x="147.1" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">1</text>
+<text x="190.2" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">2</text>
+<text x="233.3" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">3</text>
+<text x="276.4" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">4</text>
+<text x="201.0" y="241" text-anchor="middle" font-size="13" fill="#4a463f">seconds after restoration</text></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 20px; font-weight: 700">1 s outage</div>
+<svg viewBox="0 0 305 250" width="100%" role="img" aria-label="Pooled recall loss during and after a 1 second outage for three models with 95 percent bootstrap bands" style="font-family: Inter, system-ui, sans-serif">
+<line x1="46" y1="174.9" x2="298" y2="174.9" stroke="#1c1b18" stroke-width="1.3"/><text x="40" y="179.9" text-anchor="end" font-size="14" fill="#4a463f">0.00</text>
+<line x1="46" y1="143.5" x2="298" y2="143.5" stroke="#b3261e" stroke-width="1.8" stroke-dasharray="6 4"/><text x="40" y="148.5" text-anchor="end" font-size="14" fill="#4a463f">0.05</text>
+<line x1="46" y1="112.1" x2="298" y2="112.1" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="117.1" text-anchor="end" font-size="14" fill="#4a463f">0.10</text>
+<line x1="46" y1="80.8" x2="298" y2="80.8" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="85.8" text-anchor="end" font-size="14" fill="#4a463f">0.15</text>
+<line x1="46" y1="49.4" x2="298" y2="49.4" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="54.4" text-anchor="end" font-size="14" fill="#4a463f">0.20</text>
+<line x1="46" y1="18.0" x2="298" y2="18.0" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="23.0" text-anchor="end" font-size="14" fill="#4a463f">0.25</text>
+<line x1="96.0" y1="14" x2="96.0" y2="200" stroke="#1c1b18" stroke-width="1.2" stroke-dasharray="2 3"/>
+<text x="101.0" y="26" font-size="13" font-weight="600" fill="#1c1b18">restored</text>
+<polygon points="62.0,50.2 104.0,136.7 125.6,162.4 147.1,166.8 168.7,163.8 190.2,169.7 211.8,173.2 233.3,170.8 254.9,173.0 276.4,174.9 298.0,174.9 298.0,174.9 276.4,174.9 254.9,178.6 233.3,184.4 211.8,191.4 190.2,184.4 168.7,181.3 147.1,185.5 125.6,180.0 104.0,162.2 62.0,85.2" fill="#1b9e77" fill-opacity="0.16"/>
+<polygon points="62.0,87.3 104.0,136.0 125.6,152.0 147.1,171.4 168.7,170.0 190.2,171.7 211.8,165.9 233.3,169.0 254.9,168.3 276.4,169.8 298.0,171.5 298.0,185.7 276.4,183.6 254.9,181.6 233.3,187.1 211.8,182.2 190.2,187.8 168.7,189.3 147.1,188.6 125.6,175.8 104.0,166.2 62.0,114.9" fill="#d95f02" fill-opacity="0.16"/>
+<polygon points="62.0,36.4 104.0,143.9 125.6,163.0 147.1,161.2 168.7,171.0 190.2,170.0 211.8,167.4 233.3,173.3 254.9,173.1 276.4,174.9 298.0,173.1 298.0,178.7 276.4,179.1 254.9,178.9 233.3,179.9 211.8,174.9 190.2,178.3 168.7,179.0 147.1,174.9 125.6,180.9 104.0,171.4 62.0,68.4" fill="#7570b3" fill-opacity="0.16"/>
+<polyline points="62.0,67.6 104.0,149.7 125.6,171.6 147.1,175.7 168.7,172.4 190.2,177.3 211.8,182.2 233.3,177.4 254.9,175.7 276.4,174.9 298.0,174.9" fill="none" stroke="#1b9e77" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="62" cy="67.6" r="4.2" fill="#1b9e77"/><circle cx="104.0" cy="149.7" r="4.2" fill="#1b9e77"/>
+<polyline points="62.0,100.9 104.0,151.7 125.6,164.1 147.1,179.9 168.7,179.9 190.2,179.6 211.8,174.1 233.3,178.2 254.9,174.9 276.4,176.5 298.0,178.2" fill="none" stroke="#d95f02" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="62" cy="100.9" r="4.2" fill="#d95f02"/><circle cx="104.0" cy="151.7" r="4.2" fill="#d95f02"/>
+<polyline points="62.0,53.0 104.0,157.8 125.6,172.4 147.1,168.3 168.7,174.9 190.2,174.1 211.8,171.7 233.3,176.6 254.9,175.7 276.4,176.5 298.0,175.7" fill="none" stroke="#7570b3" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="62" cy="53.0" r="4.2" fill="#7570b3"/><circle cx="104.0" cy="157.8" r="4.2" fill="#7570b3"/>
+<text x="62" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">during</text>
+<text x="104.0" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">0</text>
+<text x="147.1" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">1</text>
+<text x="190.2" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">2</text>
+<text x="233.3" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">3</text>
+<text x="276.4" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">4</text>
+<text x="201.0" y="241" text-anchor="middle" font-size="13" fill="#4a463f">seconds after restoration</text></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 20px; font-weight: 700">2 s outage</div>
+<svg viewBox="0 0 305 250" width="100%" role="img" aria-label="Pooled recall loss during and after a 2 second outage for three models with 95 percent bootstrap bands" style="font-family: Inter, system-ui, sans-serif">
+<line x1="46" y1="174.9" x2="298" y2="174.9" stroke="#1c1b18" stroke-width="1.3"/><text x="40" y="179.9" text-anchor="end" font-size="14" fill="#4a463f">0.00</text>
+<line x1="46" y1="143.5" x2="298" y2="143.5" stroke="#b3261e" stroke-width="1.8" stroke-dasharray="6 4"/><text x="40" y="148.5" text-anchor="end" font-size="14" fill="#4a463f">0.05</text>
+<line x1="46" y1="112.1" x2="298" y2="112.1" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="117.1" text-anchor="end" font-size="14" fill="#4a463f">0.10</text>
+<line x1="46" y1="80.8" x2="298" y2="80.8" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="85.8" text-anchor="end" font-size="14" fill="#4a463f">0.15</text>
+<line x1="46" y1="49.4" x2="298" y2="49.4" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="54.4" text-anchor="end" font-size="14" fill="#4a463f">0.20</text>
+<line x1="46" y1="18.0" x2="298" y2="18.0" stroke="#d8d4cb" stroke-width="1"/><text x="40" y="23.0" text-anchor="end" font-size="14" fill="#4a463f">0.25</text>
+<line x1="96.0" y1="14" x2="96.0" y2="200" stroke="#1c1b18" stroke-width="1.2" stroke-dasharray="2 3"/>
+<text x="101.0" y="26" font-size="13" font-weight="600" fill="#1c1b18">restored</text>
+<polygon points="62.0,25.3 104.0,110.1 125.6,147.7 147.1,157.3 168.7,150.2 190.2,174.1 211.8,163.7 233.3,166.3 254.9,168.4 276.4,174.9 298.0,174.9 298.0,174.9 276.4,174.9 254.9,177.5 233.3,180.1 211.8,185.0 190.2,192.2 168.7,174.9 147.1,178.1 125.6,170.2 104.0,148.9 62.0,57.7" fill="#1b9e77" fill-opacity="0.16"/>
+<polygon points="62.0,66.1 104.0,110.1 125.6,142.5 147.1,157.8 168.7,163.1 190.2,167.0 211.8,164.5 233.3,168.2 254.9,170.0 276.4,171.7 298.0,165.9 298.0,179.1 276.4,188.5 254.9,185.4 233.3,183.2 211.8,181.4 190.2,184.7 168.7,185.0 147.1,179.1 125.6,169.3 104.0,146.7 62.0,96.4" fill="#d95f02" fill-opacity="0.16"/>
+<polygon points="62.0,16.3 104.0,135.4 125.6,158.1 147.1,168.2 168.7,170.9 190.2,176.4 211.8,170.9 233.3,174.9 254.9,172.4 276.4,172.5 298.0,172.5 298.0,177.3 276.4,177.2 254.9,177.4 233.3,180.5 211.8,179.1 190.2,185.6 168.7,178.9 147.1,180.2 125.6,182.3 104.0,173.7 62.0,50.6" fill="#7570b3" fill-opacity="0.16"/>
+<polyline points="62.0,41.4 104.0,129.9 125.6,159.1 147.1,167.8 168.7,162.7 190.2,183.2 211.8,174.0 233.3,173.3 254.9,173.2 276.4,174.9 298.0,174.9" fill="none" stroke="#1b9e77" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="62" cy="41.4" r="4.2" fill="#1b9e77"/><circle cx="104.0" cy="129.9" r="4.2" fill="#1b9e77"/>
+<polyline points="62.0,81.6 104.0,128.7 125.6,155.8 147.1,168.6 168.7,174.1 190.2,175.7 211.8,173.2 233.3,175.7 254.9,177.4 276.4,179.7 298.0,172.4" fill="none" stroke="#d95f02" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="62" cy="81.6" r="4.2" fill="#d95f02"/><circle cx="104.0" cy="128.7" r="4.2" fill="#d95f02"/>
+<polyline points="62.0,34.2 104.0,156.0 125.6,170.7 147.1,174.1 168.7,174.9 190.2,180.7 211.8,174.9 233.3,177.3 254.9,174.9 276.4,174.9 298.0,174.9" fill="none" stroke="#7570b3" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="62" cy="34.2" r="4.2" fill="#7570b3"/><circle cx="104.0" cy="156.0" r="4.2" fill="#7570b3"/>
+<text x="62" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">during</text>
+<text x="104.0" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">0</text>
+<text x="147.1" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">1</text>
+<text x="190.2" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">2</text>
+<text x="233.3" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">3</text>
+<text x="276.4" y="222" text-anchor="middle" font-size="14" fill="#1c1b18">4</text>
+<text x="201.0" y="241" text-anchor="middle" font-size="13" fill="#4a463f">seconds after restoration</text></svg>
+</div>
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 12px; font-size: 18px; line-height: 1.3; padding: 8px 6px">
+<div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 5px; background: #1b9e77; display: inline-block; flex-shrink: 0"></span>SparseBEV</div>
+<div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 5px; background: #d95f02; display: inline-block; flex-shrink: 0"></span>StreamPETR</div>
+<div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 5px; background: #7570b3; display: inline-block; flex-shrink: 0"></span>BEVFormer</div>
+<div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 0; border-top: 3px dashed #b3261e; display: inline-block; flex-shrink: 0"></span>0.05 loss margin</div>
+<div style="display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 16px; background: #1b9e77; opacity: 0.25; display: inline-block; flex-shrink: 0"></span>95% bootstrap interval</div>
+<div style="color: #4a463f; font-size: 17px">Dots: during the outage and the first bin after restoration (0.0 s).</div>
+</div>
+</div>
+<div style="font-size: 18px; line-height: 1.4">Pooled loss is back inside the 0.05 margin from the first bin, except 2 s outages for SparseBEV (0.072) and StreamPETR (0.074) at 0.0 s; from 0.5 s on every pooled loss stays within ±0.031. <b>Pooled recall loss falls inside the margin despite residual prediction differences</b> (SparseBEV, BEVFormer): recall recovery does not show that temporal contamination is gone.</div>
+</div>
+
+</div>
+
+<!-- COLUMN 3 -->
+<div style="display: flex; flex-direction: column; gap: 26px">
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; border-bottom: 3px solid #1c1b18; padding-bottom: 6px">C · Do missed objects come back?</div>
+<div style="display: grid; grid-template-columns: 170px repeat(3, minmax(0, 1fr)); font-size: 20px; border: 1.5px solid #1c1b18; background: #fbf9f3">
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">Detected again</div>
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">0.5 s</div>
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">1 s</div>
+<div style="padding: 9px 12px; font-weight: 700; background: #e9e3d3">2 s</div>
+<div style="padding: 9px 12px; border-top: 1px solid #c9c1ab; display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #1b9e77; display: inline-block; flex-shrink: 0"></span>SparseBEV</div>
+<div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">0.95</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">0.89</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">0.85</div>
+<div style="padding: 9px 12px; border-top: 1px solid #c9c1ab; display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #d95f02; display: inline-block; flex-shrink: 0"></span>StreamPETR</div>
+<div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">0.87</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">0.80</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">0.70</div>
+<div style="padding: 9px 12px; border-top: 1px solid #c9c1ab; display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #7570b3; display: inline-block; flex-shrink: 0"></span>BEVFormer</div>
+<div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">0.89</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">0.88</div><div style="padding: 9px 12px; border-top: 1px solid #c9c1ab">0.82</div>
+</div>
+<div style="font-size: 17px; line-height: 1.4; color: #4a463f">Same-object diagnostic: of objects the clean run detected at both samples but the outage run missed during the outage, the share detected again at the first strictly later sample with a restored front image. That sample is bin 0.0 s for 132 / 124 / 115 of 150 events and bin 0.5 s for the rest (0.5 / 1 / 2 s), including 6 / 4 / 6 events where the last "during" sample is itself bin 0.0 and cannot be compared with itself.</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; border-bottom: 3px solid #1c1b18; padding-bottom: 6px">D · Per-event damage rate</div>
+<svg viewBox="0 0 600 236" width="100%" role="img" aria-label="Grouped bar chart of the fraction of events with damage, for each model and outage duration, with 95 percent intervals" style="font-family: Inter, system-ui, sans-serif">
+<line x1="56" y1="200.0" x2="590" y2="200.0" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="205.0" text-anchor="end" font-size="15" fill="#4a463f">0.00</text>
+<line x1="56" y1="155.0" x2="590" y2="155.0" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="160.0" text-anchor="end" font-size="15" fill="#4a463f">0.25</text>
+<line x1="56" y1="110.0" x2="590" y2="110.0" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="115.0" text-anchor="end" font-size="15" fill="#4a463f">0.50</text>
+<line x1="56" y1="65.0" x2="590" y2="65.0" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="70.0" text-anchor="end" font-size="15" fill="#4a463f">0.75</text>
+<line x1="56" y1="20.0" x2="590" y2="20.0" stroke="#d8d4cb" stroke-width="1"/><text x="48" y="25.0" text-anchor="end" font-size="15" fill="#4a463f">1.00</text>
+<rect x="78.0" y="81.7" width="40" height="118.3" fill="#1b9e77"/>
+<line x1="98.0" y1="102.4" x2="98.0" y2="62.0" stroke="#1c1b18" stroke-width="2"/><line x1="93.0" y1="102.4" x2="103.0" y2="102.4" stroke="#1c1b18" stroke-width="2"/><line x1="93.0" y1="62.0" x2="103.0" y2="62.0" stroke="#1c1b18" stroke-width="2"/>
+<text x="98.0" y="56.0" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.66</text>
+<rect x="125.0" y="112.6" width="40" height="87.4" fill="#d95f02"/>
+<line x1="145.0" y1="133.5" x2="145.0" y2="91.4" stroke="#1c1b18" stroke-width="2"/><line x1="140.0" y1="133.5" x2="150.0" y2="133.5" stroke="#1c1b18" stroke-width="2"/><line x1="140.0" y1="91.4" x2="150.0" y2="91.4" stroke="#1c1b18" stroke-width="2"/>
+<text x="145.0" y="85.4" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.49</text>
+<rect x="172.0" y="58.6" width="40" height="141.4" fill="#7570b3"/>
+<line x1="192.0" y1="76.7" x2="192.0" y2="42.2" stroke="#1c1b18" stroke-width="2"/><line x1="187.0" y1="76.7" x2="197.0" y2="76.7" stroke="#1c1b18" stroke-width="2"/><line x1="187.0" y1="42.2" x2="197.0" y2="42.2" stroke="#1c1b18" stroke-width="2"/>
+<text x="192.0" y="36.2" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.79</text>
+<text x="145.0" y="226" text-anchor="middle" font-size="16" font-weight="600" fill="#1c1b18">0.5 s outage</text>
+<rect x="256.0" y="72.7" width="40" height="127.3" fill="#1b9e77"/>
+<line x1="276.0" y1="89.0" x2="276.0" y2="56.7" stroke="#1c1b18" stroke-width="2"/><line x1="271.0" y1="89.0" x2="281.0" y2="89.0" stroke="#1c1b18" stroke-width="2"/><line x1="271.0" y1="56.7" x2="281.0" y2="56.7" stroke="#1c1b18" stroke-width="2"/>
+<text x="276.0" y="50.7" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.71</text>
+<rect x="303.0" y="98.2" width="40" height="101.8" fill="#d95f02"/>
+<line x1="323.0" y1="115.9" x2="323.0" y2="80.7" stroke="#1c1b18" stroke-width="2"/><line x1="318.0" y1="115.9" x2="328.0" y2="115.9" stroke="#1c1b18" stroke-width="2"/><line x1="318.0" y1="80.7" x2="328.0" y2="80.7" stroke="#1c1b18" stroke-width="2"/>
+<text x="323.0" y="74.7" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.57</text>
+<rect x="350.0" y="58.2" width="40" height="141.8" fill="#7570b3"/>
+<line x1="370.0" y1="73.2" x2="370.0" y2="44.4" stroke="#1c1b18" stroke-width="2"/><line x1="365.0" y1="73.2" x2="375.0" y2="73.2" stroke="#1c1b18" stroke-width="2"/><line x1="365.0" y1="44.4" x2="375.0" y2="44.4" stroke="#1c1b18" stroke-width="2"/>
+<text x="370.0" y="38.4" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.79</text>
+<text x="323.0" y="226" text-anchor="middle" font-size="16" font-weight="600" fill="#1c1b18">1 s outage</text>
+<rect x="434.0" y="66.1" width="40" height="133.9" fill="#1b9e77"/>
+<line x1="454.0" y1="80.0" x2="454.0" y2="52.7" stroke="#1c1b18" stroke-width="2"/><line x1="449.0" y1="80.0" x2="459.0" y2="80.0" stroke="#1c1b18" stroke-width="2"/><line x1="449.0" y1="52.7" x2="459.0" y2="52.7" stroke="#1c1b18" stroke-width="2"/>
+<text x="454.0" y="46.7" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.74</text>
+<rect x="481.0" y="86.2" width="40" height="113.8" fill="#d95f02"/>
+<line x1="501.0" y1="101.7" x2="501.0" y2="71.2" stroke="#1c1b18" stroke-width="2"/><line x1="496.0" y1="101.7" x2="506.0" y2="101.7" stroke="#1c1b18" stroke-width="2"/><line x1="496.0" y1="71.2" x2="506.0" y2="71.2" stroke="#1c1b18" stroke-width="2"/>
+<text x="501.0" y="65.2" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.63</text>
+<rect x="528.0" y="56.0" width="40" height="144.0" fill="#7570b3"/>
+<line x1="548.0" y1="69.1" x2="548.0" y2="44.0" stroke="#1c1b18" stroke-width="2"/><line x1="543.0" y1="69.1" x2="553.0" y2="69.1" stroke="#1c1b18" stroke-width="2"/><line x1="543.0" y1="44.0" x2="553.0" y2="44.0" stroke="#1c1b18" stroke-width="2"/>
+<text x="548.0" y="38.0" text-anchor="middle" font-size="14" font-weight="600" fill="#1c1b18">0.80</text>
+<text x="501.0" y="226" text-anchor="middle" font-size="16" font-weight="600" fill="#1c1b18">2 s outage</text>
+<line x1="56" y1="200" x2="590" y2="200" stroke="#1c1b18" stroke-width="1.5"/>
+</svg>
+<div style="font-size: 18px; line-height: 1.4">Share of events (scene × duration with ≥ 5 eligible objects) whose own pooled loss exceeds 0.05. <b>StreamPETR has the lowest damage rate; SparseBEV and BEVFormer show no statistically detected difference.</b></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; border-bottom: 3px solid #1c1b18; padding-bottom: 6px">E · Follow-up gaps limit per-event recovery assessment</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: grid; grid-template-columns: 130px minmax(0, 1fr); align-items: center; column-gap: 12px; font-size: 18px">
+<div style="display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #1b9e77; display: inline-block; flex-shrink: 0"></span>SparseBEV</div>
+<div style="display: flex; flex-direction: row; width: 93%; height: 36px; font-size: 17px; font-weight: 600; color: #1c1b18"><div style="flex: 63 1 0; background: #bfe0d3; display: flex; align-items: center; justify-content: center; border: 1px solid #1c1b18">63</div><div style="flex: 30 1 0; background: #ffffff; display: flex; align-items: center; justify-content: center; border: 1px solid #1c1b18; border-left: 0">30</div></div>
+<div style="display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #d95f02; display: inline-block; flex-shrink: 0"></span>StreamPETR</div>
+<div style="display: flex; flex-direction: row; width: 79%; height: 36px; font-size: 17px; font-weight: 600; color: #1c1b18"><div style="flex: 48 1 0; background: #bfe0d3; display: flex; align-items: center; justify-content: center; border: 1px solid #1c1b18">48</div><div style="flex: 1 1 0; background: #e8b4b0; border: 1px solid #1c1b18; border-left: 0"></div><div style="flex: 30 1 0; background: #ffffff; display: flex; align-items: center; justify-content: center; border: 1px solid #1c1b18; border-left: 0">30</div></div>
+<div style="display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #7570b3; display: inline-block; flex-shrink: 0"></span>BEVFormer</div>
+<div style="display: flex; flex-direction: row; width: 100%; height: 36px; font-size: 17px; font-weight: 600; color: #1c1b18"><div style="flex: 64 1 0; background: #bfe0d3; display: flex; align-items: center; justify-content: center; border: 1px solid #1c1b18">64</div><div style="flex: 36 1 0; background: #ffffff; display: flex; align-items: center; justify-content: center; border: 1px solid #1c1b18; border-left: 0">36</div></div>
+</div>
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px 22px; font-size: 16px; color: #1c1b18">
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; background: #bfe0d3; border: 1px solid #1c1b18; display: inline-block; flex-shrink: 0"></span>recovery confirmed by 4 s</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; background: #ffffff; border: 1px solid #1c1b18; display: inline-block; flex-shrink: 0"></span>unconfirmed: follow-up incomplete (censored)</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; background: #e8b4b0; border: 1px solid #1c1b18; display: inline-block; flex-shrink: 0"></span>not recovered, follow-up complete (1 event)</span>
+</div>
+</div>
+<div style="font-size: 18px; line-height: 1.4">Damaged events after a 2 s outage (93 / 79 / 100). 32–38 % remain unconfirmed because follow-up is incomplete (the broader 43–77 % across durations includes events that still recover). Where follow-up <i>is</i> complete, recovery is confirmed in 209 of 210 events. Unconfirmed events are <b>right-censored, not failures</b>; the complete-follow-up events are a selected subset.</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- REFERENCES -->
+<div style="padding: 10px 48px 0 48px; font-size: 16px; line-height: 1.35; color: #4a463f">Data and models: <b>nuScenes</b> (Caesar et al., CVPR 2020) · <b>BEVFormer</b> (Li et al., ECCV 2022) · <b>StreamPETR</b> (Wang et al., ICCV 2023) · <b>SparseBEV</b> (Liu et al., ICCV 2023). Released checkpoints, no retraining.</div>
+
+<!-- FOOTER -->
+<div style="margin-top: 22px; background: #1c1b18; color: #e8e2d2; padding: 16px 48px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 40px; font-size: 18px; line-height: 1.35">
+<div><b style="color: #ffffff">Read with care.</b> A descriptive comparison of complete released systems: clean recall, thresholds, resolution, pretraining, query count and history all differ, so architecture is not isolated. Pilot calibration scenes may have been seen in training; recall at a fixed threshold says nothing about score or box quality; intervals cover scene sampling only.</div>
+<div style="display: flex; flex-direction: row; align-items: center; gap: 22px; white-space: nowrap; text-align: right"><div>Code and results<br><b style="color: #ffffff">github.com/JoonHan-v3/<br>camera-failure-recovery</b></div><svg viewBox="0 0 37 37" width="132" height="132" role="img" aria-label="QR code linking to the project repository on GitHub" style="display: block; flex-shrink: 0"><rect width="37" height="37" fill="#ffffff"/><path d="M2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM5 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM15 2h1v1h-1zM19 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM22 2h1v1h-1zM25 2h1v1h-1zM28 2h1v1h-1zM29 2h1v1h-1zM30 2h1v1h-1zM31 2h1v1h-1zM32 2h1v1h-1zM33 2h1v1h-1zM34 2h1v1h-1zM2 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM13 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM18 3h1v1h-1zM19 3h1v1h-1zM24 3h1v1h-1zM25 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM34 3h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM22 4h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM30 4h1v1h-1zM31 4h1v1h-1zM32 4h1v1h-1zM34 4h1v1h-1zM2 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM13 5h1v1h-1zM16 5h1v1h-1zM17 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM21 5h1v1h-1zM22 5h1v1h-1zM24 5h1v1h-1zM26 5h1v1h-1zM28 5h1v1h-1zM30 5h1v1h-1zM31 5h1v1h-1zM32 5h1v1h-1zM34 5h1v1h-1zM2 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM12 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM21 6h1v1h-1zM24 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM31 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM13 7h1v1h-1zM14 7h1v1h-1zM16 7h1v1h-1zM19 7h1v1h-1zM20 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM24 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM34 7h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM31 8h1v1h-1zM32 8h1v1h-1zM33 8h1v1h-1zM34 8h1v1h-1zM10 9h1v1h-1zM13 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM25 9h1v1h-1zM26 9h1v1h-1zM2 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM11 10h1v1h-1zM13 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM19 10h1v1h-1zM20 10h1v1h-1zM21 10h1v1h-1zM23 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM31 10h1v1h-1zM33 10h1v1h-1zM34 10h1v1h-1zM3 11h1v1h-1zM6 11h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM13 11h1v1h-1zM20 11h1v1h-1zM21 11h1v1h-1zM22 11h1v1h-1zM23 11h1v1h-1zM25 11h1v1h-1zM28 11h1v1h-1zM29 11h1v1h-1zM31 11h1v1h-1zM32 11h1v1h-1zM34 11h1v1h-1zM3 12h1v1h-1zM5 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM13 12h1v1h-1zM16 12h1v1h-1zM19 12h1v1h-1zM22 12h1v1h-1zM23 12h1v1h-1zM25 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM30 12h1v1h-1zM31 12h1v1h-1zM33 12h1v1h-1zM34 12h1v1h-1zM3 13h1v1h-1zM4 13h1v1h-1zM5 13h1v1h-1zM6 13h1v1h-1zM9 13h1v1h-1zM10 13h1v1h-1zM12 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM17 13h1v1h-1zM24 13h1v1h-1zM29 13h1v1h-1zM31 13h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM10 14h1v1h-1zM11 14h1v1h-1zM12 14h1v1h-1zM13 14h1v1h-1zM14 14h1v1h-1zM17 14h1v1h-1zM20 14h1v1h-1zM21 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM29 14h1v1h-1zM30 14h1v1h-1zM31 14h1v1h-1zM33 14h1v1h-1zM34 14h1v1h-1zM2 15h1v1h-1zM5 15h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM11 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM15 15h1v1h-1zM18 15h1v1h-1zM21 15h1v1h-1zM23 15h1v1h-1zM26 15h1v1h-1zM29 15h1v1h-1zM33 15h1v1h-1zM5 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM10 16h1v1h-1zM12 16h1v1h-1zM13 16h1v1h-1zM15 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM21 16h1v1h-1zM22 16h1v1h-1zM23 16h1v1h-1zM28 16h1v1h-1zM31 16h1v1h-1zM2 17h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM9 17h1v1h-1zM10 17h1v1h-1zM11 17h1v1h-1zM12 17h1v1h-1zM13 17h1v1h-1zM16 17h1v1h-1zM18 17h1v1h-1zM20 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM28 17h1v1h-1zM31 17h1v1h-1zM32 17h1v1h-1zM2 18h1v1h-1zM6 18h1v1h-1zM7 18h1v1h-1zM8 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM14 18h1v1h-1zM15 18h1v1h-1zM17 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM20 18h1v1h-1zM22 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM25 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM30 18h1v1h-1zM32 18h1v1h-1zM2 19h1v1h-1zM4 19h1v1h-1zM5 19h1v1h-1zM7 19h1v1h-1zM10 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM17 19h1v1h-1zM19 19h1v1h-1zM21 19h1v1h-1zM22 19h1v1h-1zM24 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM30 19h1v1h-1zM31 19h1v1h-1zM33 19h1v1h-1zM34 19h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM28 20h1v1h-1zM29 20h1v1h-1zM30 20h1v1h-1zM32 20h1v1h-1zM33 20h1v1h-1zM2 21h1v1h-1zM3 21h1v1h-1zM4 21h1v1h-1zM7 21h1v1h-1zM9 21h1v1h-1zM10 21h1v1h-1zM11 21h1v1h-1zM12 21h1v1h-1zM13 21h1v1h-1zM15 21h1v1h-1zM16 21h1v1h-1zM18 21h1v1h-1zM21 21h1v1h-1zM24 21h1v1h-1zM25 21h1v1h-1zM26 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM30 21h1v1h-1zM33 21h1v1h-1zM34 21h1v1h-1zM4 22h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM14 22h1v1h-1zM17 22h1v1h-1zM20 22h1v1h-1zM23 22h1v1h-1zM26 22h1v1h-1zM31 22h1v1h-1zM32 22h1v1h-1zM33 22h1v1h-1zM2 23h1v1h-1zM3 23h1v1h-1zM10 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM15 23h1v1h-1zM17 23h1v1h-1zM19 23h1v1h-1zM20 23h1v1h-1zM21 23h1v1h-1zM22 23h1v1h-1zM23 23h1v1h-1zM25 23h1v1h-1zM28 23h1v1h-1zM32 23h1v1h-1zM34 23h1v1h-1zM5 24h1v1h-1zM8 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM14 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM18 24h1v1h-1zM19 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM25 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM28 24h1v1h-1zM29 24h1v1h-1zM31 24h1v1h-1zM32 24h1v1h-1zM33 24h1v1h-1zM34 24h1v1h-1zM3 25h1v1h-1zM5 25h1v1h-1zM6 25h1v1h-1zM9 25h1v1h-1zM10 25h1v1h-1zM11 25h1v1h-1zM12 25h1v1h-1zM15 25h1v1h-1zM18 25h1v1h-1zM22 25h1v1h-1zM26 25h1v1h-1zM28 25h1v1h-1zM29 25h1v1h-1zM31 25h1v1h-1zM2 26h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM10 26h1v1h-1zM11 26h1v1h-1zM12 26h1v1h-1zM16 26h1v1h-1zM17 26h1v1h-1zM19 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM27 26h1v1h-1zM28 26h1v1h-1zM29 26h1v1h-1zM30 26h1v1h-1zM33 26h1v1h-1zM10 27h1v1h-1zM11 27h1v1h-1zM13 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM19 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM26 27h1v1h-1zM30 27h1v1h-1zM31 27h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM7 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM13 28h1v1h-1zM15 28h1v1h-1zM18 28h1v1h-1zM21 28h1v1h-1zM22 28h1v1h-1zM23 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM28 28h1v1h-1zM30 28h1v1h-1zM2 29h1v1h-1zM8 29h1v1h-1zM10 29h1v1h-1zM11 29h1v1h-1zM14 29h1v1h-1zM18 29h1v1h-1zM22 29h1v1h-1zM23 29h1v1h-1zM24 29h1v1h-1zM25 29h1v1h-1zM26 29h1v1h-1zM30 29h1v1h-1zM31 29h1v1h-1zM32 29h1v1h-1zM33 29h1v1h-1zM34 29h1v1h-1zM2 30h1v1h-1zM4 30h1v1h-1zM5 30h1v1h-1zM6 30h1v1h-1zM8 30h1v1h-1zM13 30h1v1h-1zM15 30h1v1h-1zM17 30h1v1h-1zM19 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM24 30h1v1h-1zM25 30h1v1h-1zM26 30h1v1h-1zM27 30h1v1h-1zM28 30h1v1h-1zM29 30h1v1h-1zM30 30h1v1h-1zM32 30h1v1h-1zM34 30h1v1h-1zM2 31h1v1h-1zM4 31h1v1h-1zM5 31h1v1h-1zM6 31h1v1h-1zM8 31h1v1h-1zM10 31h1v1h-1zM11 31h1v1h-1zM12 31h1v1h-1zM16 31h1v1h-1zM20 31h1v1h-1zM22 31h1v1h-1zM23 31h1v1h-1zM24 31h1v1h-1zM25 31h1v1h-1zM29 31h1v1h-1zM34 31h1v1h-1zM2 32h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM8 32h1v1h-1zM10 32h1v1h-1zM12 32h1v1h-1zM13 32h1v1h-1zM15 32h1v1h-1zM20 32h1v1h-1zM22 32h1v1h-1zM24 32h1v1h-1zM28 32h1v1h-1zM29 32h1v1h-1zM31 32h1v1h-1zM32 32h1v1h-1zM2 33h1v1h-1zM8 33h1v1h-1zM11 33h1v1h-1zM12 33h1v1h-1zM13 33h1v1h-1zM16 33h1v1h-1zM17 33h1v1h-1zM18 33h1v1h-1zM19 33h1v1h-1zM20 33h1v1h-1zM21 33h1v1h-1zM24 33h1v1h-1zM26 33h1v1h-1zM27 33h1v1h-1zM29 33h1v1h-1zM30 33h1v1h-1zM31 33h1v1h-1zM34 33h1v1h-1zM2 34h1v1h-1zM3 34h1v1h-1zM4 34h1v1h-1zM5 34h1v1h-1zM6 34h1v1h-1zM7 34h1v1h-1zM8 34h1v1h-1zM10 34h1v1h-1zM12 34h1v1h-1zM13 34h1v1h-1zM17 34h1v1h-1zM18 34h1v1h-1zM19 34h1v1h-1zM20 34h1v1h-1zM23 34h1v1h-1zM25 34h1v1h-1zM27 34h1v1h-1zM30 34h1v1h-1zM32 34h1v1h-1z" fill="#1c1b18"/></svg></div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2000,"height":2290}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

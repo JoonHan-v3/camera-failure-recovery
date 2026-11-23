@@ -1,0 +1,215 @@
+{
+ "blob_dirs": [
+  "v1.0-trainval01_blobs",
+  "v1.0-trainval02_blobs",
+  "v1.0-trainval03_blobs",
+  "v1.0-trainval04_blobs",
+  "v1.0-trainval05_blobs",
+  "v1.0-trainval06_blobs",
+  "v1.0-trainval07_blobs",
+  "v1.0-trainval08_blobs",
+  "v1.0-trainval09_blobs",
+  "v1.0-trainval10_blobs"
+ ],
+ "per_channel": {
+  "CAM_BACK_LEFT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 5051318668,
+   "n_kfcopy": 34149,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_BACK_LEFT|sweep": {
+   "n_json": 160856,
+   "n_blob": 160856,
+   "bytes_blob": 23803060969,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_BACK_RIGHT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 5376476448,
+   "n_kfcopy": 34149,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_BACK_RIGHT|sweep": {
+   "n_json": 164266,
+   "n_blob": 164266,
+   "bytes_blob": 25845227688,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_BACK|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 4722601533,
+   "n_kfcopy": 34149,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_BACK|sweep": {
+   "n_json": 161453,
+   "n_blob": 161453,
+   "bytes_blob": 22325684410,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_FRONT_LEFT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 5242450271,
+   "n_kfcopy": 34149,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_FRONT_LEFT|sweep": {
+   "n_json": 164274,
+   "n_blob": 164274,
+   "bytes_blob": 25204108400,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_FRONT_RIGHT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 5305096027,
+   "n_kfcopy": 34149,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_FRONT_RIGHT|sweep": {
+   "n_json": 163881,
+   "n_blob": 163881,
+   "bytes_blob": 25469638479,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_FRONT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 5089796906,
+   "n_kfcopy": 34149,
+   "kfcopy_size_mismatch": 0
+  },
+  "CAM_FRONT|sweep": {
+   "n_json": 164166,
+   "n_blob": 164166,
+   "bytes_blob": 24465948198,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "LIDAR_TOP|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 23713123840,
+   "n_kfcopy": 34149,
+   "kfcopy_size_mismatch": 0
+  },
+  "LIDAR_TOP|sweep": {
+   "n_json": 297737,
+   "n_blob": 297737,
+   "bytes_blob": 206757723520,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_BACK_LEFT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 303680611,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_BACK_LEFT|sweep": {
+   "n_json": 185467,
+   "n_blob": 185467,
+   "bytes_blob": 1648634923,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_BACK_RIGHT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 302837854,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_BACK_RIGHT|sweep": {
+   "n_json": 189065,
+   "n_blob": 189065,
+   "bytes_blob": 1674993640,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_FRONT_LEFT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 207746579,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_FRONT_LEFT|sweep": {
+   "n_json": 191133,
+   "n_blob": 191133,
+   "bytes_blob": 1161100813,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_FRONT_RIGHT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 208408392,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_FRONT_RIGHT|sweep": {
+   "n_json": 190435,
+   "n_blob": 190435,
+   "bytes_blob": 1161292139,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_FRONT|keyframe": {
+   "n_json": 34149,
+   "n_blob": 34149,
+   "bytes_blob": 313230051,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  },
+  "RADAR_FRONT|sweep": {
+   "n_json": 188562,
+   "n_blob": 188562,
+   "bytes_blob": 1729285540,
+   "n_kfcopy": 0,
+   "kfcopy_size_mismatch": 0
+  }
+ },
+ "all_json_files_present_in_blobs": true,
+ "files_on_disk_not_in_json": 0,
+ "extra_examples": [],
+ "keyframe_copy_md5_identical_sampled": "300/300",
+ "disk_bytes": {
+  "nuscenes_dl_tgz": 319054751861,
+  "nuscenes_dl_extracted_blobs": 417083637568,
+  "keyframe_copy": 54500863693,
+  "metadata_trainval": 2601855290,
+  "can_bus": 4634070525
+ },
+ "val_scenes": 150,
+ "val_scenes_scheduled": 150,
+ "val_keyframe_samples": 6019,
+ "val_keyframe_cam_images": 36114,
+ "val_keyframe_cam_bytes": 5354146090,
+ "val_scene_cam_sweeps_available_UPPER_BOUND": {
+  "CAM_FRONT": 28929,
+  "CAM_FRONT_RIGHT": 28845,
+  "CAM_BACK_RIGHT": 28925,
+  "CAM_BACK": 28479,
+  "CAM_BACK_LEFT": 28328,
+  "CAM_FRONT_LEFT": 28914
+ },
+ "val_scene_cam_sweep_bytes_UPPER_BOUND": 25562722521,
+ "loaders": {
+  "BEVFormer-tiny": "6 keyframe cams/sample; no camera sweeps; recurrent prev_bev (+ CAN-bus pose, can_bus.zip)",
+  "StreamPETR": "6 keyframe cams/sample; no camera sweeps (Member 2 verified)",
+  "SparseBEV": "r50_nuimg_704x256 @ d341052 test mode: current + 7 previous KEYFRAMES, 0 sweeps (replicated; see loader_manifests.json)"
+ },
+ "exact_loader_manifests": "artifacts/loader_manifests.json"
+}

@@ -1,0 +1,23 @@
+Declared 2026-11-22T16:48:26Z, BEFORE any validation event-analysis statistic was computed (only pilot/calibration scenes were used).
+Frozen rules for the custom front-region evaluator (study plan p.3-4), identical for all three models:
+  eligible GT        : ten detection classes; centre in front of CAM_FRONT, inside the original 1600x900 image, ground-plane distance <= 50 m
+                       (from the sample-time ego origin), >= 1 annotated LiDAR or radar point; clean calibration, sample-time annotations,
+                       camera-time ego pose, no motion compensation to exposure time (documented approximation)
+  matching           : class-aware, one-to-one, ground-plane centre distance <= 2.0 m (inclusive), predictions in descending score, nearest unmatched
+                       eligible GT (ties: lowest GT index), then ignored same-class GT absorbs; remaining unmatched in-region predictions = FP
+  predictions        : native decoded predictions BEFORE official class-range filtering, common format preds.pkl
+  threshold          : chosen on the pilot (calibration) scenes from the model's CLEAN predictions: maximise pooled precision TP/(TP+FP)
+                       subject to recall >= 0.30 and >= 100 predictions in the region; ties -> higher recall -> lower threshold; undefined precision never wins
+  damage / recovery  : loss L = R_clean - R_outage on the same eligible GT; damaged iff pooled loss during the outage > 0.05 and >= 5 eligible GT
+                       during the outage; recovery onset = first post-restoration bin with L <= 0.05 whose next adjacent scheduled bin also has L <= 0.05;
+                       each bin needs >= 5 eligible GT; missing/insufficient bin breaks the pair; bins 0.0..4.5 s step 0.5, +-0.25 s, one-to-one
+
+ADDENDUM — geometry version 2, declared 2026-11-22T19:27:22Z, in response to the Inspector's review (process.txt):
+  Version 1 measured the 2 m matching distance in the LiDAR sensor XY plane (z of prediction = box bottom) while the 50 m region rule used the sample-time
+  ego plane; the LiDAR is pitched ~2.6 deg relative to the ego frame, so the two disagreed and a real TP/FP assignment crossed the 2 m boundary.
+  Version 2: ONE ground plane = sample-time ego frame; matching distance (including the ignored-GT check) is the XY norm between the GEOMETRIC centres
+  (prediction z_bottom + h/2, GT gravity centre) after transforming both into that frame. Unchanged: 2.0 m threshold, class/score/tie/one-to-one rules,
+  region, eligibility, damage/recovery rules, calibration objective and constraints (recall >= 0.30, >= 100 region predictions, max precision), and the
+  calibration scenes (the 10 pilot TRAIN scenes only). Thresholds were recomputed from the unchanged saved CLEAN pilot predictions; no validation outcome was
+  used. DISCLOSURE: validation statistics had already been computed with version 1 (superseded records kept in artifacts/superseded_geometry_v1/); the
+  version-2 thresholds depend on the pilot scenes alone. No model inference, official metric or schedule changed.

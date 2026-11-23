@@ -1,0 +1,8 @@
+Declared 2026-11-22T16:25:16Z, BEFORE any SparseBEV validation metric was computed in this project.
+Baseline gate for the clean full-validation run (150 scenes, 6019 samples), official nuScenes detection eval:
+  |NDS - 0.556| <= 0.010
+Reference: released SparseBEV r50_nuimg_704x256 (README model-zoo table: NDS 55.6; README states a ~0.3 NDS training noise).
+The released README does not publish mAP for this setting, so mAP is REPORTED but not gated (no number from memory is used as a gate).
+Same tolerance as Members 1/2. The tolerance will not be changed after the result is seen.
+Frozen numerics: fp32 (no autocast; the config has no fp16 inference flag), TF32 off, cudnn.benchmark False, batch 1, torch 1.9.0+cu111
+with the meshgrid compat shim (outage/compat.py).

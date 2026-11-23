@@ -1,0 +1,13 @@
+{
+ "offline_calls": 80,
+ "online_calls_during_offline": 0,
+ "backbone_batch_sizes": [
+  48
+ ],
+ "n_samples": 80,
+ "same_row_count": 80,
+ "max_abs_diff_finite": 0.0,
+ "n_exact_equal": 80,
+ "n_diff_above_1e_3": 0,
+ "n_shape_mismatch": 0
+}

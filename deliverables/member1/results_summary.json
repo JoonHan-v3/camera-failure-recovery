@@ -1,0 +1,235 @@
+{
+ "baseline_gate": {
+  "NDS": 0.35449188830084066,
+  "mAP": 0.251891367928018,
+  "ref_NDS": 0.354,
+  "ref_mAP": 0.252,
+  "tol": 0.01,
+  "PASS": true
+ },
+ "official": {
+  "val_a": {
+   "NDS": 0.35449188830084066,
+   "mAP": 0.251891367928018,
+   "mATE": 0.898,
+   "mASE": 0.293,
+   "mAOE": 0.6511,
+   "mAVE": 0.6565,
+   "mAAE": 0.216
+  },
+  "val_b": {
+   "NDS": 0.35449188830084066,
+   "mAP": 0.251891367928018,
+   "mATE": 0.898,
+   "mASE": 0.293,
+   "mAOE": 0.6511,
+   "mAVE": 0.6565,
+   "mAAE": 0.216
+  },
+  "val_d05": {
+   "NDS": 0.35409677899635744,
+   "mAP": 0.2514835221743704,
+   "mATE": 0.8985,
+   "mASE": 0.2928,
+   "mAOE": 0.6501,
+   "mAVE": 0.6591,
+   "mAAE": 0.2159
+  },
+  "val_d10": {
+   "NDS": 0.35370413701363457,
+   "mAP": 0.2504587477183199,
+   "mATE": 0.8995,
+   "mASE": 0.2929,
+   "mAOE": 0.6474,
+   "mAVE": 0.6587,
+   "mAAE": 0.2167
+  },
+  "val_d20": {
+   "NDS": 0.3518379246765061,
+   "mAP": 0.24754876010445176,
+   "mATE": 0.9004,
+   "mASE": 0.2929,
+   "mAOE": 0.6471,
+   "mAVE": 0.6629,
+   "mAAE": 0.2161
+  }
+ },
+ "verification_pilot": {
+  "version": "v1.0-trainval",
+  "runs": [
+   "pilot_a",
+   "pilot_b",
+   "pilot_d05",
+   "pilot_d10",
+   "pilot_d20"
+  ],
+  "causal_policy": "alignment allowance: image sensor ts <= sample (lidar keyframe) ts + 50000 us (fixed sample+50ms inference budget; bundle availability >= max(sample time, latest exposure), delay unmeasured); eval time = sample time; observed trainval max skew +49992 us",
+  "max_cam_minus_eval_skew_us": 1867,
+  "min_cam_minus_eval_skew_us": -46078,
+  "clean_twice_max_abs_diff": 0.0,
+  "clean_twice_identical_samples": 402,
+  "clean_audit_a": "CONSISTENT",
+  "clean_audit_b": "CONSISTENT",
+  "clean_a_vs_b_input_errors": 0
+ },
+ "verification_val": {
+  "version": "v1.0-trainval",
+  "runs": [
+   "val_a",
+   "val_b",
+   "val_d05",
+   "val_d10",
+   "val_d20"
+  ],
+  "causal_policy": "alignment allowance: image sensor ts <= sample (lidar keyframe) ts + 50000 us (fixed sample+50ms inference budget; bundle availability >= max(sample time, latest exposure), delay unmeasured); eval time = sample time; observed trainval max skew +49992 us",
+  "max_cam_minus_eval_skew_us": 2106,
+  "min_cam_minus_eval_skew_us": -49961,
+  "clean_twice_max_abs_diff": 0.0,
+  "clean_twice_identical_samples": 6019,
+  "clean_audit_a": "CONSISTENT",
+  "clean_audit_b": "CONSISTENT",
+  "clean_a_vs_b_input_errors": 0
+ },
+ "isolation": {
+  "n_scenes": 10,
+  "tf32": false,
+  "fresh_B_twice_max_abs_diff": 0.0,
+  "B_after_A_vs_fresh_B_max_abs_diff": 0.0,
+  "leak_control": {
+   "rejected_by_guard": true,
+   "message": "stale memory at start of 3032b651c72e4b5c86d4dea1b4930689"
+  },
+  "leak_unguarded_max_abs_diff_vs_fresh": 97.43800735473633,
+  "no_reset_rerun_same_scene": {
+   "prev_bev_reused_at_first_frame": true,
+   "max_abs_diff_vs_fresh": 98.69283294677734
+  },
+  "interleave_control": {
+   "rejected": true,
+   "message": "scene 129304d659464b0fb3a51c99eaec114a revisited: interleaved batching/workers"
+  },
+  "all_isolated": true
+ },
+ "runs": {
+  "pilot_a": {
+   "n_samples": 402,
+   "runtime_s": 337.28653049468994,
+   "latency_median_s": 0.9163856506347656,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  },
+  "pilot_b": {
+   "n_samples": 402,
+   "runtime_s": 340.4928250312805,
+   "latency_median_s": 0.8973132371902466,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  },
+  "pilot_d05": {
+   "n_samples": 402,
+   "runtime_s": 349.2676601409912,
+   "latency_median_s": 0.9099985361099243,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  },
+  "pilot_d10": {
+   "n_samples": 402,
+   "runtime_s": 358.2272915840149,
+   "latency_median_s": 0.9199062585830688,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  },
+  "pilot_d20": {
+   "n_samples": 402,
+   "runtime_s": 317.36245822906494,
+   "latency_median_s": 0.8084750175476074,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  },
+  "val_a": {
+   "n_samples": 6019,
+   "runtime_s": 4963.376171827316,
+   "latency_median_s": 0.8175618648529053,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  },
+  "val_b": {
+   "n_samples": 6019,
+   "runtime_s": 3708.6010847091675,
+   "latency_median_s": 0.6217668056488037,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  },
+  "val_d05": {
+   "n_samples": 6019,
+   "runtime_s": 4985.732521772385,
+   "latency_median_s": 0.81886887550354,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 14 scenes",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  },
+  "val_d10": {
+   "n_samples": 6019,
+   "runtime_s": 4934.307881832123,
+   "latency_median_s": 0.8151857852935791,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 26 scenes",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  },
+  "val_d20": {
+   "n_samples": 6019,
+   "runtime_s": 3771.993837118149,
+   "latency_median_s": 0.6240370273590088,
+   "peak_gpu_mb": 617.01123046875,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 34 scenes",
+   "bev_history_present_after_first_frame": true,
+   "tf32_matmul": false,
+   "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "fresh_at_all_scene_starts": true
+  }
+ }
+}

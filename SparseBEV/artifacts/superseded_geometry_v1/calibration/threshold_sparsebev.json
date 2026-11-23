@@ -1,0 +1,16 @@
+{
+ "tau": 0.5422017574310303,
+ "precision": 0.9865168539325843,
+ "recall": 0.32114118507681055,
+ "n_pred": 445,
+ "tp": 439,
+ "fp": 6,
+ "recall_target": 0.3,
+ "min_pred": 100,
+ "n_eligible_gt": 1367,
+ "n_samples": 402,
+ "n_pred_total": 87435,
+ "native_score_floor": 0.0500008724629879,
+ "calibration_preds_sha256": "bdf577f3f50a615197ea2c80a5ff9980f813470196abd9d75d828dfa61412f04",
+ "calibration_scenes": "pilot (train split): reserved calibration scenes, may have been seen by the released models"
+}

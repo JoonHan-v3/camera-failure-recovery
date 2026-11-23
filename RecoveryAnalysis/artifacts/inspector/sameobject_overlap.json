@@ -1,0 +1,53 @@
+{
+ "0.5": {
+  "same_sample_event_pairs": 6,
+  "models": {
+   "sparsebev": {
+    "events_with_missed_during_objects": 4,
+    "same_sample_persisting_misses": 11
+   },
+   "streampetr": {
+    "events_with_missed_during_objects": 5,
+    "same_sample_persisting_misses": 11
+   },
+   "bevformer": {
+    "events_with_missed_during_objects": 5,
+    "same_sample_persisting_misses": 11
+   }
+  }
+ },
+ "1.0": {
+  "same_sample_event_pairs": 4,
+  "models": {
+   "sparsebev": {
+    "events_with_missed_during_objects": 3,
+    "same_sample_persisting_misses": 4
+   },
+   "streampetr": {
+    "events_with_missed_during_objects": 2,
+    "same_sample_persisting_misses": 5
+   },
+   "bevformer": {
+    "events_with_missed_during_objects": 3,
+    "same_sample_persisting_misses": 4
+   }
+  }
+ },
+ "2.0": {
+  "same_sample_event_pairs": 6,
+  "models": {
+   "sparsebev": {
+    "events_with_missed_during_objects": 3,
+    "same_sample_persisting_misses": 9
+   },
+   "streampetr": {
+    "events_with_missed_during_objects": 4,
+    "same_sample_persisting_misses": 10
+   },
+   "bevformer": {
+    "events_with_missed_during_objects": 3,
+    "same_sample_persisting_misses": 10
+   }
+  }
+ }
+}

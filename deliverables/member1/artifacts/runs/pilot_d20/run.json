@@ -1,0 +1,89 @@
+{
+ "condition": "2",
+ "scenes": [
+  "129304d659464b0fb3a51c99eaec114a",
+  "3032b651c72e4b5c86d4dea1b4930689",
+  "5c9bd7ead37e4aa9989f7909f3a78baa",
+  "69ee276c40644ddbb7fe21c613cd7689",
+  "73030fb67d3c46cfb5e590168088ae39",
+  "7809330e0345423ab6212787edf3561b",
+  "a6fae4900f8e46cba689b59b5bc8a2ab",
+  "bd916d78cb3149999182fb3ce4eb8a8d",
+  "deab903b0b644d7a984c552968026631",
+  "f55c8c62235146d895f611176fd0a5dc"
+ ],
+ "n_samples": 402,
+ "runtime_s": 317.36245822906494,
+ "latency_median_s": 0.8084750175476074,
+ "peak_gpu_mb": 617.01123046875,
+ "audit_status": "CONSISTENT",
+ "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+ "violations": [],
+ "causal_tolerance_us": 50000,
+ "causal_policy": "alignment allowance: image sensor ts <= sample (lidar keyframe) ts + 50000 us (fixed sample+50ms inference budget; bundle availability >= max(sample time, latest exposure), delay unmeasured); eval time = sample time; observed trainval max skew +49992 us",
+ "manifest_max_skew_us": 1867,
+ "model_state_fresh_at_scene_starts": [
+  [
+   "73030fb67d3c46cfb5e590168088ae39",
+   true
+  ],
+  [
+   "129304d659464b0fb3a51c99eaec114a",
+   true
+  ],
+  [
+   "5c9bd7ead37e4aa9989f7909f3a78baa",
+   true
+  ],
+  [
+   "7809330e0345423ab6212787edf3561b",
+   true
+  ],
+  [
+   "69ee276c40644ddbb7fe21c613cd7689",
+   true
+  ],
+  [
+   "deab903b0b644d7a984c552968026631",
+   true
+  ],
+  [
+   "a6fae4900f8e46cba689b59b5bc8a2ab",
+   true
+  ],
+  [
+   "f55c8c62235146d895f611176fd0a5dc",
+   true
+  ],
+  [
+   "bd916d78cb3149999182fb3ce4eb8a8d",
+   true
+  ],
+  [
+   "3032b651c72e4b5c86d4dea1b4930689",
+   true
+  ]
+ ],
+ "bev_history_present_after_first_frame": true,
+ "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+ "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449",
+ "ckpt_sha256": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+ "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+ "torch": "1.9.0+cu111",
+ "mmcv": "1.4.0",
+ "cuda_runtime": "11.1",
+ "argv": [
+  "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+  "--split",
+  "pilot",
+  "--condition",
+  "2",
+  "--out",
+  "../artifacts/runs/pilot_d20",
+  "--no-tf32"
+ ],
+ "cwd_root": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer",
+ "tf32_matmul": false,
+ "tf32_cudnn": false,
+ "gpu": "NVIDIA GeForce RTX 3060"
+}

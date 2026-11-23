@@ -1,0 +1,13 @@
+{
+ "n_samples": 6019,
+ "mismatching_samples": 0,
+ "sweep_files_used": 0,
+ "online_offline_mismatch": 0,
+ "n_slots": 288912,
+ "unique_files": 36114,
+ "unique_files_not_keyframes_of_evaluated_samples": 0,
+ "keyframes_of_evaluated_samples": 36114,
+ "first_of_scene_samples": 150,
+ "samples_clamped_to_oldest": 900,
+ "PASS": true
+}

@@ -1,0 +1,5 @@
+Declared 2026-11-22T06:29:44Z, BEFORE any BEVFormer validation metric was computed in this project.
+Baseline gate for the clean full-validation run (150 scenes, 6019 samples), official nuScenes detection eval:
+  |NDS - 0.354| <= 0.010  and  |mAP - 0.252| <= 0.010
+Reference: released BEVFormer-tiny (README table 35.4 / 25.2; released training log epoch 24: NDS 0.3540, mAP 0.2524).
+Same tolerance as Member 2's StreamPETR gate. The tolerance will not be changed after the result is seen.

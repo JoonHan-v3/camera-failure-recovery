@@ -1,0 +1,55 @@
+{
+ "window_keyframes": 8,
+ "tol": 0.0001,
+ "runs": {
+  "val_d05": {
+   "duration_s": 0.5,
+   "n_noncontaminated": 4801,
+   "noncontaminated_max_abs_diff": 0.0,
+   "noncontaminated_all_within_tol": true,
+   "n_contaminated": 1218,
+   "contaminated_changed": 1218,
+   "contaminated_unchanged": 0,
+   "scenes_with_leave_time": 150,
+   "leave_offset_s_after_restoration": {
+    "min": 3.336489,
+    "median": 3.536383,
+    "max": 4.13658
+   },
+   "scenes_whose_window_never_clears_before_scene_end": 0
+  },
+  "val_d10": {
+   "duration_s": 1.0,
+   "n_noncontaminated": 4643,
+   "noncontaminated_max_abs_diff": 0.0,
+   "noncontaminated_all_within_tol": true,
+   "n_contaminated": 1376,
+   "contaminated_changed": 1376,
+   "contaminated_unchanged": 0,
+   "scenes_with_leave_time": 150,
+   "leave_offset_s_after_restoration": {
+    "min": 3.287408,
+    "median": 3.537571,
+    "max": 4.137574
+   },
+   "scenes_whose_window_never_clears_before_scene_end": 0
+  },
+  "val_d20": {
+   "duration_s": 2.0,
+   "n_noncontaminated": 4334,
+   "noncontaminated_max_abs_diff": 0.0,
+   "noncontaminated_all_within_tol": true,
+   "n_contaminated": 1685,
+   "contaminated_changed": 1685,
+   "contaminated_unchanged": 0,
+   "scenes_with_leave_time": 150,
+   "leave_offset_s_after_restoration": {
+    "min": 3.334902,
+    "median": 3.5378100000000003,
+    "max": 4.137372
+   },
+   "scenes_whose_window_never_clears_before_scene_end": 0
+  }
+ },
+ "PASS": true
+}

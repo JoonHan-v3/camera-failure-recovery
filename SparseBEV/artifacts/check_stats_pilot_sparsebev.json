@@ -1,0 +1,17 @@
+{
+ "n_samples": 402,
+ "stride": 1,
+ "extra_samples_forced": [],
+ "tau": 0.5422017574310303,
+ "totals_reference": {
+  "tp": 416,
+  "fp": 7,
+  "ign": 3120,
+  "n_pred_region": 423,
+  "n_gt": 1367
+ },
+ "mismatching_samples": 0,
+ "invariant_violations": 0,
+ "examples": [],
+ "PASS": true
+}

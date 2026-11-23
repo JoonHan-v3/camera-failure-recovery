@@ -1,0 +1,1185 @@
+{
+ "geometry": "v2: sample-time ego-plane XY between geometric centres (v1 superseded: LiDAR-sensor XY, prediction z = box bottom)",
+ "example": {
+  "sample": "8c394cbb9706486aae5c0edc1d704178",
+  "prediction_row": 23,
+  "score": 0.5488640666007996,
+  "eligible_gt_index": 15,
+  "gt_instance": "b129eb9f43b14a788ef35ead8b1844dc",
+  "tau": 0.5422017574310303,
+  "lidar_xy_distance_m": 2.026647283015333,
+  "ego_plane_geometric_centre_distance_m": 1.99973018831708,
+  "v1_status": "FP (2.0266 m > 2 m)",
+  "v2_status": "TP",
+  "v2_counts_at_tau": {
+   "tp": 4,
+   "fp": 0,
+   "ign": 20,
+   "n_pred_region": 4
+  },
+  "v2_counts_expected_tp4_fp0": true,
+  "matched_gt_in_v2": 1
+ },
+ "comparison": {
+  "sparsebev_val": {
+   "tau_old": 0.5422017574310303,
+   "tau_new": 0.5422017574310303,
+   "runs": {
+    "clean": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 6,
+     "tp_v1": 10909,
+     "tp_v2": 10910,
+     "fp_v1": 659,
+     "fp_v2": 658,
+     "recall_v1": 0.36441074291822556,
+     "recall_v2": 0.364444147514698,
+     "precision_v1": 0.9430325034578146,
+     "precision_v2": 0.943118948824343,
+     "changed_examples": [
+      {
+       "sample": "5b8b618c3f9e481bb8522d9900d74f20",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 33,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 34,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "88aa269105204f8db1a29debf3cde07c",
+       "v1": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 11,
+        "n_pred_region": 5
+       },
+       "v2": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 5
+       }
+      },
+      {
+       "sample": "de7593d76648450e947ba0c203dee1b0",
+       "v1": {
+        "tp": 4,
+        "fp": 0,
+        "ign": 11,
+        "n_pred_region": 4
+       },
+       "v2": {
+        "tp": 4,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 4
+       }
+      },
+      {
+       "sample": "8c394cbb9706486aae5c0edc1d704178",
+       "v1": {
+        "tp": 3,
+        "fp": 1,
+        "ign": 20,
+        "n_pred_region": 4
+       },
+       "v2": {
+        "tp": 4,
+        "fp": 0,
+        "ign": 20,
+        "n_pred_region": 4
+       }
+      },
+      {
+       "sample": "b8f4bec20b9b4d79b1979f43ba1e0222",
+       "v1": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 9,
+        "n_pred_region": 1
+       }
+      }
+     ]
+    },
+    "0.5": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 7,
+     "tp_v1": 10784,
+     "tp_v2": 10784,
+     "fp_v1": 656,
+     "fp_v2": 657,
+     "recall_v1": 0.36023516835916625,
+     "recall_v2": 0.36023516835916625,
+     "precision_v1": 0.9426573426573427,
+     "precision_v2": 0.9425749497421554,
+     "changed_examples": [
+      {
+       "sample": "5b8b618c3f9e481bb8522d9900d74f20",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 33,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 34,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "09e58f5b8acb45a9a9c8c186895efa59",
+       "v1": {
+        "tp": 4,
+        "fp": 1,
+        "ign": 19,
+        "n_pred_region": 5
+       },
+       "v2": {
+        "tp": 5,
+        "fp": 1,
+        "ign": 18,
+        "n_pred_region": 6
+       }
+      },
+      {
+       "sample": "a0462df7186d4ca99ef58f455d53a42c",
+       "v1": {
+        "tp": 2,
+        "fp": 0,
+        "ign": 9,
+        "n_pred_region": 2
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 1,
+        "ign": 9,
+        "n_pred_region": 2
+       }
+      },
+      {
+       "sample": "7dae85733d7d49449d10dd6defa13e33",
+       "v1": {
+        "tp": 0,
+        "fp": 1,
+        "ign": 9,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 1
+       }
+      },
+      {
+       "sample": "2bf99517e3d24d53bbc970f595c433d8",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 7,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 8,
+        "n_pred_region": 0
+       }
+      }
+     ]
+    },
+    "1.0": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 5,
+     "tp_v1": 10599,
+     "tp_v2": 10599,
+     "fp_v1": 661,
+     "fp_v2": 661,
+     "recall_v1": 0.35405531801175844,
+     "recall_v2": 0.35405531801175844,
+     "precision_v1": 0.9412966252220248,
+     "precision_v2": 0.9412966252220248,
+     "changed_examples": [
+      {
+       "sample": "5b8b618c3f9e481bb8522d9900d74f20",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 33,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 34,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "7dae85733d7d49449d10dd6defa13e33",
+       "v1": {
+        "tp": 0,
+        "fp": 1,
+        "ign": 9,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 1
+       }
+      },
+      {
+       "sample": "2bf99517e3d24d53bbc970f595c433d8",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 7,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 8,
+        "n_pred_region": 0
+       }
+      },
+      {
+       "sample": "b8f4bec20b9b4d79b1979f43ba1e0222",
+       "v1": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 9,
+        "n_pred_region": 1
+       }
+      },
+      {
+       "sample": "f6c4cb03fbb44ccfb19d19fae99480c8",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 2,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 3,
+        "n_pred_region": 0
+       }
+      }
+     ]
+    },
+    "2.0": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 6,
+     "tp_v1": 10124,
+     "tp_v2": 10124,
+     "fp_v1": 659,
+     "fp_v2": 659,
+     "recall_v1": 0.338188134687333,
+     "recall_v2": 0.338188134687333,
+     "precision_v1": 0.9388852823889455,
+     "precision_v2": 0.9388852823889455,
+     "changed_examples": [
+      {
+       "sample": "5b8b618c3f9e481bb8522d9900d74f20",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 33,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 34,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "d1854d6255ca48628ff4d66317f43b7e",
+       "v1": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 5
+       },
+       "v2": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 9,
+        "n_pred_region": 5
+       }
+      },
+      {
+       "sample": "7dae85733d7d49449d10dd6defa13e33",
+       "v1": {
+        "tp": 0,
+        "fp": 1,
+        "ign": 9,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 1
+       }
+      },
+      {
+       "sample": "b8f4bec20b9b4d79b1979f43ba1e0222",
+       "v1": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 9,
+        "n_pred_region": 1
+       }
+      },
+      {
+       "sample": "f6c4cb03fbb44ccfb19d19fae99480c8",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 2,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 3,
+        "n_pred_region": 0
+       }
+      }
+     ]
+    }
+   }
+  },
+  "bevformer_val": {
+   "tau_old": 0.8792772889137268,
+   "tau_new": 0.8792772889137268,
+   "runs": {
+    "clean": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 16,
+     "tp_v1": 8961,
+     "tp_v2": 8964,
+     "fp_v1": 1095,
+     "fp_v2": 1093,
+     "recall_v1": 0.299338588989845,
+     "recall_v2": 0.29943880277926244,
+     "precision_v1": 0.891109785202864,
+     "precision_v2": 0.8913194789698717,
+     "changed_examples": [
+      {
+       "sample": "8491dd8fb7a44826b15e24ef9f869455",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 7,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 8,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "b9853461935b41f88ba20195a2d0217c",
+       "v1": {
+        "tp": 1,
+        "fp": 1,
+        "ign": 9,
+        "n_pred_region": 2
+       },
+       "v2": {
+        "tp": 2,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "e9b9031b8f5f41e89bd5eed158feaf14",
+       "v1": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 2,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 3,
+        "n_pred_region": 1
+       }
+      },
+      {
+       "sample": "023a58306058440988b0ca496bdf9c2e",
+       "v1": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 13,
+        "n_pred_region": 5
+       },
+       "v2": {
+        "tp": 6,
+        "fp": 0,
+        "ign": 12,
+        "n_pred_region": 6
+       }
+      },
+      {
+       "sample": "70189da84ffc4c839decca4e41777135",
+       "v1": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 16,
+        "n_pred_region": 5
+       },
+       "v2": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 15,
+        "n_pred_region": 5
+       }
+      }
+     ]
+    },
+    "0.5": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 21,
+     "tp_v1": 8807,
+     "tp_v2": 8808,
+     "fp_v1": 1074,
+     "fp_v2": 1075,
+     "recall_v1": 0.29419428113308393,
+     "recall_v2": 0.2942276857295564,
+     "precision_v1": 0.891306547920251,
+     "precision_v2": 0.8912273601133259,
+     "changed_examples": [
+      {
+       "sample": "8491dd8fb7a44826b15e24ef9f869455",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 7,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 8,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "b9853461935b41f88ba20195a2d0217c",
+       "v1": {
+        "tp": 1,
+        "fp": 1,
+        "ign": 9,
+        "n_pred_region": 2
+       },
+       "v2": {
+        "tp": 2,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "e9b9031b8f5f41e89bd5eed158feaf14",
+       "v1": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 2,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 3,
+        "n_pred_region": 1
+       }
+      },
+      {
+       "sample": "3ba93f957fe54c8c891a2cd5992e65a9",
+       "v1": {
+        "tp": 2,
+        "fp": 0,
+        "ign": 4,
+        "n_pred_region": 2
+       },
+       "v2": {
+        "tp": 2,
+        "fp": 1,
+        "ign": 3,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "023a58306058440988b0ca496bdf9c2e",
+       "v1": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 13,
+        "n_pred_region": 5
+       },
+       "v2": {
+        "tp": 6,
+        "fp": 0,
+        "ign": 12,
+        "n_pred_region": 6
+       }
+      }
+     ]
+    },
+    "1.0": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 16,
+     "tp_v1": 8600,
+     "tp_v2": 8603,
+     "fp_v1": 1066,
+     "fp_v2": 1065,
+     "recall_v1": 0.2872795296632817,
+     "recall_v2": 0.28737974345269907,
+     "precision_v1": 0.8897165321746328,
+     "precision_v2": 0.8898427803061647,
+     "changed_examples": [
+      {
+       "sample": "8491dd8fb7a44826b15e24ef9f869455",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 7,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 8,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "b9853461935b41f88ba20195a2d0217c",
+       "v1": {
+        "tp": 1,
+        "fp": 1,
+        "ign": 9,
+        "n_pred_region": 2
+       },
+       "v2": {
+        "tp": 2,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "e9b9031b8f5f41e89bd5eed158feaf14",
+       "v1": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 2,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 3,
+        "n_pred_region": 1
+       }
+      },
+      {
+       "sample": "023a58306058440988b0ca496bdf9c2e",
+       "v1": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 13,
+        "n_pred_region": 5
+       },
+       "v2": {
+        "tp": 6,
+        "fp": 0,
+        "ign": 12,
+        "n_pred_region": 6
+       }
+      },
+      {
+       "sample": "58976dcd6bc449b4a23cadab4fb49646",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 4,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 3,
+        "n_pred_region": 0
+       }
+      }
+     ]
+    },
+    "2.0": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 16,
+     "tp_v1": 8202,
+     "tp_v2": 8203,
+     "fp_v1": 1005,
+     "fp_v2": 1006,
+     "recall_v1": 0.27398450026723675,
+     "recall_v2": 0.27401790486370925,
+     "precision_v1": 0.8908439231019876,
+     "precision_v2": 0.8907590400694972,
+     "changed_examples": [
+      {
+       "sample": "8491dd8fb7a44826b15e24ef9f869455",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 7,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 8,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "b9853461935b41f88ba20195a2d0217c",
+       "v1": {
+        "tp": 1,
+        "fp": 1,
+        "ign": 9,
+        "n_pred_region": 2
+       },
+       "v2": {
+        "tp": 2,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "e9b9031b8f5f41e89bd5eed158feaf14",
+       "v1": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 2,
+        "n_pred_region": 1
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 0,
+        "ign": 3,
+        "n_pred_region": 1
+       }
+      },
+      {
+       "sample": "5c27958677604dc5ad254f69f31aaf85",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 5,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 4,
+        "n_pred_region": 0
+       }
+      },
+      {
+       "sample": "023a58306058440988b0ca496bdf9c2e",
+       "v1": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 13,
+        "n_pred_region": 5
+       },
+       "v2": {
+        "tp": 6,
+        "fp": 0,
+        "ign": 12,
+        "n_pred_region": 6
+       }
+      }
+     ]
+    }
+   }
+  },
+  "streampetr_val": {
+   "tau_old": 0.7578224539756775,
+   "tau_new": 0.7578224539756775,
+   "runs": {
+    "clean": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 10,
+     "tp_v1": 9597,
+     "tp_v2": 9595,
+     "fp_v1": 947,
+     "fp_v2": 949,
+     "recall_v1": 0.3205839123463389,
+     "recall_v2": 0.32051710315339393,
+     "precision_v1": 0.9101858877086495,
+     "precision_v2": 0.9099962063732928,
+     "changed_examples": [
+      {
+       "sample": "47f40eb09dcb40b9888d81fb4b872ac4",
+       "v1": {
+        "tp": 2,
+        "fp": 0,
+        "ign": 8,
+        "n_pred_region": 2
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 2
+       }
+      },
+      {
+       "sample": "d0ecf474e0e64950aa265cd44b9c9d75",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 16,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 2,
+        "fp": 1,
+        "ign": 16,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "a0eba88acbd4445f862290bbc6735c63",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 9,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "9c701c349ab54e219095571ba091c19c",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 12,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 11,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "d9394f43b43a46278005844d35f20650",
+       "v1": {
+        "tp": 2,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 2,
+        "fp": 1,
+        "ign": 9,
+        "n_pred_region": 3
+       }
+      }
+     ]
+    },
+    "0.5": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 10,
+     "tp_v1": 9533,
+     "tp_v2": 9529,
+     "fp_v1": 939,
+     "fp_v2": 943,
+     "recall_v1": 0.3184460181721005,
+     "recall_v2": 0.31831239978621056,
+     "precision_v1": 0.9103323147440795,
+     "precision_v2": 0.9099503437738732,
+     "changed_examples": [
+      {
+       "sample": "b3d9bac351554cc98cdafe751f3d437a",
+       "v1": {
+        "tp": 5,
+        "fp": 1,
+        "ign": 13,
+        "n_pred_region": 6
+       },
+       "v2": {
+        "tp": 5,
+        "fp": 1,
+        "ign": 14,
+        "n_pred_region": 6
+       }
+      },
+      {
+       "sample": "d0ecf474e0e64950aa265cd44b9c9d75",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 16,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 2,
+        "fp": 1,
+        "ign": 16,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "c6558fcf7c034d939c3aa0b6a6feb048",
+       "v1": {
+        "tp": 2,
+        "fp": 0,
+        "ign": 5,
+        "n_pred_region": 2
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 1,
+        "ign": 5,
+        "n_pred_region": 2
+       }
+      },
+      {
+       "sample": "224d34c137b64e4f8012c7280b4b9089",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 11,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 0
+       }
+      },
+      {
+       "sample": "a0eba88acbd4445f862290bbc6735c63",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 9,
+        "n_pred_region": 3
+       }
+      }
+     ]
+    },
+    "1.0": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 5,
+     "tp_v1": 9408,
+     "tp_v2": 9408,
+     "fp_v1": 945,
+     "fp_v2": 945,
+     "recall_v1": 0.31427044361304113,
+     "recall_v2": 0.31427044361304113,
+     "precision_v1": 0.9087221095334685,
+     "precision_v2": 0.9087221095334685,
+     "changed_examples": [
+      {
+       "sample": "b3d9bac351554cc98cdafe751f3d437a",
+       "v1": {
+        "tp": 5,
+        "fp": 1,
+        "ign": 13,
+        "n_pred_region": 6
+       },
+       "v2": {
+        "tp": 5,
+        "fp": 1,
+        "ign": 14,
+        "n_pred_region": 6
+       }
+      },
+      {
+       "sample": "a0eba88acbd4445f862290bbc6735c63",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 9,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "33aebb17dcb14d24a5feb6f224ff1380",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 5,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 6,
+        "n_pred_region": 0
+       }
+      },
+      {
+       "sample": "00e20f5229844d2d9d7d2889ec5f853c",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 4,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 5,
+        "n_pred_region": 0
+       }
+      },
+      {
+       "sample": "598c200674194f2896072b0b4017c487",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 3,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 4,
+        "n_pred_region": 3
+       }
+      }
+     ]
+    },
+    "2.0": {
+     "n_samples": 6019,
+     "samples_with_changed_counts": 5,
+     "tp_v1": 9041,
+     "tp_v2": 9040,
+     "fp_v1": 901,
+     "fp_v2": 902,
+     "recall_v1": 0.302010956707643,
+     "recall_v2": 0.3019775521111705,
+     "precision_v1": 0.9093743713538524,
+     "precision_v2": 0.9092737879702273,
+     "changed_examples": [
+      {
+       "sample": "47f40eb09dcb40b9888d81fb4b872ac4",
+       "v1": {
+        "tp": 2,
+        "fp": 0,
+        "ign": 8,
+        "n_pred_region": 2
+       },
+       "v2": {
+        "tp": 1,
+        "fp": 1,
+        "ign": 8,
+        "n_pred_region": 2
+       }
+      },
+      {
+       "sample": "b3d9bac351554cc98cdafe751f3d437a",
+       "v1": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 13,
+        "n_pred_region": 5
+       },
+       "v2": {
+        "tp": 5,
+        "fp": 0,
+        "ign": 14,
+        "n_pred_region": 5
+       }
+      },
+      {
+       "sample": "a0eba88acbd4445f862290bbc6735c63",
+       "v1": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 10,
+        "n_pred_region": 3
+       },
+       "v2": {
+        "tp": 3,
+        "fp": 0,
+        "ign": 9,
+        "n_pred_region": 3
+       }
+      },
+      {
+       "sample": "33aebb17dcb14d24a5feb6f224ff1380",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 5,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 6,
+        "n_pred_region": 0
+       }
+      },
+      {
+       "sample": "00e20f5229844d2d9d7d2889ec5f853c",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 4,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 5,
+        "n_pred_region": 0
+       }
+      }
+     ]
+    }
+   }
+  },
+  "sparsebev_pilot": {
+   "tau_old": 0.5422017574310303,
+   "tau_new": 0.5422017574310303,
+   "runs": {
+    "clean": {
+     "n_samples": 402,
+     "samples_with_changed_counts": 0,
+     "tp_v1": 439,
+     "tp_v2": 439,
+     "fp_v1": 6,
+     "fp_v2": 6,
+     "recall_v1": 0.32114118507681055,
+     "recall_v2": 0.32114118507681055,
+     "precision_v1": 0.9865168539325843,
+     "precision_v2": 0.9865168539325843,
+     "changed_examples": []
+    },
+    "0.5": {
+     "n_samples": 402,
+     "samples_with_changed_counts": 0,
+     "tp_v1": 435,
+     "tp_v2": 435,
+     "fp_v1": 6,
+     "fp_v2": 6,
+     "recall_v1": 0.3182150694952451,
+     "recall_v2": 0.3182150694952451,
+     "precision_v1": 0.9863945578231292,
+     "precision_v2": 0.9863945578231292,
+     "changed_examples": []
+    },
+    "1.0": {
+     "n_samples": 402,
+     "samples_with_changed_counts": 1,
+     "tp_v1": 429,
+     "tp_v2": 429,
+     "fp_v1": 7,
+     "fp_v2": 7,
+     "recall_v1": 0.31382589612289685,
+     "recall_v2": 0.31382589612289685,
+     "precision_v1": 0.9839449541284404,
+     "precision_v2": 0.9839449541284404,
+     "changed_examples": [
+      {
+       "sample": "93819a56c4f745d9a81e5d45c29ac387",
+       "v1": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 5,
+        "n_pred_region": 0
+       },
+       "v2": {
+        "tp": 0,
+        "fp": 0,
+        "ign": 6,
+        "n_pred_region": 0
+       }
+      }
+     ]
+    },
+    "2.0": {
+     "n_samples": 402,
+     "samples_with_changed_counts": 0,
+     "tp_v1": 416,
+     "tp_v2": 416,
+     "fp_v1": 7,
+     "fp_v2": 7,
+     "recall_v1": 0.3043160204828091,
+     "recall_v2": 0.3043160204828091,
+     "precision_v1": 0.983451536643026,
+     "precision_v2": 0.983451536643026,
+     "changed_examples": []
+    }
+   }
+  }
+ }
+}

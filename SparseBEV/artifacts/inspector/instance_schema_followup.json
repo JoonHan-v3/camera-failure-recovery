@@ -1,0 +1,22 @@
+{
+ "bevformer_val": {
+  "rows": 7222800,
+  "tp_rows_checked": 97214,
+  "PASS": true
+ },
+ "sparsebev_pilot": {
+  "rows": 350845,
+  "tp_rows_checked": 5293,
+  "PASS": true
+ },
+ "sparsebev_val": {
+  "rows": 5196706,
+  "tp_rows_checked": 110443,
+  "PASS": true
+ },
+ "streampetr_val": {
+  "rows": 7222800,
+  "tp_rows_checked": 107421,
+  "PASS": true
+ }
+}

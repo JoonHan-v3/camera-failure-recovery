@@ -1,0 +1,62 @@
+{
+ "model": "streampetr",
+ "n_frames": 80,
+ "scenes": [
+  "129304d659464b0fb3a51c99eaec114a",
+  "73030fb67d3c46cfb5e590168088ae39"
+ ],
+ "repeats": 3,
+ "batch_size": 1,
+ "condition": "clean",
+ "tf32": false,
+ "latency_ms": {
+  "steady_median": 78.62492850836134,
+  "steady_mean": 79.05452964501804,
+  "steady_p95": 82.94952094875043,
+  "steady_p99": 83.33339669072302,
+  "steady_min": 77.22149899927899,
+  "steady_max": 85.11533300043084,
+  "first_frame_of_scene_median": 78.14145799784455,
+  "per_pass_median": [
+   78.44208649476059,
+   78.67571100359783,
+   78.65140450303443
+  ]
+ },
+ "fps_steady_median": 12.718612518593964,
+ "data_loading_cpu_ms": {
+  "median": 152.37254750536522,
+  "mean": 152.354876499885,
+  "p95": 157.96842955533066
+ },
+ "end_to_end_ms_paired_median": 231.27010800817516,
+ "end_to_end_ms_estimate_median_forward_plus_median_load": 230.99747601372655,
+ "input_output_checks": {
+  "fresh_copy_equals_pristine": true,
+  "forward_mutated_its_input_copy_frames": 0,
+  "n_forwards": 320,
+  "output_max_abs_diff_warmup_vs_measured": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "output_max_abs_diff_between_measured_passes": [
+   0.0,
+   0.0
+  ],
+  "pristine_templates_unchanged_after_all_passes": true,
+  "interpretation": "forward_mutated_its_input_copy_frames > 0 means the model's forward edits its inputs in place, which is why every forward gets a fresh copy; output differences are bitwise repeatability of detections across passes (0 = identical)"
+ },
+ "peak_allocated_mb": 374.8388671875,
+ "peak_reserved_mb": 540.0,
+ "n_parameters": 37259345,
+ "gpu_smi": "NVIDIA GeForce RTX 3060, 2777 MiB, 12288 MiB, 2002 MHz, 2160 MHz, 90.10 W",
+ "gpu_compute_apps_during_profile": [
+  "432885, 1944 MiB"
+ ],
+ "torch": "1.9.0+cu111",
+ "cuda_runtime": "11.1",
+ "fp16_wrapped": true,
+ "protocol": "warm-up pass discarded; synchronized per-frame forward incl. host->device copy of FRESH copies of pre-built inputs (copy untimed); CPU decode excluded (reported separately); end_to_end_ms_paired_median = median over passes and frames of (that frame's CPU decode time + that frame's forward time); the *_estimate_* field is median(forward)+median(load)",
+ "timestamp_utc": "2026-11-22T22:57:00Z"
+}

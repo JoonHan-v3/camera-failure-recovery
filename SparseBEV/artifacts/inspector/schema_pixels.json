@@ -1,0 +1,59 @@
+{
+ "predictions": {
+  "pilot_a": {
+   "n_samples": 402,
+   "invalid_samples": 0,
+   "empty_samples": 0
+  },
+  "pilot_b": {
+   "n_samples": 402,
+   "invalid_samples": 0,
+   "empty_samples": 0
+  },
+  "pilot_d05": {
+   "n_samples": 402,
+   "invalid_samples": 0,
+   "empty_samples": 0
+  },
+  "pilot_d10": {
+   "n_samples": 402,
+   "invalid_samples": 0,
+   "empty_samples": 0
+  },
+  "pilot_d20": {
+   "n_samples": 402,
+   "invalid_samples": 0,
+   "empty_samples": 0
+  },
+  "val_a": {
+   "n_samples": 6019,
+   "invalid_samples": 0,
+   "empty_samples": 1
+  },
+  "val_b": {
+   "n_samples": 6019,
+   "invalid_samples": 0,
+   "empty_samples": 1
+  },
+  "val_d05": {
+   "n_samples": 6019,
+   "invalid_samples": 0,
+   "empty_samples": 1
+  },
+  "val_d10": {
+   "n_samples": 6019,
+   "invalid_samples": 0,
+   "empty_samples": 1
+  },
+  "val_d20": {
+   "n_samples": 6019,
+   "invalid_samples": 0,
+   "empty_samples": 1
+  }
+ },
+ "pixel_check": {
+  "n": 24,
+  "black": 11,
+  "mismatches": []
+ }
+}

@@ -1,0 +1,353 @@
+{
+ "version": "v1.0-trainval",
+ "runs": [
+  "val_a",
+  "val_b",
+  "val_d05",
+  "val_d10",
+  "val_d20"
+ ],
+ "causal_policy": "alignment allowance: image sensor ts <= sample (lidar keyframe) ts + 50000 us (fixed sample+50ms inference budget; bundle availability >= max(sample time, latest exposure), delay unmeasured); eval time = sample time; observed trainval max skew +49992 us",
+ "max_cam_minus_eval_skew_us": 2106,
+ "min_cam_minus_eval_skew_us": -49961,
+ "clean_twice_max_abs_diff": 0.0,
+ "clean_twice_identical_samples": 6019,
+ "clean_audit_a": "CONSISTENT",
+ "clean_audit_b": "CONSISTENT",
+ "clean_a_vs_b_input_errors": 0,
+ "conditions": {
+  "val_d05": {
+   "duration_s": 0.5,
+   "status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 14 scenes",
+   "paired_input_errors": [],
+   "n_paired_errors": 0,
+   "black_inputs_expected_vs_logged_equal": true,
+   "n_black_images": 168,
+   "black_images_per_scene_min_max": [
+    1,
+    2
+   ],
+   "all_black_pixels_verified": true,
+   "other_cameras_corrupted": 0,
+   "prefix_samples": 900,
+   "prefix_predictions_identical": 900,
+   "post_start_samples": 5119,
+   "post_start_predictions_changed": 1218,
+   "missing_follow_up_bins": {
+    "080a52cb8f59489b9cddc7b721808088": [
+     0.0
+    ],
+    "30a1a4ccd60047b4a22ee3bf0645f3ad": [
+     4.5
+    ],
+    "3f90afe9f7dc49399347ae1626502aed": [
+     0.0
+    ],
+    "4962cb207a824e57bd10a2af49354b16": [
+     0.0
+    ],
+    "4bb9626f13184da7a67ba1b241c19558": [
+     0.0
+    ],
+    "5a0dd8908a3a459b83ec5eb6ac7d0f82": [
+     0.0
+    ],
+    "656bb27689dc4e9b8e4559e3f6a7e534": [
+     0.0
+    ],
+    "85889db3628342a482c5c0255e5347e9": [
+     0.0
+    ],
+    "91c071bcc1ad4fa1b555399e1cfbab79": [
+     0.0
+    ],
+    "952cb0bcd89b4ca4b904cdcbbf595523": [
+     0.0
+    ],
+    "a178a1b5415f45c08d179bd2cacdf284": [
+     3.5
+    ],
+    "bed67ef03c4a4066a74f6c0117d512ee": [
+     0.0
+    ],
+    "ec7b7459461e4da1a236ba23e22377c9": [
+     0.0
+    ],
+    "ee48ee50025e40b4ae27dbdf84d92825": [
+     0.0
+    ]
+   },
+   "restoration_offsets_s_example": {
+    "c3ab8ee2c1a54068a72d7eb4cf22e43d": [
+     0.038,
+     0.538,
+     1.038,
+     1.537,
+     2.037,
+     2.537,
+     3.086,
+     3.586,
+     4.086,
+     4.585,
+     5.036,
+     5.536
+    ]
+   }
+  },
+  "val_d10": {
+   "duration_s": 1.0,
+   "status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 26 scenes",
+   "paired_input_errors": [],
+   "n_paired_errors": 0,
+   "black_inputs_expected_vs_logged_equal": true,
+   "n_black_images": 326,
+   "black_images_per_scene_min_max": [
+    2,
+    3
+   ],
+   "all_black_pixels_verified": true,
+   "other_cameras_corrupted": 0,
+   "prefix_samples": 900,
+   "prefix_predictions_identical": 900,
+   "post_start_samples": 5119,
+   "post_start_predictions_changed": 1376,
+   "missing_follow_up_bins": {
+    "080a52cb8f59489b9cddc7b721808088": [
+     0.0
+    ],
+    "19d97841d6f64eba9f6eb9b6e8c257dc": [
+     0.0
+    ],
+    "201b7c65a61f4bc1a2333ea90ba9a932": [
+     0.0
+    ],
+    "30a1a4ccd60047b4a22ee3bf0645f3ad": [
+     4.0
+    ],
+    "3ada261efee347cba2e7557794f1aec8": [
+     0.0
+    ],
+    "3b2ee26cb8484f77895bc336663df502": [
+     0.0
+    ],
+    "3f90afe9f7dc49399347ae1626502aed": [
+     0.0
+    ],
+    "4962cb207a824e57bd10a2af49354b16": [
+     0.0
+    ],
+    "4bb9626f13184da7a67ba1b241c19558": [
+     0.0
+    ],
+    "5a0dd8908a3a459b83ec5eb6ac7d0f82": [
+     0.0
+    ],
+    "5af9c7f124d84e7e9ac729fafa40ea01": [
+     0.0
+    ],
+    "656bb27689dc4e9b8e4559e3f6a7e534": [
+     0.0
+    ],
+    "6741d407b1b44511853e5ec7aaee2992": [
+     0.0
+    ],
+    "76ceedbcc6a54b158eba9945a160a7bc": [
+     0.0
+    ],
+    "8180a1dbbba3479bb0c7f4ff6e9a3f0e": [
+     4.5
+    ],
+    "85889db3628342a482c5c0255e5347e9": [
+     0.0
+    ],
+    "91c071bcc1ad4fa1b555399e1cfbab79": [
+     0.0
+    ],
+    "952cb0bcd89b4ca4b904cdcbbf595523": [
+     0.0
+    ],
+    "9709626638f5406f9f773348150d02fd": [
+     0.0
+    ],
+    "a178a1b5415f45c08d179bd2cacdf284": [
+     3.0
+    ],
+    "b94fbf78579f4ff5ab5dbd897d5e3199": [
+     0.0
+    ],
+    "bed67ef03c4a4066a74f6c0117d512ee": [
+     0.0
+    ],
+    "c65c4acf86954f8cbd53a3541a3bfa3a": [
+     4.5
+    ],
+    "ddb615d9bb22484cabc6545b632a1025": [
+     0.0
+    ],
+    "ec7b7459461e4da1a236ba23e22377c9": [
+     0.0
+    ],
+    "ee48ee50025e40b4ae27dbdf84d92825": [
+     0.0
+    ]
+   },
+   "restoration_offsets_s_example": {
+    "c3ab8ee2c1a54068a72d7eb4cf22e43d": [
+     0.038,
+     0.538,
+     1.037,
+     1.537,
+     2.037,
+     2.586,
+     3.086,
+     3.586,
+     4.085,
+     4.536,
+     5.036,
+     5.587
+    ]
+   }
+  },
+  "val_d20": {
+   "duration_s": 2.0,
+   "status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 34 scenes",
+   "paired_input_errors": [],
+   "n_paired_errors": 0,
+   "black_inputs_expected_vs_logged_equal": true,
+   "n_black_images": 635,
+   "black_images_per_scene_min_max": [
+    4,
+    5
+   ],
+   "all_black_pixels_verified": true,
+   "other_cameras_corrupted": 0,
+   "prefix_samples": 900,
+   "prefix_predictions_identical": 900,
+   "post_start_samples": 5119,
+   "post_start_predictions_changed": 1685,
+   "missing_follow_up_bins": {
+    "01452fbfbf4543af8acdfd3e8a1ee806": [
+     0.0
+    ],
+    "080a52cb8f59489b9cddc7b721808088": [
+     0.0
+    ],
+    "201b7c65a61f4bc1a2333ea90ba9a932": [
+     0.0
+    ],
+    "223096a415cc45bf8ecd4c3a42251fd7": [
+     0.0
+    ],
+    "3045ed93c2534ec2a5cabea89b186bd9": [
+     0.0
+    ],
+    "30a1a4ccd60047b4a22ee3bf0645f3ad": [
+     3.0
+    ],
+    "380ff00ec86447e3b986edc8e82ffba7": [
+     0.0
+    ],
+    "3ada261efee347cba2e7557794f1aec8": [
+     0.0
+    ],
+    "4962cb207a824e57bd10a2af49354b16": [
+     0.0
+    ],
+    "4bb9626f13184da7a67ba1b241c19558": [
+     0.0
+    ],
+    "5301151d8b6a42b0b252e95634bd3995": [
+     0.0
+    ],
+    "5a0dd8908a3a459b83ec5eb6ac7d0f82": [
+     0.0
+    ],
+    "5af9c7f124d84e7e9ac729fafa40ea01": [
+     0.0
+    ],
+    "656bb27689dc4e9b8e4559e3f6a7e534": [
+     0.0
+    ],
+    "6741d407b1b44511853e5ec7aaee2992": [
+     0.0
+    ],
+    "76ceedbcc6a54b158eba9945a160a7bc": [
+     0.0
+    ],
+    "8180a1dbbba3479bb0c7f4ff6e9a3f0e": [
+     3.5
+    ],
+    "8377abf77f464a9cb62eacf63f383422": [
+     0.0
+    ],
+    "85889db3628342a482c5c0255e5347e9": [
+     0.0
+    ],
+    "9709626638f5406f9f773348150d02fd": [
+     0.0
+    ],
+    "a178a1b5415f45c08d179bd2cacdf284": [
+     2.0
+    ],
+    "a2b005c4dd654af48194ada18662c8ca": [
+     0.0
+    ],
+    "aacd6706a091407fb1b0e5343d27da7e": [
+     0.0
+    ],
+    "b07358651c604e2d83da7c4d4755de73": [
+     0.0
+    ],
+    "b94fbf78579f4ff5ab5dbd897d5e3199": [
+     0.0
+    ],
+    "bed67ef03c4a4066a74f6c0117d512ee": [
+     0.0
+    ],
+    "c65c4acf86954f8cbd53a3541a3bfa3a": [
+     3.5
+    ],
+    "d3b86ca0a17840109e9e049b3dd40037": [
+     0.0
+    ],
+    "d87ec0461e3f4c4ea29b0f0c0ede5167": [
+     0.0
+    ],
+    "ddb615d9bb22484cabc6545b632a1025": [
+     0.0
+    ],
+    "e60ef590e3614187b7800db3e5284e1a": [
+     0.0
+    ],
+    "e6f1a7e6218a4737bfedc6af90926b3e": [
+     4.5
+    ],
+    "ec7b7459461e4da1a236ba23e22377c9": [
+     0.0
+    ],
+    "ee48ee50025e40b4ae27dbdf84d92825": [
+     0.0
+    ]
+   },
+   "restoration_offsets_s_example": {
+    "c3ab8ee2c1a54068a72d7eb4cf22e43d": [
+     0.037,
+     0.537,
+     1.037,
+     1.586,
+     2.086,
+     2.586,
+     3.085,
+     3.536,
+     4.036,
+     4.587,
+     5.087,
+     5.586
+    ]
+   }
+  }
+ }
+}

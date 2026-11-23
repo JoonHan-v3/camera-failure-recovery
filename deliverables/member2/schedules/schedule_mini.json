@@ -1,0 +1,86 @@
+{
+ "params": {
+  "camera": "CAM_FRONT",
+  "dataset_version": "v1.0-mini",
+  "durations_s": [
+   0.5,
+   1.0,
+   2.0
+  ],
+  "followup_s": 4.5,
+  "warmup_kf": 6
+ },
+ "scenes": [
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "2fc3753772e241f2ab2cd16a784cc680",
+   "t_start_us": 1535657111112404,
+   "warmup_kf": 6
+  },
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "325cef682f064c55a255f2625c533b75",
+   "t_start_us": 1538984236412460,
+   "warmup_kf": 6
+  },
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "6f83169d067343658251f72e1dd17dbc",
+   "t_start_us": 1535489299012404,
+   "warmup_kf": 6
+  },
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "bebf5f5b2a674631ab5c88fd1aa9e87a",
+   "t_start_us": 1535385094912404,
+   "warmup_kf": 6
+  },
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "c5224b9b454b4ded9b5d2d2634bbda8a",
+   "t_start_us": 1538448747512460,
+   "warmup_kf": 6
+  },
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "cc8c0bf57f984915a77078b10eb33198",
+   "t_start_us": 1532402930612460,
+   "warmup_kf": 6
+  },
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "d25718445d89453381c659b9c8734939",
+   "t_start_us": 1542800370912460,
+   "warmup_kf": 6
+  },
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "de7d80a1f5fb4c3e82ce8a4f213b450a",
+   "t_start_us": 1542800850912460,
+   "warmup_kf": 6
+  },
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "e233467e827140efa4b42d2b4c435855",
+   "t_start_us": 1542800990912460,
+   "warmup_kf": 6
+  },
+  {
+   "followup_us": 4500000,
+   "max_duration_us": 2000000,
+   "scene_token": "fcbccedd61424f1b85dcbf8f897f9754",
+   "t_start_us": 1533151606512404,
+   "warmup_kf": 6
+  }
+ ],
+ "skipped": {}
+}

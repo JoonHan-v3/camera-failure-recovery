@@ -1,0 +1,27 @@
+{
+ "models": {
+  "sparsebev": {
+   "cells_compared": 64350,
+   "mismatching_cells": 0,
+   "tau": 0.5422017574310303,
+   "csv_sha256": "ff2b5071fbdf7fcd4f049912ab471f6a641c38bc42358118a60caa03cb6e78d6",
+   "per_sample_pickle_sha256": "d003a6801c2d2dab32397c84e0800cdf6a27b7fbb538ca4199bbed693c2dcbb9"
+  },
+  "streampetr": {
+   "cells_compared": 64350,
+   "mismatching_cells": 0,
+   "tau": 0.7578224539756775,
+   "csv_sha256": "81fa594095a33b51ba718bc8d1a8a43c248d95d483a91ad8c8d8cbc009e75b13",
+   "per_sample_pickle_sha256": "47fc7eb939b018391a294e564205d82cb4574dcf063788fb9a1d7f25d1b6b46d"
+  },
+  "bevformer": {
+   "cells_compared": 64350,
+   "mismatching_cells": 0,
+   "tau": 0.8792772889137268,
+   "csv_sha256": "6d4a818c4ce8cb4bcc14f89a9e1c71780f8c524c9da0ab2903edb155c1c9002b",
+   "per_sample_pickle_sha256": "a370869700b861d32dfb62feec521ef99dbbe6416e62521d3113266c12946cf2"
+  }
+ },
+ "generated_utc": "2026-11-22T22:58:15Z",
+ "ALL_MATCH": true
+}

@@ -1,0 +1,50 @@
+{
+ "val_d05": {
+  "streampetr_run": "rf_val_d05",
+  "bevformer_black": 168,
+  "streampetr_black": 168,
+  "identical_black_sets": true,
+  "identical_consumed_image_sets": true,
+  "schedules_equal": true
+ },
+ "val_d10": {
+  "streampetr_run": "rf_val_d10",
+  "bevformer_black": 326,
+  "streampetr_black": 326,
+  "identical_black_sets": true,
+  "identical_consumed_image_sets": true,
+  "schedules_equal": true
+ },
+ "val_d20": {
+  "streampetr_run": "rf_val_d20",
+  "bevformer_black": 635,
+  "streampetr_black": 635,
+  "identical_black_sets": true,
+  "identical_consumed_image_sets": true,
+  "schedules_equal": true
+ },
+ "pilot_d05": {
+  "streampetr_run": "rf_pilot_d05",
+  "bevformer_black": 11,
+  "streampetr_black": 11,
+  "identical_black_sets": true,
+  "identical_consumed_image_sets": true,
+  "schedules_equal": true
+ },
+ "pilot_d10": {
+  "streampetr_run": "rf_pilot_d10",
+  "bevformer_black": 21,
+  "streampetr_black": 21,
+  "identical_black_sets": true,
+  "identical_consumed_image_sets": true,
+  "schedules_equal": true
+ },
+ "pilot_d20": {
+  "streampetr_run": "rf_pilot_d20",
+  "bevformer_black": 42,
+  "streampetr_black": 42,
+  "identical_black_sets": true,
+  "identical_consumed_image_sets": true,
+  "schedules_equal": true
+ }
+}

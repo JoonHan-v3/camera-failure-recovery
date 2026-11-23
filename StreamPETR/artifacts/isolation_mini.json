@@ -1,0 +1,77 @@
+{
+ "per_scene_alone_vs_continuous": {
+  "2fc3753772e241f2ab2cd16a784cc680": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  },
+  "325cef682f064c55a255f2625c533b75": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  },
+  "6f83169d067343658251f72e1dd17dbc": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  },
+  "bebf5f5b2a674631ab5c88fd1aa9e87a": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  },
+  "c5224b9b454b4ded9b5d2d2634bbda8a": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  },
+  "cc8c0bf57f984915a77078b10eb33198": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  },
+  "d25718445d89453381c659b9c8734939": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  },
+  "de7d80a1f5fb4c3e82ce8a4f213b450a": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  },
+  "e233467e827140efa4b42d2b4c435855": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  },
+  "fcbccedd61424f1b85dcbf8f897f9754": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": [
+    true
+   ]
+  }
+ },
+ "n_scenes": 10,
+ "fresh_B_twice_max_abs_diff": 0.0,
+ "B_after_A_vs_fresh_B_max_abs_diff": 0.0,
+ "leak_control": {
+  "rejected_by_guard": true,
+  "message": "memory state unobserved at start of 325cef682f064c55a255f2625c533b75"
+ },
+ "leak_unguarded_max_abs_diff_vs_fresh": 102.39778900146484,
+ "interleave_control": {
+  "rejected": true,
+  "message": "scene 2fc3753772e241f2ab2cd16a784cc680 revisited: interleaved batching/workers"
+ },
+ "all_isolated": true
+}

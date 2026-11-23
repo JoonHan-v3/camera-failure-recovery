@@ -1,0 +1,49 @@
+{
+ "rule": "see module docstring",
+ "duration_s": 2.0,
+ "events": {
+  "recovered_first_bin": "9709626638f5406f9f773348150d02fd",
+  "late_recovery": "16e50a63b809463099cb4c378fe0641e",
+  "no_measured_degradation": "905cfed4f0fc46679e8df8890cca4141",
+  "false_positives": "3b2ee26cb8484f77895bc336663df502"
+ },
+ "detail": {
+  "recovered_first_bin": {
+   "model": "sparsebev",
+   "duration_s": "2.0",
+   "scene": "9709626638f5406f9f773348150d02fd",
+   "category": "damaged_recovered_first_observed_bin",
+   "n_gt_during": "131",
+   "loss_during": "0.282443",
+   "first_observed_bin_s": "0.5",
+   "confirmed_onset_s": "0.5",
+   "broken_adjacent_pairs": "1"
+  },
+  "late_recovery": {
+   "model": "sparsebev",
+   "duration_s": "2.0",
+   "scene": "16e50a63b809463099cb4c378fe0641e",
+   "category": "damaged_recovered_later",
+   "n_gt_during": "14",
+   "loss_during": "0.142857",
+   "first_observed_bin_s": "3.0",
+   "confirmed_onset_s": "4.0",
+   "broken_adjacent_pairs": "8"
+  },
+  "no_measured_degradation": {
+   "model": "sparsebev",
+   "duration_s": "2.0",
+   "scene": "905cfed4f0fc46679e8df8890cca4141",
+   "category": "no_measured_degradation",
+   "n_gt_during": "61",
+   "loss_during": "0.0",
+   "first_observed_bin_s": "",
+   "confirmed_onset_s": "",
+   "broken_adjacent_pairs": "0"
+  },
+  "false_positives": {
+   "scene": "3b2ee26cb8484f77895bc336663df502",
+   "fp_increase_bins_0_to_1s": 2
+  }
+ }
+}

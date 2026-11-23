@@ -1,0 +1,146 @@
+{
+ "runs": {
+  "pilot_a": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "13905423b5d5a40d3f8bc0e0a5ab1e759bd8d6d8a9149471f1f1df6079a97a07",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  },
+  "pilot_b": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "13905423b5d5a40d3f8bc0e0a5ab1e759bd8d6d8a9149471f1f1df6079a97a07",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  },
+  "pilot_d05": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "13905423b5d5a40d3f8bc0e0a5ab1e759bd8d6d8a9149471f1f1df6079a97a07",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  },
+  "pilot_d10": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "13905423b5d5a40d3f8bc0e0a5ab1e759bd8d6d8a9149471f1f1df6079a97a07",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  },
+  "pilot_d20": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "13905423b5d5a40d3f8bc0e0a5ab1e759bd8d6d8a9149471f1f1df6079a97a07",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  },
+  "val_a": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "232fe3ba7a903d19fa9086ca55cc10bea24ab43c0b9fdb3f00d9cc752ae494ce",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  },
+  "val_b": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "232fe3ba7a903d19fa9086ca55cc10bea24ab43c0b9fdb3f00d9cc752ae494ce",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  },
+  "val_d05": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "232fe3ba7a903d19fa9086ca55cc10bea24ab43c0b9fdb3f00d9cc752ae494ce",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  },
+  "val_d10": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "232fe3ba7a903d19fa9086ca55cc10bea24ab43c0b9fdb3f00d9cc752ae494ce",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  },
+  "val_d20": {
+   "run_affecting_files_changed": [],
+   "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "infos_sha256": "232fe3ba7a903d19fa9086ca55cc10bea24ab43c0b9fdb3f00d9cc752ae494ce",
+   "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+   "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+   "tf32_matmul": false,
+   "cudnn_benchmark": false,
+   "cudnn_deterministic": true
+  }
+ },
+ "note": "Each run.json records the sha256 of every outage/*.py present when it ran. run_affecting_files_changed lists the inference/corruption/audit files whose current hash differs; evaluator/diagnostic files changed after the runs (geometry v2, numerics.py, isolation fixes) do not touch model inputs or predictions.",
+ "evaluator_or_diagnostic_files_changed_after_runs": [
+  "backbone_hook_probe.py",
+  "build_infos.py",
+  "calibrate.py",
+  "check_projection_devkit.py",
+  "check_stats.py",
+  "collect_deliverables.py",
+  "confirm_loader_manifest.py",
+  "cross_model_check.py",
+  "eval_official.py",
+  "evaluator.py",
+  "event_stats.py",
+  "geometry_regression.py",
+  "gt_tables.py",
+  "input_probe.py",
+  "isolation.py",
+  "make_schedules.py",
+  "numerics.py",
+  "online_offline_check.py",
+  "verify_runs.py",
+  "window_check.py"
+ ],
+ "all_run_affecting_files_unchanged_since_every_run": true,
+ "identical_across_runs": {
+  "ckpt_sha256": true,
+  "config_sha256": true,
+  "sparsebev_commit": true,
+  "tf32_matmul": true,
+  "cudnn_benchmark": true,
+  "cudnn_deterministic": true
+ },
+ "shared_code_byte_identical_to_member2": {
+  "schedule.py": true,
+  "corruption.py": true,
+  "audit.py": true,
+  "state.py": true,
+  "nusc_ref.py": true,
+  "verify_runs.py": true,
+  "make_schedules.py": true,
+  "streampetr_adapter.py": true
+ }
+}

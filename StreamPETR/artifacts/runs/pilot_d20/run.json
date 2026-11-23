@@ -1,0 +1,71 @@
+{
+ "condition": "2",
+ "scenes": [
+  "129304d659464b0fb3a51c99eaec114a",
+  "3032b651c72e4b5c86d4dea1b4930689",
+  "5c9bd7ead37e4aa9989f7909f3a78baa",
+  "69ee276c40644ddbb7fe21c613cd7689",
+  "73030fb67d3c46cfb5e590168088ae39",
+  "7809330e0345423ab6212787edf3561b",
+  "a6fae4900f8e46cba689b59b5bc8a2ab",
+  "bd916d78cb3149999182fb3ce4eb8a8d",
+  "deab903b0b644d7a984c552968026631",
+  "f55c8c62235146d895f611176fd0a5dc"
+ ],
+ "n_samples": 402,
+ "runtime_s": 176.57992362976074,
+ "latency_median_s": 0.4370220899581909,
+ "peak_gpu_mb": 457.6748046875,
+ "audit_status": "CONSISTENT",
+ "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+ "violations": [],
+ "causal_tolerance_us": 1867,
+ "model_state_fresh_at_scene_starts": [
+  [
+   "73030fb67d3c46cfb5e590168088ae39",
+   true
+  ],
+  [
+   "129304d659464b0fb3a51c99eaec114a",
+   true
+  ],
+  [
+   "5c9bd7ead37e4aa9989f7909f3a78baa",
+   true
+  ],
+  [
+   "7809330e0345423ab6212787edf3561b",
+   true
+  ],
+  [
+   "69ee276c40644ddbb7fe21c613cd7689",
+   true
+  ],
+  [
+   "deab903b0b644d7a984c552968026631",
+   true
+  ],
+  [
+   "a6fae4900f8e46cba689b59b5bc8a2ab",
+   true
+  ],
+  [
+   "f55c8c62235146d895f611176fd0a5dc",
+   true
+  ],
+  [
+   "bd916d78cb3149999182fb3ce4eb8a8d",
+   true
+  ],
+  [
+   "3032b651c72e4b5c86d4dea1b4930689",
+   true
+  ]
+ ],
+ "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+ "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876",
+ "ckpt_sha256": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+ "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+ "torch": "1.9.0+cu111",
+ "flash_attn": "outage/shims (pure-PyTorch)"
+}

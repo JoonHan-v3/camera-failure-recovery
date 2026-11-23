@@ -1,0 +1,4 @@
+val_notf32 started 2026-11-21 17:23 EST before run.json recorded shim/TF32 details:
+cmd: PYTHONPATH=outage/shims:streampetr_src:. python -m outage.run_streampetr --split val --condition clean --out artifacts/runs/val_notf32 --no-tf32
+env: FLASH_SHIM_MODE unset (fp32-softmax shim); shim sha256 = (see sha256sum outage/shims/flash_attn/flash_attn_interface.py at that time; file was edited only to add the FLASH_SHIM_MODE switch before this run);
+TF32 matmul/cuDNN disabled by --no-tf32; GPU RTX 3060 12GB.

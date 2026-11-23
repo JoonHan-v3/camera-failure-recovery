@@ -1,0 +1,179 @@
+{
+ "frozen_config": {
+  "flash_attn": "REAL flash-attn 0.2.2 (conda env streampetr_fa)",
+  "tf32": "off",
+  "precision": "fp16 per config",
+  "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+  "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876",
+  "checkpoint_sha256": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+  "cuda_extension_sha256": [
+   "46a7049f3e62136b031134ab75b7310c65debe0c64bac12167d1748b1b225d0b"
+  ],
+  "all_runs_real_kernel_tf32_off": true
+ },
+ "baseline_gate": {
+  "target_NDS": 0.537,
+  "target_mAP": 0.432,
+  "tolerance": 0.01,
+  "NDS": 0.5370423975234109,
+  "mAP": 0.43323639360322763,
+  "passed": true
+ },
+ "unit_tests_passed": true,
+ "official_whole_sequence_metrics": {
+  "rf_val_a": {
+   "NDS": 0.5370423975234109,
+   "mAP": 0.43323639360322763,
+   "mATE": 0.6094,
+   "mASE": 0.2703,
+   "mAOE": 0.4485,
+   "mAVE": 0.2784,
+   "mAAE": 0.1892
+  },
+  "rf_val_b": {
+   "NDS": 0.5370423975234109,
+   "mAP": 0.43323639360322763,
+   "mATE": 0.6094,
+   "mASE": 0.2703,
+   "mAOE": 0.4485,
+   "mAVE": 0.2784,
+   "mAAE": 0.1892
+  },
+  "rf_val_d05": {
+   "NDS": 0.5373717879098378,
+   "mAP": 0.43263337568644455,
+   "mATE": 0.6077,
+   "mASE": 0.2703,
+   "mAOE": 0.4439,
+   "mAVE": 0.2781,
+   "mAAE": 0.1893
+  },
+  "rf_val_d10": {
+   "NDS": 0.5367595830333668,
+   "mAP": 0.4319485819562357,
+   "mATE": 0.6073,
+   "mASE": 0.2698,
+   "mAOE": 0.4457,
+   "mAVE": 0.2793,
+   "mAAE": 0.19
+  },
+  "rf_val_d20": {
+   "NDS": 0.5337836771261176,
+   "mAP": 0.42733724189508937,
+   "mATE": 0.6105,
+   "mASE": 0.2705,
+   "mAOE": 0.4452,
+   "mAVE": 0.2816,
+   "mAAE": 0.1911
+  }
+ },
+ "pilot": {
+  "scenes": 10,
+  "samples": 402,
+  "clean_twice_max_abs_diff": 0.0,
+  "clean_twice_samples": 402,
+  "conditions": {
+   "rf_pilot_d05": {
+    "status": "CONSISTENT",
+    "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+    "n_paired_errors": 0,
+    "black_inputs_expected_vs_logged_equal": true,
+    "n_black_images": 11,
+    "other_cameras_corrupted": 0,
+    "prefix_samples": 60,
+    "prefix_predictions_identical": 60,
+    "post_start_samples": 342,
+    "post_start_predictions_changed": 342,
+    "scenes_with_missing_bins": 1
+   },
+   "rf_pilot_d10": {
+    "status": "CONSISTENT",
+    "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+    "n_paired_errors": 0,
+    "black_inputs_expected_vs_logged_equal": true,
+    "n_black_images": 21,
+    "other_cameras_corrupted": 0,
+    "prefix_samples": 60,
+    "prefix_predictions_identical": 60,
+    "post_start_samples": 342,
+    "post_start_predictions_changed": 342,
+    "scenes_with_missing_bins": 1
+   },
+   "rf_pilot_d20": {
+    "status": "CONSISTENT",
+    "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+    "n_paired_errors": 0,
+    "black_inputs_expected_vs_logged_equal": true,
+    "n_black_images": 42,
+    "other_cameras_corrupted": 0,
+    "prefix_samples": 60,
+    "prefix_predictions_identical": 60,
+    "post_start_samples": 342,
+    "post_start_predictions_changed": 342,
+    "scenes_with_missing_bins": 2
+   }
+  }
+ },
+ "validation": {
+  "scenes": 150,
+  "samples": 6019,
+  "clean_twice_max_abs_diff": 0.0,
+  "clean_twice_samples": 6019,
+  "conditions": {
+   "rf_val_d05": {
+    "status": "CONSISTENT",
+    "readiness": "NOT READY: follow-up bins missing in 14 scenes",
+    "n_paired_errors": 0,
+    "black_inputs_expected_vs_logged_equal": true,
+    "n_black_images": 168,
+    "other_cameras_corrupted": 0,
+    "prefix_samples": 900,
+    "prefix_predictions_identical": 900,
+    "post_start_samples": 5119,
+    "post_start_predictions_changed": 5119,
+    "scenes_with_missing_bins": 14
+   },
+   "rf_val_d10": {
+    "status": "CONSISTENT",
+    "readiness": "NOT READY: follow-up bins missing in 26 scenes",
+    "n_paired_errors": 0,
+    "black_inputs_expected_vs_logged_equal": true,
+    "n_black_images": 326,
+    "other_cameras_corrupted": 0,
+    "prefix_samples": 900,
+    "prefix_predictions_identical": 900,
+    "post_start_samples": 5119,
+    "post_start_predictions_changed": 5119,
+    "scenes_with_missing_bins": 26
+   },
+   "rf_val_d20": {
+    "status": "CONSISTENT",
+    "readiness": "NOT READY: follow-up bins missing in 34 scenes",
+    "n_paired_errors": 0,
+    "black_inputs_expected_vs_logged_equal": true,
+    "n_black_images": 635,
+    "other_cameras_corrupted": 0,
+    "prefix_samples": 900,
+    "prefix_predictions_identical": 900,
+    "post_start_samples": 5119,
+    "post_start_predictions_changed": 5119,
+    "scenes_with_missing_bins": 34
+   }
+  },
+  "cam_minus_eval_skew_us": [
+   -49961,
+   2106
+  ]
+ },
+ "isolation_pilot_real_model": {
+  "all_isolated": true,
+  "fresh_B_twice_max_abs_diff": 0.0,
+  "B_after_A_vs_fresh_B_max_abs_diff": 0.0,
+  "leak_unguarded_max_abs_diff_vs_fresh": 102.3984375,
+  "n_scenes": 10,
+  "leak_guard_rejected": true,
+  "interleave_rejected": true,
+  "per_scene_alone_vs_continuous_max_diff": 0.0
+ },
+ "causal_policy": "alignment allowance: image sensor ts <= sample (lidar keyframe) ts + 50000 us (fixed sample+50ms inference budget; bundle availability >= max(sample time, latest exposure), delay unmeasured); eval time = sample time; observed trainval max skew +49992 us"
+}

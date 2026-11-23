@@ -1,0 +1,75 @@
+{
+ "per_scene_alone_vs_continuous": {
+  "129304d659464b0fb3a51c99eaec114a": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  },
+  "3032b651c72e4b5c86d4dea1b4930689": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  },
+  "5c9bd7ead37e4aa9989f7909f3a78baa": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  },
+  "69ee276c40644ddbb7fe21c613cd7689": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  },
+  "73030fb67d3c46cfb5e590168088ae39": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  },
+  "7809330e0345423ab6212787edf3561b": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  },
+  "a6fae4900f8e46cba689b59b5bc8a2ab": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  },
+  "bd916d78cb3149999182fb3ce4eb8a8d": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  },
+  "deab903b0b644d7a984c552968026631": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  },
+  "f55c8c62235146d895f611176fd0a5dc": {
+   "max_abs_diff": 0.0,
+   "fresh_at_start": true,
+   "max_cache_size": 7
+  }
+ },
+ "n_scenes": 10,
+ "tf32": false,
+ "fresh_B_twice_max_abs_diff": 0.0,
+ "B_after_A_vs_fresh_B_max_abs_diff": 0.0,
+ "full_run_then_rerun_without_reset": {
+  "rejected_by_guard": false,
+  "note": "no stale hit: FIFO-8 evicts the leftover tail first"
+ },
+ "stale_cache_control": {
+  "rejected_by_guard": true,
+  "message": "stale feature cache: current frame of 3032b651c72e4b5c86d4dea1b4930689@1542193521798725 was cached before its own step"
+ },
+ "stale_unguarded_sample6_equals_outage_run": true,
+ "stale_unguarded_sample6_vs_fresh_clean_max_abs_diff": null,
+ "stale_unguarded_sample6_vs_fresh_clean_shape_mismatch": true,
+ "outage_vs_clean_changed_samples_in_short_run": 1,
+ "interleave_control": {
+  "rejected": true,
+  "message": "scene 129304d659464b0fb3a51c99eaec114a revisited: interleaved batching/workers"
+ },
+ "all_isolated": true
+}

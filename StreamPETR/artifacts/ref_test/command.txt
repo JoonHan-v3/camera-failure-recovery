@@ -1,0 +1,8 @@
+Exact upstream-control invocation (resolved), run from streampetr_src/ on 2026-11-21 17:05 EST, GPU: RTX 3060, TF32 DEFAULT (on), FLASH_SHIM_MODE unset:
+export PATH=$HOME/anaconda3/envs/streampetr/bin:$PATH
+R=/home/rockhan/Documents/UM/rob535/projects/StreamPETR
+PYTHONPATH=$R/outage/shims:$R/streampetr_src:$R python -m torch.distributed.launch --nproc_per_node=1 --master_port=29511 \
+  tools/test.py projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py \
+  $R/ckpts/stream_petr_r50_flash_704_bs2_seq_90e.pth --launcher pytorch --eval bbox \
+  --cfg-options data.test.ann_file=$R/artifacts/trainval_infos/val_infos.pkl
+Output: streampetr_src/test/stream_petr_r50_flash_704_bs2_seq_90e/Sat_Nov_21_17_05_43_2026/pts_bbox/results_nusc.json

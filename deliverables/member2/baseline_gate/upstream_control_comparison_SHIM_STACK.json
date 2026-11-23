@@ -1,0 +1,10 @@
+{
+ "upstream_NDS": 0.5085751858045778,
+ "upstream_mAP": 0.38943019927054834,
+ "samples": 6019,
+ "boxes_compared": 1148071,
+ "count_or_class_mismatch": 0,
+ "max_abs_diff": 0.0,
+ "command": "python -m torch.distributed.launch --nproc_per_node=1 tools/test.py <config> <ckpt> --launcher pytorch --eval bbox --cfg-options data.test.ann_file=artifacts/trainval_infos/val_infos.pkl",
+ "results_file": "streampetr_src/test/stream_petr_r50_flash_704_bs2_seq_90e/Sat_Nov_21_17_05_43_2026/pts_bbox/results_nusc.json"
+}

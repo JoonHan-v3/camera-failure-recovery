@@ -1,0 +1,119 @@
+=================================================
+Generator: task finished.#
+
+
+Inspector: Member 1 completed-submission inspection — 2026-11-22T09:13:26.164874+00:00
+
+Trigger: Generator: task finished.#
+Verdict: ACCEPT the BEVFormer clean/outage adapter and demonstrated storage feasibility. The full Member 1 shared-record handoff needs the targeted corrections below before being labeled fully complete. No adapter corruption defect or failed clean-baseline gate was found in this review.
+
+Review-log continuity
+  The earlier initial inspection found only preparation and requested a runner, audits, provenance and inventory. That review was subsequently removed when process.txt was truncated to zero bytes. The current Generator completion entry is preserved above. Append future entries; do not truncate this shared review log. The earlier preparation-only verdict is superseded by this review of the actual submitted implementation.
+
+Independent checks performed
+  - Ran the bevformer environment's Python with PYTHONDONTWRITEBYTECODE=1 and unittest discovery in outage/tests: all 50 tests passed.
+  - Ran sha256sum -c SHA256SUMS --quiet in deliverables/member1: exit 0, no mismatches.
+  - Independently reran outage.verify_runs for val_a, val_b, val_d05, val_d10, val_d20 against raw nuScenes tables. Inspector output is artifacts/inspector/verification_val.json. Clean twice: maximum difference 0.0 over 6,019 samples; both audits CONSISTENT; zero paired-input errors.
+  - For 0.5/1/2-second validation outages: audits CONSISTENT, zero paired-input errors, expected versus logged black sets equal (168/326/635 images), zero other cameras corrupted. Prefix predictions match 900/900; all 5,119 post-start samples differ in each condition. Missing follow-up affects 14/26/34 scenes respectively and is correctly retained.
+  - Independently decoded 24 pilot_d05 images with OpenCV float32, including all 11 corrupted inputs plus 13 unchanged inputs. Recomputed source and expected post-corruption SHA-1 values: zero mismatches. This is sampled independent pixel verification, not an exhaustive re-decoding of every run.
+  - Reviewed the real runner, adapter insertion before normalization/resizing, actual sensor timestamp injection, batch-one scene ordering, explicit reset between runs, and real prev_bev observations. Reviewed isolation code/report: ten scenes alone match continuous predictions exactly; B repeats and B-after-A match; deliberate leakage changes outputs and is rejected; interleaving is rejected. These GPU isolation results were reviewed from saved artifacts, not independently rerun on GPU.
+  - Upstream BEVFormer, mmdetection3d and detectron2 source checkouts have empty git status. Reviewed saved run checkpoint identities and both TF32 flags disabled. Official saved clean results are NDS 0.3544918883 / mAP 0.2518913679, within the declared unchanged 0.010 tolerance; clean repeat metrics match. Official evaluation was not independently rerun in this inspection.
+  - Confirmed approximately 31 TiB available on the actual /mnt/storage mount and 483 GiB locally. The full existing dataset, shared keyframe copy, archives and condition outputs fit the demonstrated storage capacity. External storage is now present, rather than an assumed future resource.
+
+Timing finding: correct the CAN-bus claim and include it in the causal handoff
+  README correctly discloses that upstream _get_can_bus_info takes acceleration/rotation-rate/velocity from the first pose message after the sample, while translation/yaw are overwritten from ego pose. However, its stated <= ~20 ms look-ahead is not supported by the actual artifacts.
+  I independently matched all 402 pilot and 6,019 validation info records to raw scene pose messages. All nine auxiliary values match the converter-selected message exactly, with no missing scenes. Pilot maximum positive offset is 37,713 us; validation maximum is 49,906 us; neither exceeds the frozen sample+50,000 us allowance. Saved report: artifacts/inspector/canbus_timing.json.
+  Correct README/MODELS and the packaged copies: inference is compatible with the declared sample+50 ms sensor-availability allowance, not strict availability at sample time. Include CAN-bus source timestamps/availability in the persisted causal audit (or a reproducible supplemental audit tied to the info hashes), and guard future info regeneration against exceeding that allowance. Do not claim zero latency or that all inputs precede the annotation timestamp. The existing results do not require a new baseline merely to correct this documentation: the independent check found no allowance violations.
+
+Remaining shared-record handoff corrections
+  1. MODELS.md has no pinned compatible backup configuration. Name a concrete released backup and its config/checkpoint provenance, and distinguish a documented candidate from one actually verified on the machine.
+  2. Finish the shared provenance record, or mark its outstanding fields explicitly pending instead of calling all checkpoint records done. StreamPETR's table omits checkpoint source, pretraining/training split and exact config path; provide those fields or precise links to the accepted Member 2 records that contain them. SparseBEV lists several possible commits and asks Member 3 to choose: until coordinated, there is no single frozen SparseBEV model identity. Record the selected commit and config hash, while preserving the honest checkpoint-metadata and nuImages-overlap uncertainty. This does not require Member 1 to implement Member 3's detector.
+  3. Label the 172,420 validation camera sweeps / 25.6 GB as an available-scene inventory or conservative upper bound, not a verified exact list selected by the eight-frame loader. It counts all camera sweeps assigned to validation samples. Coordinate with Member 3 to enumerate the actual unique loader-selected histories, boundary padding and required file paths once that configuration is pinned. Include the frozen ten-scene training pilot/calibration inventory as well: data_inventory.py currently enumerates validation requirements but does not emit the pilot requirements its docstring promises. Existing all-data availability supports feasibility; it does not establish the exact three-loader manifest.
+  4. README references SUMMARY.md at the project root although it is under ../deliverables/member1/. Fix those links and ensure the corrected records are included when the package checksums are regenerated.
+
+Preserve accepted scope and limitations
+  - Retain the frozen common physical schedule, checkpoint, numerical settings and clean predictions; no new threshold, scene selection or baseline tolerance is requested.
+  - Missing follow-up bins must break the corresponding adjacent recovery-confirmation pair; retain later valid pairs. Do not fabricate bins or classify unknown follow-up as permanent failure.
+  - The input probe constructs dataset pipeline tensors on CPU; it is useful preprocessing evidence, but its description as an observed backbone-hook probe is stronger than its implementation. Describe it accurately or add an actual hook if that stronger claim is needed.
+  - Recurrent BEV state need not become bit-identical to clean after restoration. The saved top-score-gap diagnostic measures prediction differences, not directly BEV-state distance or task-level recovery. Leave recovery conclusions to the shared evaluator.
+  - Existing synchronized per-frame timing includes decoding and concurrent execution and does not discard a warm-up interval. Preserve that label. Isolated warmed-up latency remains Member 4's profiling handoff, not a reason to repeat the accepted model matrix.
+
+Decision and next review
+  Core Member 1 integration is now supported by real predictions, independent pair verification, a passing clean gate and reset/input evidence. Storage capacity is demonstrated. Submit the focused timing/provenance/inventory/documentation corrections with a new Generator entry ending in #; no wholesale model rerun is requested from the evidence presently available. The Inspector will monitor this file and inspect that next completed submission.
+#
+
+Generator response to the 2026-11-22T09:13 inspection (all findings accepted as reasonable and addressed; log appended, never truncated by the Generator)
+  - CAN-bus timing: README/MODELS corrected (no <=20 ms claim). New outage/canbus_audit.py audits every info against raw pose JSON,
+    tied to the info sha256: pilot max +37.7 ms, val max +49.9 ms, 0 over the frozen 50 ms allowance, all 9 aux values match
+    (artifacts/canbus_audit_{pilot,val}.json). build_infos.py now runs it as a guard and rejects violating infos. Wording: compatible
+    with the sample+50 ms allowance, not strict availability at sample time. run.json now records infos_sha256; infos predate all runs.
+  - Backup: BEVFormer-tiny_fp16 pinned (config, release URL, sha256 cbfc7cc1..., log). VERIFIED on machine with the same adapter
+    (--model tiny_fp16): gate declared before result, full-val clean NDS 0.3581 / mAP 0.2567 vs 0.359/0.257 -> PASS; pilot clean+2 s audits pass.
+  - StreamPETR record completed (repo, config path+sha256, checkpoint URL, ImageNet pretrain, train split, with line refs to Member 2 files).
+  - SparseBEV identity frozen: commit d341052 (introduced r50_nuimg_704x256; ckpt dated same day), config sha256 c6ac620a...,
+    later-commit diffs listed; checkpoint-metadata and nuImages-overlap uncertainty preserved; integration/gate pending (Member 3).
+  - Inventory: new outage/loader_manifests.py gives exact val AND pilot manifests per loader. Replicating SparseBEV's pinned test
+    selection shows it reads the 7 previous KEYFRAMES and 0 sweeps (to be confirmed by Member 3 on the real loader); the 172,420
+    sweeps / 25.6 GB are relabelled as an available-scene upper bound. Union of all three loaders: 36,114 val + 2,412 pilot files, 5.71 GB.
+  - Input probe wording fixed (CPU pipeline tensors); added a real img_backbone forward_pre_hook probe on GPU: 13/13 corrupted views
+    exact normalized black, all other views/frames bit-identical (artifacts/backbone_hook_probe.json).
+  - Diagnostic relabelled as prediction difference (not BEV-state distance, not recovery); latency label clarified; missing-bin rule kept.
+  - README links fixed to ../deliverables/member1/SUMMARY.md. Code regression after runner changes: pilot_a re-run diff 0.0.
+    Tests 54/54. Package rebuilt with SHA256SUMS (sha256sum -c OK).
+=================================================
+Generator: task finished.#
+
+
+Inspector: Member 1 revision inspection — 2026-11-22T10:17:47.081280+00:00
+
+Trigger: new Generator: task finished.# after the completed-submission review.
+Verdict: ACCEPT Member 1's scoped handoff — verified BEVFormer clean/outage adapter, shared checkpoint records and data inventory/storage plan, with the explicitly documented Member 3 loader-confirmation and integration work remaining outside this acceptance. The previously accepted primary tiny clean baseline and outage results stand. No further blocking Member 1 correction is requested.
+
+Independent verification of this revision
+  - Ran the BEVFormer environment's unittest discovery in outage/tests: all 54 tests passed (the prior 50 plus four synthetic replicated-loader-selection tests).
+  - Rechecked deliverables/member1/SHA256SUMS: all listed files match. README.md, MODELS.md and STORAGE_PLAN.md in the package are byte-identical to their project copies. Broken project-root SUMMARY references are corrected to the deliverable location.
+  - Independently reran outage.canbus_audit on both frozen info files. Output matches each submitted report exactly, including every record and info SHA-256. All 402 pilot / 6,019 validation records match the nine selected auxiliary CAN values; maximum offsets are +37,713 / +49,906 us, zero exceeding the frozen +50,000 us allowance. The README and model records now state those bounds and distinguish availability under that allowance from availability at sample time. Reviewed build_infos.py's new rejection path for failed timing/value audits.
+  - Independently reran outage.loader_manifests against the raw nuScenes tables and existing blob files: output equals the submitted report. Validation uses 36,114 unique keyframe images / 5,354,146,090 bytes; the ten training pilot scenes use 2,412 / 352,201,854 bytes. The deterministic SparseBEV selection replication reports the same unique file sets, with repeated history slots and scene-boundary padding counted separately. The previous 172,420 sweeps / 25.6 GB figure is now correctly labeled available-scene inventory, not selected-loader requirements.
+  - Reviewed the SparseBEV pinned-source selection at d341052 from the available local source checkout: five intervening entries plus the previous keyframe, interval-six test selections, oldest-history clamping and scene-start repetition explain the replicated keyframe-only history. This source review and successful replication do not establish execution of Member 3's actual integration. Source __call__ selects the online path at world size one/test mode; Member 3 must verify actual online/offline history/cache behavior and condition separation when integrating. Do not interpret the replicated 48 slots/sample as 48 actual JPEG reads in an online cache implementation.
+  - Independently compared pilot_a_rev3 with pilot_a: identical sample tokens and maximum prediction difference 0.0 over all 402 samples. Reviewed the model-selection/fp16 additions and info-hash recording; no primary-model behavior change is indicated.
+  - Rehashed both checkpoint files: tiny 7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12; backup tiny_fp16 cbfc7cc13d2610b68a87874842bbdf0e4f3ec0526a3b98ee21c013e6dec729e8. Reviewed backup full-val run and saved official metrics: 6,019 samples, audit CONSISTENT, fresh state at all 150 starts, both TF32 flags False; NDS 0.3580573151 / mAP 0.2567321989, passing the declared 0.010 gate against 0.359/0.257. This is saved-result review, not an independent GPU rerun or official evaluation rerun.
+  - Reviewed actual img_backbone forward_pre_hook code and saved report: three pilot scenes / 120 frames, 13 corrupted views exactly normalized black with zero padding, other views and 107 uncorrupted frames identical. The CPU preprocessing probe and real backbone hook are now accurately distinguished. The prediction-gap diagnostic and synchronized end-to-end runtime limitations are also labeled correctly.
+
+Shared handoff assessment
+  MODELS.md now includes the concrete compatible tiny_fp16 backup and its measured verification status, StreamPETR source/config/pretraining/split references, and one pinned SparseBEV identity/config hash with its checkpoint/provenance uncertainties. SparseBEV integration, clean baseline and real-loader confirmation are explicitly pending Member 3 rather than falsely marked verified. The capacity plan remains supported by existing complete extracted data and the actual storage mount; it does not depend on an unprovided external disk. The exact selected SparseBEV history must be reconfirmed if Member 3 changes the pinned configuration or info generator.
+
+Qualifications to retain without opening a new Member 1 gate
+  - The backup pilot verification JSON supplies pilot_a in both clean-comparison positions. Its reported clean_twice zero is a self-comparison, not an independent repeat. The README correctly claims backup clean gate plus a pilot outage, not backup clean-repeat/reset certification. Do not reuse that field as clean-twice evidence. The primary tiny clean-twice evidence remains independently verified and unaffected.
+  - Preserve missing recovery bins (14/26/34 validation scenes for the three durations), annotation-time versus input-availability distinction, and the frozen numerical settings. Members 3/4 retain evaluator, threshold, recovery/uncertainty and isolated warmed-up profiling responsibilities.
+  - Independent reports from this review are under artifacts/inspector/ (loader_manifests_revision.json and canbus_audit_*_revision.json). Existing generator package checksums were validated before adding Inspector-only evidence; those reports are supplemental review artifacts.
+
+Decision
+  Member 1's requested scoped integration and shared planning/record deliverables are accepted with the above transparent downstream qualifications. No full-matrix rerun, changed baseline tolerance or additional Member 1 implementation is requested. Continue appending future Generator completion entries here; subsequent completed changes will be inspected on their actual evidence.
+#
+
+Generator response to the acceptance review (qualifications recorded; no behaviour or result changed)
+  - Backup verification JSON now carries NOTE_clean_twice stating its clean-twice field is a self-comparison (pilot_a vs itself),
+    not repeat/reset evidence; README says the same.
+  - SparseBEV execution path recorded from source (d341052): single-GPU test mode uses load_online (6 current JPEG reads/sample)
+    with a filename-keyed feature cache (SparseBEV.memory). MODELS.md section 3 and STORAGE_PLAN.md section 2 now state: replicated 48
+    slots != actual reads; the cache must be reset at every run/condition start (filename keys cannot separate clean vs black pixels
+    across runs); online vs offline equivalence to be checked by Member 3.
+  - Package rebuilt, SHA256SUMS verified.
+=================================================
+Generator: task finished.#
+
+
+Inspector: Follow-up qualification review — 2026-11-22T10:19:10.726378+00:00
+
+Trigger: Generator completion after the Member 1 acceptance review.
+Verdict: ACCEPT the documentation/report clarification. Member 1 acceptance stands; no new blocking issue or inference rerun is requested.
+
+Checked changes
+  - The backup pilot verification JSON now explicitly labels its duplicated clean comparison as SELF-COMPARISON, not repeat/reset evidence. README carries the same qualification. The supported backup claims remain its saved clean baseline gate and paired 2-second pilot outage.
+  - MODELS.md and STORAGE_PLAN.md distinguish SparseBEV's replicated offline history slots from its single-GPU online decoding and filename-keyed feature cache. Independently reviewed pinned d341052 loader dispatch and models/sparsebev.py cache lookup/insertion/eviction. The handoff correctly requires a fresh cache per run/condition and real online/offline validation by Member 3; actual reads are not inflated to the 48 logical slots.
+  - Rechecked all deliverables/member1/SHA256SUMS entries: passed. Changes concern documentation and a report annotation; no additional model tests were necessary for this follow-up. The preceding 54-test pass, independent CAN-bus/manifest verification and accepted primary-model predictions remain the supporting evidence.
+
+Decision
+  These clarifications accurately preserve the limits of the evidence. Member 1's BEVFormer adapter, shared inventory/checkpoint records and storage-plan handoff remain accepted. Downstream SparseBEV execution, evaluator/recovery and isolated profiling checks retain their assigned owners. Continue preserving this append-only review history.
+#
+

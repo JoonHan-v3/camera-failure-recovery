@@ -1,0 +1,4 @@
+Declared 2026-11-22T09:17:32Z, BEFORE any backup-model validation metric was computed in this project.
+Backup: BEVFormer-tiny_fp16 (config bevformer_fp16/bevformer_tiny_fp16.py, ckpt bevformer_tiny_fp16_epoch_24.pth sha256
+cbfc7cc13d2610b68a87874842bbdf0e4f3ec0526a3b98ee21c013e6dec729e8). Gate for its clean full-validation run with the SAME adapter:
+  |NDS - 0.359| <= 0.010 and |mAP - 0.257| <= 0.010   (README 35.9/25.7; released log epoch 24: 0.3588/0.2571)

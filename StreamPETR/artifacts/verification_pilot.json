@@ -1,0 +1,143 @@
+{
+ "version": "v1.0-trainval",
+ "runs": [
+  "pilot_a",
+  "pilot_b",
+  "pilot_d05",
+  "pilot_d10",
+  "pilot_d20"
+ ],
+ "causal_policy": "synchronized-sample availability: image sensor ts <= sample (lidar keyframe) ts + 50000 us; observed trainval max skew +49992 us",
+ "max_cam_minus_eval_skew_us": 1867,
+ "min_cam_minus_eval_skew_us": -46078,
+ "clean_twice_max_abs_diff": 0.0,
+ "clean_twice_identical_samples": 402,
+ "clean_audit_a": "CONSISTENT",
+ "clean_audit_b": "CONSISTENT",
+ "clean_a_vs_b_input_errors": 0,
+ "conditions": {
+  "pilot_d05": {
+   "duration_s": 0.5,
+   "status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "paired_input_errors": [],
+   "n_paired_errors": 0,
+   "black_inputs_expected_vs_logged_equal": true,
+   "n_black_images": 11,
+   "black_images_per_scene_min_max": [
+    1,
+    2
+   ],
+   "all_black_pixels_verified": true,
+   "other_cameras_corrupted": 0,
+   "prefix_samples": 60,
+   "prefix_predictions_identical": 60,
+   "post_start_samples": 342,
+   "post_start_predictions_changed": 331,
+   "missing_follow_up_bins": {
+    "73030fb67d3c46cfb5e590168088ae39": [
+     0.0
+    ]
+   },
+   "restoration_offsets_s_example": {
+    "73030fb67d3c46cfb5e590168088ae39": [
+     0.437,
+     0.937,
+     1.436,
+     1.936,
+     2.436,
+     2.936,
+     3.385,
+     3.886,
+     4.386,
+     4.935,
+     5.536,
+     6.036
+    ]
+   }
+  },
+  "pilot_d10": {
+   "duration_s": 1.0,
+   "status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "paired_input_errors": [],
+   "n_paired_errors": 0,
+   "black_inputs_expected_vs_logged_equal": true,
+   "n_black_images": 21,
+   "black_images_per_scene_min_max": [
+    2,
+    3
+   ],
+   "all_black_pixels_verified": true,
+   "other_cameras_corrupted": 0,
+   "prefix_samples": 60,
+   "prefix_predictions_identical": 60,
+   "post_start_samples": 342,
+   "post_start_predictions_changed": 331,
+   "missing_follow_up_bins": {
+    "73030fb67d3c46cfb5e590168088ae39": [
+     0.0
+    ]
+   },
+   "restoration_offsets_s_example": {
+    "73030fb67d3c46cfb5e590168088ae39": [
+     0.437,
+     0.936,
+     1.436,
+     1.936,
+     2.436,
+     2.885,
+     3.386,
+     3.886,
+     4.435,
+     5.036,
+     5.536,
+     6.036
+    ]
+   }
+  },
+  "pilot_d20": {
+   "duration_s": 2.0,
+   "status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+   "paired_input_errors": [],
+   "n_paired_errors": 0,
+   "black_inputs_expected_vs_logged_equal": true,
+   "n_black_images": 42,
+   "black_images_per_scene_min_max": [
+    4,
+    5
+   ],
+   "all_black_pixels_verified": true,
+   "other_cameras_corrupted": 0,
+   "prefix_samples": 60,
+   "prefix_predictions_identical": 60,
+   "post_start_samples": 342,
+   "post_start_predictions_changed": 331,
+   "missing_follow_up_bins": {
+    "3032b651c72e4b5c86d4dea1b4930689": [
+     0.0
+    ],
+    "73030fb67d3c46cfb5e590168088ae39": [
+     0.0
+    ]
+   },
+   "restoration_offsets_s_example": {
+    "73030fb67d3c46cfb5e590168088ae39": [
+     0.436,
+     0.936,
+     1.436,
+     1.885,
+     2.386,
+     2.886,
+     3.435,
+     4.036,
+     4.536,
+     5.036,
+     5.536,
+     6.036
+    ]
+   }
+  }
+ }
+}

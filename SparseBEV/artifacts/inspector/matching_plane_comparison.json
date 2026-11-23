@@ -1,0 +1,92 @@
+[
+ {
+  "sample": "5b8b618c3f9e481bb8522d9900d74f20",
+  "lidar_xy": {
+   "tp": 3,
+   "fp": 0,
+   "ign": 33,
+   "n_pred_region": 3
+  },
+  "ego_ground_xy": {
+   "tp": 3,
+   "fp": 0,
+   "ign": 34,
+   "n_pred_region": 3
+  }
+ },
+ {
+  "sample": "88aa269105204f8db1a29debf3cde07c",
+  "lidar_xy": {
+   "tp": 5,
+   "fp": 0,
+   "ign": 11,
+   "n_pred_region": 5
+  },
+  "ego_ground_xy": {
+   "tp": 5,
+   "fp": 0,
+   "ign": 10,
+   "n_pred_region": 5
+  }
+ },
+ {
+  "sample": "8c394cbb9706486aae5c0edc1d704178",
+  "lidar_xy": {
+   "tp": 3,
+   "fp": 1,
+   "ign": 20,
+   "n_pred_region": 4
+  },
+  "ego_ground_xy": {
+   "tp": 4,
+   "fp": 0,
+   "ign": 20,
+   "n_pred_region": 4
+  }
+ },
+ {
+  "sample": "b8f4bec20b9b4d79b1979f43ba1e0222",
+  "lidar_xy": {
+   "tp": 1,
+   "fp": 0,
+   "ign": 10,
+   "n_pred_region": 1
+  },
+  "ego_ground_xy": {
+   "tp": 1,
+   "fp": 0,
+   "ign": 9,
+   "n_pred_region": 1
+  }
+ },
+ {
+  "sample": "de7593d76648450e947ba0c203dee1b0",
+  "lidar_xy": {
+   "tp": 4,
+   "fp": 0,
+   "ign": 11,
+   "n_pred_region": 4
+  },
+  "ego_ground_xy": {
+   "tp": 4,
+   "fp": 0,
+   "ign": 10,
+   "n_pred_region": 4
+  }
+ },
+ {
+  "sample": "f6c4cb03fbb44ccfb19d19fae99480c8",
+  "lidar_xy": {
+   "tp": 0,
+   "fp": 0,
+   "ign": 2,
+   "n_pred_region": 0
+  },
+  "ego_ground_xy": {
+   "tp": 0,
+   "fp": 0,
+   "ign": 3,
+   "n_pred_region": 0
+  }
+ }
+]

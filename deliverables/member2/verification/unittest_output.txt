@@ -1,0 +1,49 @@
+test_audit_detects_tamper (outage.tests.test_outage.Adapter) ... ok
+test_cam_parse (outage.tests.test_outage.Adapter) ... ok
+test_last_corrupted_leaves_window (outage.tests.test_outage.Adapter) ... ok
+test_outage_audit_passes (outage.tests.test_outage.Adapter) ... ok
+test_prefix_unchanged_and_clean (outage.tests.test_outage.Adapter) ... ok
+test_causal_policy_is_frozen_constant (outage.tests.test_outage.Comparator) ... ok
+test_pred_diff_rejects_nonfinite_and_bad_schema (outage.tests.test_outage.Comparator) ... ok
+test_half_open_and_sweeps (outage.tests.test_outage.Corr) ... ok
+test_no_mutation (outage.tests.test_outage.Corr) ... ok
+test_abs_s_mode_and_front_skew (outage.tests.test_outage.RealLoaderContract) ... ok
+test_audit_save_load_roundtrip (outage.tests.test_outage.RealLoaderContract) ... ok
+test_abs_us_mode (outage.tests.test_outage.Regress) ... ok
+test_adapter_length_mismatch (outage.tests.test_outage.Regress) ... ok
+test_empty_audit_fails (outage.tests.test_outage.Regress) ... ok
+test_manifest_and_unobserved (outage.tests.test_outage.Regress) ... ok
+test_pair_ok_and_missing (outage.tests.test_outage.Regress) ... ok
+test_predictions_rtol_and_order (outage.tests.test_outage.Regress) ... ok
+test_restoration_offsets (outage.tests.test_outage.Regress) ... ok
+test_scene_isolation_toy_model (outage.tests.test_outage.Regress) ... ok
+test_schedule_validation_and_persist (outage.tests.test_outage.Regress) ... ok
+test_unflagged_modification (outage.tests.test_outage.Regress) ... ok
+test_unknown_memory_rejected (outage.tests.test_outage.Regress) ... ok
+test_causal_needs_eval_ts_and_status (outage.tests.test_outage.Round3) ... ok
+test_compare_rejects_duplicates_and_schedule_mismatch (outage.tests.test_outage.Round3) ... ok
+test_conflicting_eval_ts_not_overwritten (outage.tests.test_outage.Round3) ... ok
+test_duplicate_labels_same_timestamp_rejected (outage.tests.test_outage.Round3) ... ok
+test_full_run_ready (outage.tests.test_outage.Round3) ... ok
+test_future_image_rejected (outage.tests.test_outage.Round3) ... ok
+test_manifest_retained_and_saved (outage.tests.test_outage.Round3) ... ok
+test_missing_identity_and_metadata_mismatch (outage.tests.test_outage.Round3) ... ok
+test_numpy_bool_and_commit_after_validation (outage.tests.test_outage.Round3) ... ok
+test_pass_requires_both (outage.tests.test_outage.Round3) ... ok
+test_prefix_only_run_not_ready (outage.tests.test_outage.Round3) ... ok
+test_restoration_eval_once_and_bins (outage.tests.test_outage.Round3) ... ok
+test_save_preserves_manifest_and_metadata (outage.tests.test_outage.Round3) ... ok
+test_sparse_midpoint_bins (outage.tests.test_outage.Round3) ... ok
+test_bad_input (outage.tests.test_outage.Sched) ... ok
+test_boundary_exact (outage.tests.test_outage.Sched) ... ok
+test_rule_and_skips (outage.tests.test_outage.Sched) ... ok
+test_same_start_across_durations (outage.tests.test_outage.Sched) ... ok
+test_interleave_and_backwards (outage.tests.test_outage.State) ... ok
+test_ok_and_reset (outage.tests.test_outage.State) ... ok
+test_repeatability (outage.tests.test_outage.State) ... ok
+test_stale_memory (outage.tests.test_outage.State) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 0.034s
+
+OK

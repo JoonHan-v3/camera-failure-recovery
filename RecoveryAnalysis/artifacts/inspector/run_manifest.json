@@ -1,0 +1,1993 @@
+{
+ "generated_utc": "2026-11-22T22:49:02Z",
+ "runs": [
+  {
+   "model": "bevformer",
+   "split": "val",
+   "condition": "clean",
+   "name": "a",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_a",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_a",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "e737a2fb19278d795649e78949bfa2fb5253906ebbf328c9c1a229a9f2cb8126",
+    "audit.json": "8300e9eee9f97090b7a32284f87e991e019edc27e6b6fcc9b7722f41de12fa70",
+    "run.json": "9977ab1bafc486ad545a3ad2a080896d914eae33f22428895455fe72974230a3"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 4963.376171827316,
+   "latency_median_s": 0.8175618648529053,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "val",
+    "--condition",
+    "clean",
+    "--out",
+    "../artifacts/runs/val_a",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 0,
+   "official": {
+    "NDS": 0.35449188830084066,
+    "mAP": 0.251891367928018,
+    "mATE": 0.898,
+    "mASE": 0.293,
+    "mAOE": 0.6511,
+    "mAVE": 0.6565,
+    "mAAE": 0.216
+   },
+   "official_metrics_sha256": "4849caf9f6caec9ac5edf7a1f6bf648109449fe511a8a3a73d92c5ee0644ae14",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "bevformer",
+   "split": "val",
+   "condition": "0.5",
+   "name": "d05",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_d05",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_d05",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "692d6b36e4b0762183dbbcbe2309367630f841feb0f6c97cc8b543ec799c2134",
+    "audit.json": "76090ffe21eeaecd4d50e57ab56282ac11591746ae397f44926b330a6ed45939",
+    "run.json": "6a89707ee4f626c8e89f8fc1b74de0a4315f64244aee31033b9597c0748fd3fe"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 14 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 4985.732521772385,
+   "latency_median_s": 0.81886887550354,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "val",
+    "--condition",
+    "0.5",
+    "--out",
+    "../artifacts/runs/val_d05",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 168,
+   "official": {
+    "NDS": 0.35409677899635744,
+    "mAP": 0.2514835221743704,
+    "mATE": 0.8985,
+    "mASE": 0.2928,
+    "mAOE": 0.6501,
+    "mAVE": 0.6591,
+    "mAAE": 0.2159
+   },
+   "official_metrics_sha256": "92a2bbb2dee238ffae4192e8adeaa70df999886d0ff4cdc42646a8e88634cef4",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "bevformer",
+   "split": "val",
+   "condition": "1",
+   "name": "d10",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_d10",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_d10",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "a8f2681aa9725333a19806d6f9961dbd77e2e5f1975f3842f3c87c32dd1a1d6a",
+    "audit.json": "dca9543591e281fe9841afb96a16411725e8a4b53bc7c81431c42f7095c1a063",
+    "run.json": "85b192759121c139e1f8f0f760fcbae1de492f07932dace65ff2eb54d970feca"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 26 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 4934.307881832123,
+   "latency_median_s": 0.8151857852935791,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "val",
+    "--condition",
+    "1",
+    "--out",
+    "../artifacts/runs/val_d10",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 326,
+   "official": {
+    "NDS": 0.35370413701363457,
+    "mAP": 0.2504587477183199,
+    "mATE": 0.8995,
+    "mASE": 0.2929,
+    "mAOE": 0.6474,
+    "mAVE": 0.6587,
+    "mAAE": 0.2167
+   },
+   "official_metrics_sha256": "fe1b944989144ccf785c58fa9859c2148074163a3c6d5dcc416384b2aeeeeaa1",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "bevformer",
+   "split": "val",
+   "condition": "2",
+   "name": "d20",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_d20",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_d20",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "25e31667dcbfe33f45ad69b4f453b09ee9e8e65078d00a22e3c6559e249423b7",
+    "audit.json": "f785f3a1c6fe89be10283771e420eaf2a1277257489bbb38e787795b2232d5c7",
+    "run.json": "6fe730ff108179f44db90ce40bdef342f27e6d90682a4fb2ce9d7f794e3249f2"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 34 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3771.993837118149,
+   "latency_median_s": 0.6240370273590088,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "val",
+    "--condition",
+    "2",
+    "--out",
+    "../artifacts/runs/val_d20",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 635,
+   "official": {
+    "NDS": 0.3518379246765061,
+    "mAP": 0.24754876010445176,
+    "mATE": 0.9004,
+    "mASE": 0.2929,
+    "mAOE": 0.6471,
+    "mAVE": 0.6629,
+    "mAAE": 0.2161
+   },
+   "official_metrics_sha256": "569617d4b0256c1d8bd00ca51f9b785583b530486eb53e0f30f12732f8cb4a30",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "bevformer",
+   "split": "pilot",
+   "condition": "clean",
+   "name": "a",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_a",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_a",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "cc5655ba490679c3d52a1dbd8ae34968125b0c4767c898805b3bd3158ee3b4f5",
+    "audit.json": "6efb79d99d18bd2666b0a35373177d7305da5cccfb7c7b51efd8150893c55984",
+    "run.json": "25fb1a7563e20b43515b1e64e11d86519cfb02b8c0577b63712ddb869046b36e"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 337.28653049468994,
+   "latency_median_s": 0.9163856506347656,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "clean",
+    "--out",
+    "../artifacts/runs/pilot_a",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 0,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "bevformer",
+   "split": "pilot",
+   "condition": "0.5",
+   "name": "d05",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_d05",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_d05",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "20b28cd62817e541b7423c0def60f38cfaa266667723f429b9fd355f75d0a8cf",
+    "audit.json": "9689dc236e0c38f53c015ac77f71b30022fd757f50f68ef25774bb4c7d1c1f41",
+    "run.json": "e67544aff354bee2d13e531b12f253d1be4654ef85adbb43ebc2e449994387cc"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 349.2676601409912,
+   "latency_median_s": 0.9099985361099243,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "0.5",
+    "--out",
+    "../artifacts/runs/pilot_d05",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 11,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "bevformer",
+   "split": "pilot",
+   "condition": "1",
+   "name": "d10",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_d10",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_d10",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "cbc9c9d3742f2c88c20c832560c633180ebdd83a7cc14528abc97a597657e4df",
+    "audit.json": "c4bbef97909d202e88f0e7d48dcaec436f84bd9870709ddf8f955c626ba9c471",
+    "run.json": "590adb0610b6603242d834c86b1955f20e1f6bc6d9fad53a1a32ef7ce97ae01a"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 358.2272915840149,
+   "latency_median_s": 0.9199062585830688,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "1",
+    "--out",
+    "../artifacts/runs/pilot_d10",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 21,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "bevformer",
+   "split": "pilot",
+   "condition": "2",
+   "name": "d20",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_d20",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_d20",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "aa66b06b422f21f4099b5a22a03461661ccf989f88f4c567be99d8dcca9397b5",
+    "audit.json": "04a04753b9ab7913ff835a1dc1a08957ff54f055cf74b83b6648a7f82399fe00",
+    "run.json": "95a800f97e76b53ad2e3324572ca26ea18ba2dd4d95233d4548273ee52f43447"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 317.36245822906494,
+   "latency_median_s": 0.8084750175476074,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "2",
+    "--out",
+    "../artifacts/runs/pilot_d20",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 42,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "val",
+   "condition": "clean",
+   "name": "a",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_val_a",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/val_realflash",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "7f7f067132b9fdf2b5f5453e45fef536592d01aa65b83b11f14b5752878fd2d8",
+    "audit.json": "de7d1189b4d945c1ebd97279b14cad5120ca5e2b8c3786739f94b9b52b49b2b4",
+    "run.json": "332621e0cd8366ab7b568793f613442afaaa0e2e4493c8a2264930e449ae193d"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 2601.4393327236176,
+   "latency_median_s": 0.4307899475097656,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "val",
+    "--condition",
+    "clean",
+    "--out",
+    "artifacts/runs/val_realflash",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 0,
+   "official": {
+    "NDS": 0.5370423975234109,
+    "mAP": 0.43323639360322763,
+    "mATE": 0.6094,
+    "mASE": 0.2703,
+    "mAOE": 0.4485,
+    "mAVE": 0.2784,
+    "mAAE": 0.1892
+   },
+   "official_metrics_sha256": "443a03c9450dd84a28ebe1c170e6b7e11ce72cc07ebd23a742ac636e942fcb47",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "val",
+   "condition": "0.5",
+   "name": "d05",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_val_d05",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_val_d05",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "e420cd2b5a56530360f50428e98a59d77201a491db4c9468fca09cb4fba51186",
+    "audit.json": "02e609b4a2d736a4b6b594aee78e6cdd96b7a836e96658ed1ae2ba95e77507f2",
+    "run.json": "9b8f5bde1980d0075615111f5f6583743ab40309e2c43220ae7f45e7e8d156c2"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 14 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3280.6612663269043,
+   "latency_median_s": 0.5479598045349121,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "val",
+    "--condition",
+    "0.5",
+    "--out",
+    "artifacts/runs/rf_val_d05",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 168,
+   "official": {
+    "NDS": 0.5373717879098378,
+    "mAP": 0.43263337568644455,
+    "mATE": 0.6077,
+    "mASE": 0.2703,
+    "mAOE": 0.4439,
+    "mAVE": 0.2781,
+    "mAAE": 0.1893
+   },
+   "official_metrics_sha256": "5c8ae961b160a6b799826d58e3db860701a2200f0eabec7dedc4627c89ffef03",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "val",
+   "condition": "1",
+   "name": "d10",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_val_d10",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_val_d10",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "50413e1e3339499fe3fe04632862b0ab3173e3801b816002645faaf4bf363b05",
+    "audit.json": "0ea95a8cde238ace6ad01325da617c2df58d771f73525c0e0755cfab8aa256a6",
+    "run.json": "a1ad89ffea3621ee1ab1b2611e1977325266b92cd5f8fec19d3dad85d6d41d71"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 26 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3288.5208711624146,
+   "latency_median_s": 0.5497510433197021,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "val",
+    "--condition",
+    "1",
+    "--out",
+    "artifacts/runs/rf_val_d10",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 326,
+   "official": {
+    "NDS": 0.5367595830333668,
+    "mAP": 0.4319485819562357,
+    "mATE": 0.6073,
+    "mASE": 0.2698,
+    "mAOE": 0.4457,
+    "mAVE": 0.2793,
+    "mAAE": 0.19
+   },
+   "official_metrics_sha256": "6be02154091ab0fc0745ab0a803202630c098959719677db0c625f72063bbeb7",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "val",
+   "condition": "2",
+   "name": "d20",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_val_d20",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_val_d20",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "542311b7866619acbbe9fbd6a028f9de32607bf376625aa7ae3c0ca97be6f16d",
+    "audit.json": "7ddf85ae18c2a972d58b5a16988b3bfdf5ee98289e7a4d4159a5b1b41d85b40b",
+    "run.json": "ef08702321896cfb4ad6fa807ff9c1805031ccca5d9dae42c46bf60d9d97b1fe"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 34 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3171.2406170368195,
+   "latency_median_s": 0.5192646980285645,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "val",
+    "--condition",
+    "2",
+    "--out",
+    "artifacts/runs/rf_val_d20",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 635,
+   "official": {
+    "NDS": 0.5337836771261176,
+    "mAP": 0.42733724189508937,
+    "mATE": 0.6105,
+    "mASE": 0.2705,
+    "mAOE": 0.4452,
+    "mAVE": 0.2816,
+    "mAAE": 0.1911
+   },
+   "official_metrics_sha256": "158d893fe1f1c7ed5709185ba60c6fddb96387fe5cfc2462b7a56865fdd8dc77",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "pilot",
+   "condition": "clean",
+   "name": "a",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_a",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_a",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "0e31d3ac06d9a8aea633d41cf3b04d67b0df5766d99668d7d03cc6a1fe7cacb9",
+    "audit.json": "1ad61b3412defce8d48fe80e60506b70edc60240b30022d9687176810b7c90c5",
+    "run.json": "9969e754818dde2368172cf0f74ef1bac24a0c2e14a091db92df3d82e0c46fea"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 215.67332291603088,
+   "latency_median_s": 0.5377920866012573,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "clean",
+    "--out",
+    "artifacts/runs/rf_pilot_a",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 0,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "pilot",
+   "condition": "0.5",
+   "name": "d05",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_d05",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_d05",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "7ca36f798503390098bb825a33a2a6de163ffe56252730a4a1ce313a5f00939f",
+    "audit.json": "ed83b296b18db6323af2f77cb4cf1da31624ae533a71d5bb3fbfbd232333aca8",
+    "run.json": "ff115241deadfd1d22510cb1f4a4b97337cd9f396f3cec62aca0bc198250af8e"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 221.40177083015442,
+   "latency_median_s": 0.5576789379119873,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "0.5",
+    "--out",
+    "artifacts/runs/rf_pilot_d05",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 11,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "pilot",
+   "condition": "1",
+   "name": "d10",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_d10",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_d10",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "53a258af172d3775c6de40df5a213688cc686b06837618ba934158d6eaaf1b7e",
+    "audit.json": "d6f2a29a9dc38f121ab1812c928e125a09e3f616049b9b2d7fb1c6262b54a1a4",
+    "run.json": "36960a801f8c7b3e46d911b748bc92c469a9c3914849abcc54dfc39718f29e56"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 225.92222142219543,
+   "latency_median_s": 0.5697486400604248,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "1",
+    "--out",
+    "artifacts/runs/rf_pilot_d10",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 21,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "pilot",
+   "condition": "2",
+   "name": "d20",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_d20",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_d20",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "b539e80fec58e83d07dcc9010f820e3a687d4263475799829758275f8e08219a",
+    "audit.json": "2995b2f2d456e7353c52c94787b87dadb2d2306b027b6301a6d06e535ca5e749",
+    "run.json": "e73212344ac564422ea242a9c22757ac0a6ddffb989462a4c98d96f516a9f691"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 222.65240287780762,
+   "latency_median_s": 0.5657774209976196,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "2",
+    "--out",
+    "artifacts/runs/rf_pilot_d20",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 42,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "val",
+   "condition": "clean",
+   "name": "a",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_a",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_a",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "f5ac576bfd24f8e409b69ff97e5cd9f4bf36615b25fa442ad428f99765f2e76f",
+    "audit.json": "fadd9820bd31f68d5e2bf70c17029d2d485590e47c9810204edd97fb9ae3dd28",
+    "run.json": "96085d7789f5fabc72869413fd8375b937a06c868cf92d6ee1239b60f97de838"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3300.9309742450714,
+   "latency_median_s": 0.5524599552154541,
+   "peak_gpu_mb": 2652.81689453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "val",
+    "--condition",
+    "clean",
+    "--out",
+    "../artifacts/runs/val_a",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 0,
+   "official": {
+    "NDS": 0.5559816299897353,
+    "mAP": 0.4542639325595507,
+    "mATE": 0.5981,
+    "mASE": 0.2705,
+    "mAOE": 0.4129,
+    "mAVE": 0.2433,
+    "mAAE": 0.1866
+   },
+   "official_metrics_sha256": "e143166b19ed302aae78a24d2626b236cf8f0ff47ac822327011177290e6f025",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "val",
+   "condition": "0.5",
+   "name": "d05",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_d05",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_d05",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "db50901cf50a1b30081fdd8444207234f053db00dddcd91685b983b7e660531d",
+    "audit.json": "bda43ff5ccad26b025245db80c7d8146c66c45031a9b1e2e672eb30955b3c273",
+    "run.json": "82856737aa27220a595e2816b29736812acc3f17692f76379bc6567f19e92355"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 14 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3322.1943068504333,
+   "latency_median_s": 0.5546348094940186,
+   "peak_gpu_mb": 2652.81689453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "val",
+    "--condition",
+    "0.5",
+    "--out",
+    "../artifacts/runs/val_d05",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 168,
+   "official": {
+    "NDS": 0.5553162925467541,
+    "mAP": 0.4535406505114743,
+    "mATE": 0.5987,
+    "mASE": 0.2706,
+    "mAOE": 0.4137,
+    "mAVE": 0.2443,
+    "mAAE": 0.1872
+   },
+   "official_metrics_sha256": "8de8bde1b7cd0d7c00766b7aab135ef71487882cc3c5082cc34604fa3c68c09f",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "val",
+   "condition": "1",
+   "name": "d10",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_d10",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_d10",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "ad09159cf6c8252896bf4af9a44df94015d744b708ba9700ea276ec324148e1a",
+    "audit.json": "aa810476e735505a53fff0dcd52b86a0b62289526ccacaf82fa4c6bc03eb3bac",
+    "run.json": "ef0c945bbe2b989984208674726c1c9a4f6809efa3b8e474957eadaafe643a98"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 26 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3093.4748661518097,
+   "latency_median_s": 0.5015215873718262,
+   "peak_gpu_mb": 2652.81689453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "val",
+    "--condition",
+    "1",
+    "--out",
+    "../artifacts/runs/val_d10",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 326,
+   "official": {
+    "NDS": 0.5545615684895795,
+    "mAP": 0.4521976414877398,
+    "mATE": 0.6,
+    "mASE": 0.2706,
+    "mAOE": 0.4117,
+    "mAVE": 0.2459,
+    "mAAE": 0.1871
+   },
+   "official_metrics_sha256": "97d73475e63cb02877c453ecb8fb90a90677e1d06108e9e9f7cb952dec8b43d7",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "val",
+   "condition": "2",
+   "name": "d20",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_d20",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_d20",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "9412dcf509d0ee1960ed050efe5a3763b418ffdaea1dea7b3b4f8d98bbcd13ca",
+    "audit.json": "c8a4d01e1680d90553649a546248bd94d443ff6a5a169af35f0bfbe5d2775bce",
+    "run.json": "c6d5ef5bc4d412a8be63601c67373145c77998ed6b4f1e1a99908a8e9901be7b"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 34 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3258.9717535972595,
+   "latency_median_s": 0.5528764724731445,
+   "peak_gpu_mb": 2652.81689453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "val",
+    "--condition",
+    "2",
+    "--out",
+    "../artifacts/runs/val_d20",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 635,
+   "official": {
+    "NDS": 0.552344637624023,
+    "mAP": 0.44837472971871567,
+    "mATE": 0.6002,
+    "mASE": 0.2706,
+    "mAOE": 0.4117,
+    "mAVE": 0.2481,
+    "mAAE": 0.1878
+   },
+   "official_metrics_sha256": "dd2ec15410fcdee54e831bde8305b3a463c76c0b7b6b8a10bd475397d12061eb",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "pilot",
+   "condition": "clean",
+   "name": "a",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_a",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_a",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "bdf577f3f50a615197ea2c80a5ff9980f813470196abd9d75d828dfa61412f04",
+    "audit.json": "6d2ebbf0d89e0ded1c4856c5276e4e5b117309231110ac2e13fc1fa33d7040fc",
+    "run.json": "9e0b6be513fdd57a12c630dc1d4732dcef572a21c999315a731aed0427ea10f5"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 217.23729848861694,
+   "latency_median_s": 0.5448657274246216,
+   "peak_gpu_mb": 2652.62939453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "clean",
+    "--out",
+    "../artifacts/runs/pilot_a",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 0,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "pilot",
+   "condition": "0.5",
+   "name": "d05",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_d05",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_d05",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "86be14c2938908fa2ec35ad52157417c8f10095c069b1f611d40b0e1d16f1102",
+    "audit.json": "478d32cb11829a99161c53fa71dc3c673219d3840cfec1ac9dc7d69627a0d553",
+    "run.json": "d6d751670bbffef6dc419b7790370b1c4d1fdf328416a8f90cee69281e923c53"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 239.73392844200134,
+   "latency_median_s": 0.615070104598999,
+   "peak_gpu_mb": 2652.62939453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "0.5",
+    "--out",
+    "../artifacts/runs/pilot_d05",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 11,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "pilot",
+   "condition": "1",
+   "name": "d10",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_d10",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_d10",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "1028fce1c42a3ac49a09ddb35abf1bdd989c7a5698c47f932a4400679aa7fc06",
+    "audit.json": "7e751ef9ca6dbefb30b00f07cf55b41bc5a890fcb72737841d30750dea870acb",
+    "run.json": "67afb96345ff2378dfd5a8e6b6144bbac0157cd4cc246de6c4060613d32fb57b"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 1 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 244.55772161483765,
+   "latency_median_s": 0.6157071590423584,
+   "peak_gpu_mb": 2652.62939453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "1",
+    "--out",
+    "../artifacts/runs/pilot_d10",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 21,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "pilot",
+   "condition": "2",
+   "name": "d20",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_d20",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_d20",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "4744e5a13c9bb2c6b45cdafdc4dd912a9a93827c001ddada803b56f5f6b02429",
+    "audit.json": "298f39b565a0074b2d42632678ea4475cfb269676dfb39220da2c60d8cb2299d",
+    "run.json": "6acce6b52b163f677b4aa32086202b4d04a1c540410eaac8b56625f223bcaac3"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 238.87291049957275,
+   "latency_median_s": 0.6154394149780273,
+   "peak_gpu_mb": 2652.62939453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "2",
+    "--out",
+    "../artifacts/runs/pilot_d20",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 42,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "bevformer",
+   "split": "val",
+   "condition": "clean",
+   "name": "b",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_b",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/val_b",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "e737a2fb19278d795649e78949bfa2fb5253906ebbf328c9c1a229a9f2cb8126",
+    "audit.json": "4b9be4ac44fa21fbfb4074025be92d30c09fe17d318a36114eaef4e488026cc5",
+    "run.json": "9efdc4bcbea94983be3ab8f03a06114374b3014f37e0e7989e015c010ba68136"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3708.6010847091675,
+   "latency_median_s": 0.6217668056488037,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "val",
+    "--condition",
+    "clean",
+    "--out",
+    "../artifacts/runs/val_b",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 0,
+   "official": {
+    "NDS": 0.35449188830084066,
+    "mAP": 0.251891367928018,
+    "mATE": 0.898,
+    "mASE": 0.293,
+    "mAOE": 0.6511,
+    "mAVE": 0.6565,
+    "mAAE": 0.216
+   },
+   "official_metrics_sha256": "4849caf9f6caec9ac5edf7a1f6bf648109449fe511a8a3a73d92c5ee0644ae14",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "bevformer",
+   "split": "pilot",
+   "condition": "clean",
+   "name": "b",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_b",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/artifacts/runs/pilot_b",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "cc5655ba490679c3d52a1dbd8ae34968125b0c4767c898805b3bd3158ee3b4f5",
+    "audit.json": "114541338decb3dda60f35d81903e068b5f0ae50de8110ffcbdef38d0a5e025c",
+    "run.json": "643b05c66313eb8408b00b59badf1702649d34d9c426cd8627d60fc0ec080f38"
+   },
+   "ckpt_sha256_recorded": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "ckpt_sha256_on_disk": "7305046dbaa4fe8b1fa6d6acb9e0e3d605a70a3c473f763e936103428d2b2f12",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 340.4928250312805,
+   "latency_median_s": 0.8973132371902466,
+   "peak_gpu_mb": 617.01123046875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "bevformer_src/projects/configs/bevformer/bevformer_tiny.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/BEVFormer/outage/run_bevformer.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "clean",
+    "--out",
+    "../artifacts/runs/pilot_b",
+    "--no-tf32"
+   ],
+   "commit": {
+    "bevformer_commit": "66b65f3a1f58caf0507cb2a971b9c0e7f842376c",
+    "mmdet3d_commit": "f1107977dfd26155fc1f83779ee6535d2468f449"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 0,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "val",
+   "condition": "clean",
+   "name": "b",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_val_b",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_val_b",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "7f7f067132b9fdf2b5f5453e45fef536592d01aa65b83b11f14b5752878fd2d8",
+    "audit.json": "2cfb021a0024448685be185322913e7b8c4112dfec798e75b31cd5ff805ac34a",
+    "run.json": "5e3dfb486012bb90dd4072bc29388b8709695379aa229738dacf9c7afabdfa27"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 2770.4898784160614,
+   "latency_median_s": 0.43860602378845215,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "val",
+    "--condition",
+    "clean",
+    "--out",
+    "artifacts/runs/rf_val_b",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 0,
+   "official": {
+    "NDS": 0.5370423975234109,
+    "mAP": 0.43323639360322763,
+    "mATE": 0.6094,
+    "mASE": 0.2703,
+    "mAOE": 0.4485,
+    "mAVE": 0.2784,
+    "mAAE": 0.1892
+   },
+   "official_metrics_sha256": "443a03c9450dd84a28ebe1c170e6b7e11ce72cc07ebd23a742ac636e942fcb47",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "streampetr",
+   "split": "pilot",
+   "condition": "clean",
+   "name": "b",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_b",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/artifacts/runs/rf_pilot_b",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "0e31d3ac06d9a8aea633d41cf3b04d67b0df5766d99668d7d03cc6a1fe7cacb9",
+    "audit.json": "a899c8242fa56f785d9327ff310f43dff0bb94528a53e3df628dd61fed78d610",
+    "run.json": "bc533352d2c20b8cb547428b2706548a1b56f8ed69296eb8a2ba3bd76471d35d"
+   },
+   "ckpt_sha256_recorded": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "ckpt_sha256_on_disk": "e6323ae5c31adf1eedd46d6dd4fd3c73d95aa26f18cc8aa23c196494b7de3451",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 220.99628925323486,
+   "latency_median_s": 0.5566200017929077,
+   "peak_gpu_mb": 374.8388671875,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "streampetr_src/projects/configs/StreamPETR/stream_petr_r50_flash_704_bs2_seq_90e.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/StreamPETR/outage/run_streampetr.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "clean",
+    "--out",
+    "artifacts/runs/rf_pilot_b",
+    "--no-tf32"
+   ],
+   "commit": {
+    "streampetr_commit": "95f64702306ccdb7a78889578b2a55b5deb35b2a",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 0,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "val",
+   "condition": "clean",
+   "name": "b",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_b",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/val_b",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "f5ac576bfd24f8e409b69ff97e5cd9f4bf36615b25fa442ad428f99765f2e76f",
+    "audit.json": "3281d294dd6dda048515a399eafc79cf33c66dea212d8c1856e183e04ee6a82b",
+    "run.json": "af4166fae085aec105a7a0ac00d71fb8773c1982c54ba066d57ecedefdd0d911"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 6019,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 3329.401426553726,
+   "latency_median_s": 0.5520505905151367,
+   "peak_gpu_mb": 2652.81689453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "val",
+    "--condition",
+    "clean",
+    "--out",
+    "../artifacts/runs/val_b",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+   "n_audit_records": 36114,
+   "n_black_images": 0,
+   "official": {
+    "NDS": 0.5559816299897353,
+    "mAP": 0.4542639325595507,
+    "mATE": 0.5981,
+    "mASE": 0.2705,
+    "mAOE": 0.4129,
+    "mAVE": 0.2433,
+    "mAAE": 0.1866
+   },
+   "official_metrics_sha256": "e143166b19ed302aae78a24d2626b236cf8f0ff47ac822327011177290e6f025",
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  },
+  {
+   "model": "sparsebev",
+   "split": "pilot",
+   "condition": "clean",
+   "name": "b",
+   "dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_b",
+   "real_dir": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/artifacts/runs/pilot_b",
+   "exists": true,
+   "files_present": {
+    "preds.pkl": true,
+    "audit.json": true,
+    "run.json": true
+   },
+   "sha256": {
+    "preds.pkl": "bdf577f3f50a615197ea2c80a5ff9980f813470196abd9d75d828dfa61412f04",
+    "audit.json": "ade32a44d1146480d9609bb09470c10f4340f87d88039fc9e508ed1f47465095",
+    "run.json": "8e9386cc8599d75f321fb550ce3168c1ffb3729e7b9dad3862595fc46f182555"
+   },
+   "ckpt_sha256_recorded": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "ckpt_sha256_on_disk": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+   "n_samples": 402,
+   "audit_status": "CONSISTENT",
+   "readiness": "READY",
+   "tf32": [
+    false,
+    false
+   ],
+   "runtime_s": 188.2512080669403,
+   "latency_median_s": 0.44453930854797363,
+   "peak_gpu_mb": 2652.62939453125,
+   "torch": "1.9.0+cu111",
+   "gpu": "NVIDIA GeForce RTX 3060",
+   "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+   "argv": [
+    "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+    "--split",
+    "pilot",
+    "--condition",
+    "clean",
+    "--out",
+    "../artifacts/runs/pilot_b",
+    "--no-tf32"
+   ],
+   "commit": {
+    "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+    "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+   },
+   "schedule_sha256": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+   "n_audit_records": 2412,
+   "n_black_images": 0,
+   "checks": {
+    "files_present": true,
+    "audit_consistent": true,
+    "n_samples": true,
+    "tf32_off": true,
+    "checkpoint_matches_disk": true,
+    "checkpoint_matches_pinned_record": true,
+    "black_image_count": true
+   },
+   "integrity_ok": true
+  }
+ ],
+ "val_schedule_sha256": {
+  "bevformer": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+  "streampetr": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e",
+  "sparsebev": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e"
+ },
+ "val_schedule_identical_across_models": true,
+ "all_runs_ok": true,
+ "n_runs": 30
+}

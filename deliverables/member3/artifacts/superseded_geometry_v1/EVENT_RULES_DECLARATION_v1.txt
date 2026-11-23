@@ -1,0 +1,13 @@
+Declared 2026-11-22T16:48:26Z, BEFORE any validation event-analysis statistic was computed (only pilot/calibration scenes were used).
+Frozen rules for the custom front-region evaluator (study plan p.3-4), identical for all three models:
+  eligible GT        : ten detection classes; centre in front of CAM_FRONT, inside the original 1600x900 image, ground-plane distance <= 50 m
+                       (from the sample-time ego origin), >= 1 annotated LiDAR or radar point; clean calibration, sample-time annotations,
+                       camera-time ego pose, no motion compensation to exposure time (documented approximation)
+  matching           : class-aware, one-to-one, ground-plane centre distance <= 2.0 m (inclusive), predictions in descending score, nearest unmatched
+                       eligible GT (ties: lowest GT index), then ignored same-class GT absorbs; remaining unmatched in-region predictions = FP
+  predictions        : native decoded predictions BEFORE official class-range filtering, common format preds.pkl
+  threshold          : chosen on the pilot (calibration) scenes from the model's CLEAN predictions: maximise pooled precision TP/(TP+FP)
+                       subject to recall >= 0.30 and >= 100 predictions in the region; ties -> higher recall -> lower threshold; undefined precision never wins
+  damage / recovery  : loss L = R_clean - R_outage on the same eligible GT; damaged iff pooled loss during the outage > 0.05 and >= 5 eligible GT
+                       during the outage; recovery onset = first post-restoration bin with L <= 0.05 whose next adjacent scheduled bin also has L <= 0.05;
+                       each bin needs >= 5 eligible GT; missing/insufficient bin breaks the pair; bins 0.0..4.5 s step 0.5, +-0.25 s, one-to-one

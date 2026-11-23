@@ -1,0 +1,62 @@
+{
+ "sparsebev": {
+  "B": 10000,
+  "unreached": 2,
+  "unreached_fraction": 0.0002,
+  "conditional_finite_ci": [
+   1.0,
+   2.0
+  ],
+  "unconditional_upper_order_statistic": 2.0,
+  "saved": {
+   "value": 1.5,
+   "reached": true,
+   "fraction_of_replicates_reached": 1.0,
+   "ci95": [
+    1.0,
+    2.0
+   ],
+   "note": "censored/unconfirmed damaged events are kept in the denominator; a median exists only if more than half of damaged events have a confirmed onset"
+  }
+ },
+ "streampetr": {
+  "B": 10000,
+  "unreached": 235,
+  "unreached_fraction": 0.0235,
+  "conditional_finite_ci": [
+   1.0,
+   3.0
+  ],
+  "unconditional_upper_order_statistic": 4.0,
+  "saved": {
+   "value": 2.0,
+   "reached": true,
+   "fraction_of_replicates_reached": 0.975,
+   "ci95": [
+    1.0,
+    3.0
+   ],
+   "note": "censored/unconfirmed damaged events are kept in the denominator; a median exists only if more than half of damaged events have a confirmed onset"
+  }
+ },
+ "bevformer": {
+  "B": 10000,
+  "unreached": 20,
+  "unreached_fraction": 0.002,
+  "conditional_finite_ci": [
+   0.5,
+   2.0
+  ],
+  "unconditional_upper_order_statistic": 2.0,
+  "saved": {
+   "value": 1.0,
+   "reached": true,
+   "fraction_of_replicates_reached": 0.999,
+   "ci95": [
+    0.5,
+    2.0
+   ],
+   "note": "censored/unconfirmed damaged events are kept in the denominator; a median exists only if more than half of damaged events have a confirmed onset"
+  }
+ }
+}

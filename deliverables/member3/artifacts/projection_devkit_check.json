@@ -1,0 +1,10 @@
+{
+ "n_samples": 150,
+ "n_boxes": 4513,
+ "n_eligible": 698,
+ "max_abs_center_diff_m": 1.1310952174881095e-12,
+ "max_abs_pixel_diff": 0.0039716362953186035,
+ "region_flag_mismatches": 0,
+ "eligible_flag_mismatches": 0,
+ "note": "devkit transform: global -> ego(CAM_FRONT sample_data pose) -> camera; ground distance from LIDAR_TOP-time ego origin"
+}

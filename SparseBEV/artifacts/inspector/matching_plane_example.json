@@ -1,0 +1,11 @@
+{
+  "sample": "8c394cbb9706486aae5c0edc1d704178",
+  "prediction_row": 23,
+  "score": 0.5488640666007996,
+  "gt_index": 15,
+  "gt_instance": "b129eb9f43b14a788ef35ead8b1844dc",
+  "lidar_xy_distance_m": 2.026647283015333,
+  "ego_xy_distance_m": 1.99973018831708,
+  "current_status": "FP",
+  "ego_ground_plane_status": "TP"
+}

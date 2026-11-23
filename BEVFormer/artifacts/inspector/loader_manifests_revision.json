@@ -1,0 +1,123 @@
+{
+ "val": {
+  "scenes": 150,
+  "scheduled": 150,
+  "models": {
+   "BEVFormer-tiny | StreamPETR": {
+    "samples": 6019,
+    "consumed_slots": 36114,
+    "unique_files": 36114,
+    "bytes": 5354146090,
+    "sweeps_needed": 0,
+    "all_present": true,
+    "front_files_inside_outage_window": {
+     "0.5": {
+      "total": 168,
+      "sweeps": 0
+     },
+     "1.0": {
+      "total": 326,
+      "sweeps": 0
+     },
+     "2.0": {
+      "total": 635,
+      "sweeps": 0
+     }
+    }
+   },
+   "SparseBEV r50_nuimg_704x256 (replicated selection)": {
+    "samples": 6019,
+    "consumed_slots": 288912,
+    "unique_files": 36114,
+    "unique_sweep_files": 0,
+    "unique_keyframe_files": 36114,
+    "bytes": 5354146090,
+    "sweep_bytes": 0,
+    "all_present": true,
+    "boundary_padding": {
+     "no_history_keyframe_repeated": 150,
+     "history_clamped_to_oldest": 900,
+     "full": 4969
+    },
+    "oldest_history_s": 3.894,
+    "front_files_inside_outage_window": {
+     "0.5": {
+      "total": 168,
+      "sweeps": 0
+     },
+     "1.0": {
+      "total": 326,
+      "sweeps": 0
+     },
+     "2.0": {
+      "total": 635,
+      "sweeps": 0
+     }
+    }
+   }
+  },
+  "union_unique_files": 36114,
+  "union_bytes": 5354146090
+ },
+ "pilot": {
+  "scenes": 10,
+  "scheduled": 10,
+  "models": {
+   "BEVFormer-tiny | StreamPETR": {
+    "samples": 402,
+    "consumed_slots": 2412,
+    "unique_files": 2412,
+    "bytes": 352201854,
+    "sweeps_needed": 0,
+    "all_present": true,
+    "front_files_inside_outage_window": {
+     "0.5": {
+      "total": 11,
+      "sweeps": 0
+     },
+     "1.0": {
+      "total": 21,
+      "sweeps": 0
+     },
+     "2.0": {
+      "total": 42,
+      "sweeps": 0
+     }
+    }
+   },
+   "SparseBEV r50_nuimg_704x256 (replicated selection)": {
+    "samples": 402,
+    "consumed_slots": 19296,
+    "unique_files": 2412,
+    "unique_sweep_files": 0,
+    "unique_keyframe_files": 2412,
+    "bytes": 352201854,
+    "sweep_bytes": 0,
+    "all_present": true,
+    "boundary_padding": {
+     "no_history_keyframe_repeated": 10,
+     "history_clamped_to_oldest": 60,
+     "full": 332
+    },
+    "oldest_history_s": 3.696,
+    "front_files_inside_outage_window": {
+     "0.5": {
+      "total": 11,
+      "sweeps": 0
+     },
+     "1.0": {
+      "total": 21,
+      "sweeps": 0
+     },
+     "2.0": {
+      "total": 42,
+      "sweeps": 0
+     }
+    }
+   }
+  },
+  "union_unique_files": 2412,
+  "union_bytes": 352201854
+ },
+ "note": "Exact per-loader image manifests for the frozen evaluation (150 val scenes) and pilot (10 train scenes), from the raw\nv1.0-trainval JSON only (no model, no GPU).\n\n* BEVFormer-tiny / StreamPETR: the 6 keyframe camera images of every sample (verified in the real runs' audits).\n* SparseBEV r50_nuimg_704x256 @ d341052 (pinned, see MODELS.md): a REPLICATION of its test-mode selection logic, copied\n  line-for-line in behaviour from gen_sweep_info.add_sweep_info (5 camera sweeps before each keyframe, cam order and the\n  'no prev -> repeat last sweep_info' rule), CustomNuScenesDataset.collect_sweeps (into_past=60, walk back over\n  timestamp-sorted infos appending each sample's sweeps then the previous keyframe 'cams', stop at a sample with no sweeps)\n  and LoadMultiViewImageFromMultiSweeps.load_offline (test_mode, sweeps_num=7, interval 6 -> prev indices 5,11,...,41,\n  clamped to len-1, incomplete sweep -> previous entry; no history -> the current keyframe repeated 7x = boundary padding).\n  It is NOT an execution of SparseBEV's own code; Member 3 must confirm it against the real loader (compare the filename\n  lists of its first pipeline step) once integrated.\nOutputs per (split, model): unique files, consumed image slots, bytes, boundary-padding counts, CAM_FRONT files inside each\noutage window (the images the outage must black, sweeps included), and the oldest history offset (how far back a corrupted\nimage can stay in a finite window).\nUsage: python -m outage.loader_manifests <out.json>"
+}

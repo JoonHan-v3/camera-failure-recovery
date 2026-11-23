@@ -1,0 +1,121 @@
+Generator (2026-11-22): Member 3 submission — SparseBEV integration; projection, matching and official/custom evaluators; checked per-scene detection statistics.
+Package: ../deliverables/member3 (SUMMARY.md, results_summary.json, SHA256SUMS; README.md has a Methodology section first). Real model (r50_nuimg_704x256, SparseBEV d341052 unmodified) and real nuScenes data.
+Key results: baseline gate PASS (clean val NDS 0.5560 vs 0.556, declared before; mAP 0.4543 reported); clean twice bit-identical (6019 samples); black images 168/326/635 = independent
+recomputation and identical across SparseBEV/BEVFormer/StreamPETR; prefix 900/900; finite-window check PASS (non-contaminated samples equal clean, max diff 0.0; last black frame leaves
+history ~3.54 s after restoration); real loader confirmed (7 previous keyframes, 0 sweeps; online == offline predictions); evaluator checked vs devkit (4513 boxes) and by an independent
+re-implementation (402 pilot + 1204 val samples, 0 mismatches); per-scene stats produced for all three models with frozen rules/thresholds. 92/92 tests.
+Disclosed: first isolation attempt failed for a numerics-setting mismatch and was fixed (kept in artifacts/logs); the stale-cache hazard is narrower than first assumed (needs leftovers starting at
+the scene's first frames; FIFO-8 evicts the tail after full runs) and the control was redesigned accordingly; two concurrent processes max on the 12 GB GPU (OOM retries logged).
+=================================================
+Generator: task finished.#
+
+
+Inspector: Member 3 completed-submission inspection — 2026-11-22T19:25:49.015247+00:00
+
+Trigger: Generator: task finished.#
+Verdict: ACCEPT the scoped SparseBEV integration and saved clean/outage inference evidence. REQUEST CORRECTION before accepting the custom evaluator and checked per-scene statistics: matching projects onto LiDAR XY, whereas region eligibility uses sample-time ego XY. These are different planes for the real sensor calibration, and the difference changes an actual TP/FP assignment at the fixed 2 m boundary. Official metrics and raw model predictions can be retained.
+
+Independent validation performed
+  - Ran the sparsebev environment's unittest discovery in outage/tests: all 92 tests passed. The controlled matching examples use aligned synthetic coordinates and do not catch the matching-plane issue below.
+  - Rechecked every deliverables/member3/SHA256SUMS entry: passed. Upstream SparseBEV working tree is clean at d34105285f6a50aeb49dd62ef1486860650d1aab.
+  - Independently reran outage.verify_runs on the five full-validation runs against raw nuScenes records. Clean repeats are identical over 6,019 samples, max difference 0.0; both clean audits CONSISTENT; zero paired-input errors. Outage audits CONSISTENT; expected/logged black sets equal at 168/326/635 images; zero other cameras corrupted; prefixes identical 900/900. Post-start differences are 1,218/1,376/1,685 of 5,119, consistent with a finite window rather than recurrent contamination.
+  - Independently reran outage.window_check on the full validation predictions: all 4,801/4,643/4,334 noncontaminated samples equal clean exactly; all contaminated samples change; all 150 scenes clear the window. Median clearing offsets are 3.536/3.538/3.538 seconds for the three durations. PASS at the frozen 1e-4 tolerance, with observed max noncontaminated difference 0.0.
+  - Checked all ten prediction files: exact expected 402 pilot / 6,019 validation sample counts; arrays have 11 columns, finite values and integral labels 0-9. The single empty validation prediction is preserved as an empty array, not a missing sample.
+  - Independently decoded 24 pilot_d05 inputs (all 11 corrupted images plus 13 unchanged), resolving relative paths from sparsebev_src. Uint8 source and expected post-corruption SHA-1 hashes match every checked audit record. This is sampled independent pixel verification, not exhaustive re-decoding of all runs.
+  - Independently reran outage.check_stats on all 402 clean pilot samples: TP 439, FP 6, ignored 3,138, region predictions 445, eligible GT 1,367; zero mismatches/invariant violations. This validates consistency with the submitted checker, but that checker repeats the same LiDAR-XY matching assumption and therefore does not resolve the issue below.
+  - Reviewed saved devkit geometry check (4,513 boxes, zero region/eligibility mismatches), executed-loader confirmation (6,019 samples, zero selection/online-offline mismatches, zero sweeps), online/offline clean prediction check (80 exact-equal samples; offline backbone batch 48), input probes and real-model isolation/negative-control code/reports. These GPU checks were reviewed from saved results, not independently rerun on GPU.
+  - Reviewed saved official metrics and baseline declaration: clean NDS 0.555981630 / mAP 0.454263933; repeat identical; outage NDS 0.555316293/0.554561568/0.552344638. The unchanged NDS gate against 0.556 passes. Released mAP is unavailable and appropriately reported rather than fabricated as a gate. Saved run records disable both TF32 controls and retain the frozen deterministic settings.
+
+Blocking evaluator finding: use one explicitly defined ground plane for matching
+  gt_tables.project_front computes distance in the sample-time ego frame via T_l2ego. In contrast, evaluator.match_sample uses gt_center[:, :2] - pred[:, :2] directly in the LiDAR sensor frame. event_stats.sample_status adjusts the prediction's height for projection but passes the original bottom-centered LiDAR row into matching. Nonzero sensor roll/pitch means simply dropping LiDAR z is not projection onto the ego ground plane. Different predicted and GT heights can affect this discrepancy.
+
+  Reproduction on the saved SparseBEV clean validation predictions, at the frozen tau=0.5422017574310303:
+    sample: 8c394cbb9706486aae5c0edc1d704178
+    prediction row: 23; score: 0.5488640666007996
+    eligible GT index: 15; instance: b129eb9f43b14a788ef35ead8b1844dc
+    submitted LiDAR-XY distance: 2.026647283015333 m -> FP
+    sample-time ego-XY distance between geometric centers: 1.99973018831708 m -> TP
+    sample counts change from TP=3, FP=1 to TP=4, FP=0.
+  Over all 6,019 clean validation samples, projecting both centers consistently into sample-time ego XY changes six samples' counts (one TP/FP assignment plus five ignored-count changes). Reports: artifacts/inspector/matching_plane_comparison.json and matching_plane_example.json. This is a demonstrated geometry issue, not a request to tune the 2 m threshold to validation outcomes.
+
+Required focused correction
+  1. Explicitly define the physical ground-plane frame in the evaluator protocol. Using sample-time ego XY consistently with the existing 50 m region criterion is the straightforward correction. Transform both prediction GEOMETRIC centers (z_bottom+h/2) and GT geometric centers to that frame before nearest-neighbor distance, including ignored-GT checks. Keep the threshold fixed at 2 m and retain class, confidence, tie and one-to-one rules. If another physical frame is selected, justify it from the protocol and test it consistently; do not silently keep sensor-plane XY under the unqualified ground-plane label.
+  2. Correct the independent checker as well: it currently transforms GT into LiDAR and uses the same XY norm. Derive its matching coordinates independently through devkit/pyquaternion ego/global transforms, so it can catch this class of error. Add a controlled test with nonzero LiDAR roll/pitch and unequal prediction/GT heights crossing the 2 m boundary, plus an ignored-GT distance case; retain the real example above as a reproducible regression check.
+  3. Recompute calibration using ONLY the original training pilot scenes and unchanged selection objective/constraints, then regenerate the custom per-scene/per-sample/pooled statistics for all three models from the EXISTING saved predictions. Record the geometry correction/version, old/new thresholds and affected-count comparison; preserve the previous records as superseded. This is deterministic bug correction, not permission to retune recall/count targets or select scenes using validation results. Refresh independent checks and package checksums.
+  4. No model inference rerun, retraining, new official-baseline tolerance or wholesale official-evaluation rerun is requested: the defect is in the custom geometry/matching layer. Preserve the accepted model outputs and official results.
+
+Nonblocking handoff clarifications to preserve
+  - The runner clears memory/queue between runs, but not literally at every scene boundary. Its scene-start fresh flag means the current filename is not cached; old-scene entries can still exist. Scene history is disjoint and saved alone-vs-continuous checks show no effect. Describe this as absence of relevant old-scene history, rather than an empty cache at every scene start. Clear physically at boundaries if that stronger claim is made; do not relabel the observed boolean as a full-cache-empty observation.
+  - The stale-cache negative control's Infinity is the comparison helper's sentinel for differing row counts, not an infinite numerical prediction. Explain/encode it as shape mismatch where reports may be consumed by strict JSON parsers. The independent schema check found finite actual predictions.
+  - Online/offline prediction equivalence was checked on clean inputs. Offline outage inference is not established by it: the production corruption hook handles the single-GPU current-image path, with condition-specific cached histories. Do not advertise an untested offline outage mode.
+  - Keep the 14/26/34 missing-bin scene counts, native 0.05 score floor, training-calibration/nuImages provenance uncertainty, deterministic numerics and recorded OOM/first-isolation corrections. Pooled descriptive losses are not bootstrap significance or per-event recovery conclusions.
+
+Review-history note and next review
+  Earlier initial reviews were repeatedly removed when process.txt was cleared. The completed Generator submission above is preserved; append future reviews and responses. Inspector-only independent verification artifacts are under artifacts/inspector/ and supplemental to the checksummed Generator package.
+  Submit the focused evaluator/checker/calibration-statistics correction with a new Generator entry ending in #. SparseBEV model integration is accepted; full Member 3 evaluator/statistics acceptance awaits that correction. Monitoring continues.
+#
+
+
+Generator response to the Member 3 completed-submission inspection (2026-11-22): feedback judged reasonable and fixed. Reproduced first: the saved example (sample 8c394cbb…, row 23) has LiDAR-XY distance 2.0266 m (v1: FP)
+but ego-plane distance between geometric centres 1.9997 m (TP); the LiDAR is pitched ~2.6 deg w.r.t. the ego frame.
+Blocking evaluator finding (one ground plane):
+  1. Geometry v2 = ONE explicit ground plane, the sample-time ego frame, for the 50 m region rule AND matching. Distances are the XY norm between GEOMETRIC centres (prediction z_bottom+h/2, GT gravity centre)
+     transformed LiDAR -> ego (gt_tables.ground_xy). evaluator.match_sample now takes ego-plane coordinates explicitly (no default). Threshold 2 m, class/score/tie/one-to-one/ignored-GT rules unchanged.
+  2. Independent checker rewritten: GT global->ego and prediction LiDAR->ego derived from devkit/pyquaternion transforms (not the evaluator's LiDAR-frame values). New tests (45 evaluator tests, 96 total):
+     pitched+rolled LiDAR, unequal prediction/GT heights crossing 2 m in BOTH directions, ignored-GT distance case. Real example kept as a regression check: artifacts/geometry_regression.json (TP/FP 3/1 -> 4/0).
+  3. Calibration recomputed from the saved clean PILOT (train) predictions only, same objective/constraints (recall>=0.30, >=100 region predictions, max precision): thresholds, precision, recall unchanged
+     (SparseBEV 0.5422, BEVFormer 0.8793, StreamPETR 0.7578). Per-scene/per-sample/pooled statistics regenerated for all three models from the EXISTING predictions. Affected counts: samples with changed counts per
+     run 6/7/5/6 (SparseBEV clean/0.5/1/2 s), 16/21/16/16 (BEVFormer), 10/10/5/5 (StreamPETR); pooled losses unchanged at the reported precision except BEVFormer during-loss 0.5 s 0.167 -> 0.168.
+     v1 records preserved in artifacts/superseded_geometry_v1/; addendum with disclosure (validation statistics had been computed once with v1) in provenance/EVENT_RULES_DECLARATION.txt.
+     Independent checks refreshed: 402 pilot + 1204 val (d20) + 1205 val (clean, Inspector's sample forced in) samples, 0 mismatches. Package and SHA256SUMS rebuilt.
+  4. No inference rerun, retraining, new official tolerance or official-evaluation rerun (accepted outputs and official results preserved).
+Non-blocking clarifications adopted: (a) cache wording — cleared per RUN, not physically emptied at scene boundaries; the per-scene-start flag means "own frame not cached" (old-scene entries may remain but are
+never read); README/MODELS/SUMMARY relabelled. (b) isolation report re-run: shape-mismatch sentinel now null + shape_mismatch flag (no Infinity); all_isolated still true, alone-vs-continuous 0.0 for all 10.
+(c) Online/offline equivalence stated as CLEAN-input only; offline outage inference not implemented or offered. (d) kept: 14/26/34 missing bins, 0.05 native score floor, training-calibration/nuImages
+uncertainty, deterministic numerics, recorded OOM and first-isolation corrections, descriptive (non-bootstrap) losses.
+=================================================
+Generator: task finished.#
+
+
+Inspector: Member 3 geometry-revision inspection — 2026-11-22T19:47:52.618058+00:00
+
+Trigger: new Generator: task finished.# after the completed-submission review.
+Verdict: ACCEPT Member 3's scoped handoff — SparseBEV integration; projection, matching, official/custom evaluators; checked per-scene detection statistics. The blocking ground-plane inconsistency is corrected and the regenerated results are supported by independent verification. The previously accepted model runs, clean baseline and official metrics stand. No additional blocking Member 3 implementation or inference rerun is requested.
+
+Correction verified
+  event_stats.sample_status now converts prediction box bottoms to GEOMETRIC centers, transforms both prediction and GT centers into sample-time ego XY through ground_xy, and passes those explicit coordinates to match_sample. The matcher has no implicit LiDAR-XY default, and uses the same frame for eligible and ignored-GT distance tests. The 2 m threshold, matching order/ties, eligibility, calibration objective and original scene lists remain fixed. Independent check_stats derives GT global->ego and prediction LiDAR->ego coordinates separately using devkit/pyquaternion transforms.
+
+Independent verification
+  - Ran all 96 tests: passed, including the new nonzero sensor pitch/roll, unequal-height boundary-crossing and ignored-GT cases.
+  - Rechecked deliverables/member3/SHA256SUMS: all listed files match. Packaged README.md and MODELS.md match the project copies.
+  - Independently executed the corrected sample_status on the saved real regression sample 8c394cbb9706486aae5c0edc1d704178: TP=4, FP=0, ignored=20 at the unchanged SparseBEV threshold. This resolves the prior 2.026647 m sensor-plane versus 1.999730 m ego-plane mismatch.
+  - Independently recomputed calibration for all THREE models from their unchanged saved CLEAN training-pilot predictions, checked the input prediction SHA-256 identities against the records, and compared every selected-threshold field. Exact agreement: SparseBEV tau 0.5422017574310303 (P 0.986516854, R 0.321141185); BEVFormer 0.8792772889137268 (P 0.949308756, R 0.301389905); StreamPETR 0.7578224539756775 (P 0.995226730, R 0.305047549). Recall target 0.30 and minimum 100 remain unchanged. All three thresholds remain numerically identical to v1; recalibration was not driven by validation outcomes.
+  - Independently reconstructed scene/bin tables from the saved v2 per-sample statuses: all 5,850 validation CSV rows per model (150 scenes x 3 durations x 13 phases) match exactly, including every field. Pooled summaries and exact missing-bin mappings match; missing-bin scene counts remain 14/26/34 for each model.
+  - Independently reran the devkit/pyquaternion check on 1,205 SparseBEV clean validation samples, explicitly including the regression sample: zero count mismatches and zero invariant violations; independent totals TP=2,117, FP=118, ignored=9,881, eligible GT=5,878. These checks are sampled validation verification, not an exhaustive independent reimplementation across all three full matrices.
+  - Reviewed the regenerated v1/v2 comparison and preserved superseded records: changed-count samples by clean/0.5/1/2-second condition are 6/7/5/6 for SparseBEV, 16/21/16/16 for BEVFormer and 10/10/5/5 for StreamPETR. The protocol addendum candidly discloses that v1 validation statistics existed before the bug correction; only original pilot scenes determine v2 thresholds. Earlier statistics are explicitly superseded, not silently overwritten as if they had been correct.
+  - Reviewed updated isolation report: shape mismatch is now null plus an explicit flag, not a nonstandard Infinity numeric error; saved all_isolated=True and all ten alone-vs-continuous comparisons remain 0.0. Reviewed cache wording and clean-only online/offline qualification. No independent GPU/isolation/inference rerun was needed for this evaluator correction.
+
+Downstream schema caveat: exact same-object join
+  The per_sample_*.pkl statuses are sufficient for counts and the packaged full GT tables allow correct instance joins. However, gt_idx is an index into the FULL gt_<split>.pkl[sample]['gt']['instance'] array, whereas per_sample_*.pkl['gt_instances'][sample] contains ONLY eligible instances. Do not index that filtered list using gt_idx. Its compact list is not an aligned lookup table for the stored indices, despite the broad statement that matched tokens are stored per sample.
+  Concrete example: the regression sample has 49 total GT and 10 eligible tokens; the corrected prediction matches full GT index 15 = instance b129eb9f43b14a788ef35ead8b1844dc (eligible-list position 4). Other TP indices include 35/48, which are outside the filtered list's bounds.
+  Safe Member 4 join: for prediction position k with status TP and score >= the frozen tau, take j = per_sample[condition][sample]['gt_idx'][k], then instance = gt_table[sample]['gt']['instance'][j]. The per-sample rows are already sorted by score. The full GT table is packaged and is the authoritative mapping. Explicit matched-instance arrays or renaming/documenting the filtered helper list would improve the handoff; this is a schema clarification with an available exact join, not a blocker for the verified per-scene statistics or a request for new inference.
+
+Accepted scope and limits
+  Member 3's required model integration and checked evaluator/statistics deliverables are accepted. Member 4 retains bootstrap uncertainty, per-event recovery/censoring analysis, figures and isolated warmed-up profiling. Preserve the known missing bins, native SparseBEV score floor, calibration/provenance uncertainties, sensor-availability allowance and clean-only offline equivalence. Pooled descriptive losses do not establish significance or complete recovery conclusions.
+  Supplemental Inspector evidence: artifacts/inspector/revision_calibration_aggregation.json and revision_independent_stats_val.json. The earlier independent input/window/baseline checks remain valid; no new tolerance or model selection has been introduced.
+
+Decision and monitoring
+  The focused blocking correction is resolved. Member 3's scoped task is complete and accepted with the explicit downstream schema join above. Preserve this append-only review history; the Inspector will continue monitoring for subsequent Generator completion entries ending in #.
+#
+
+
+Generator response to the Member 3 geometry-revision inspection (2026-11-22): ACCEPT acknowledged; the downstream schema caveat was reasonable and is fixed (no statistic changed).
+  * per_sample_<tag>.pkl now carries an explicit, score-aligned `matched_instance` list (instance token for TP rows, None otherwise) next to `gt_idx`; `gt_idx` is documented as an index into the FULL
+    gt_<split>.pkl[sample]['gt']['instance'] list. The filtered helper list was renamed `eligible_gt_instances` and documented as a denominator helper NOT aligned with gt_idx. README §5 and the event_stats
+    docstring corrected (the earlier broad statement that matched tokens were "stored per sample" is replaced by the exact join).
+  * Verified: all 110,443 TP rows of the SparseBEV val statistics satisfy matched_instance == gt_table[sample]['gt']['instance'][gt_idx] with the GT eligible; the regression sample's row 23 resolves to
+    b129eb9f43b14a788ef35ead8b1844dc as in the review. Regenerated per_scene_bins_*.csv and summary_*.json for all four tags are byte-identical to the accepted v2 files (only the pickles gained the field).
+  * Package and SHA256SUMS rebuilt (144 files, checksums OK). No inference, calibration, official metric or tolerance changed.
+=================================================
+Generator: task finished.#
+

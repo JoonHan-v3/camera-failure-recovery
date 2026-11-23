@@ -1,0 +1,503 @@
+{
+ "n_samples": 80,
+ "duration_s": 0.5,
+ "tensor_shape": [
+  6,
+  3,
+  480,
+  800
+ ],
+ "normalized_black": [
+  -2.1179039478302,
+  -2.0357143878936768,
+  -1.804444432258606
+ ],
+ "corrupted_samples": 2,
+ "corrupted_slot_exact_black": 2,
+ "pad_zero": 2,
+ "other_slots_identical": true,
+ "uncorrupted_frames_identical": true,
+ "frames": [
+  {
+   "sample": "250aacb7cdb0450cbcb08795d4455041",
+   "front_ts_us": 1532707856012404,
+   "offset_from_start_s": -3.0,
+   "black": false
+  },
+  {
+   "sample": "5b02220f89fa4e90964aeda87685c928",
+   "front_ts_us": 1532707856512404,
+   "offset_from_start_s": -2.5,
+   "black": false
+  },
+  {
+   "sample": "3e0b7d91e0d54eb69e8388a57dd1ae95",
+   "front_ts_us": 1532707857012404,
+   "offset_from_start_s": -2.0,
+   "black": false
+  },
+  {
+   "sample": "c8d04816a75f447cb8105b5011ea9b90",
+   "front_ts_us": 1532707857512404,
+   "offset_from_start_s": -1.5,
+   "black": false
+  },
+  {
+   "sample": "e70f7bdf368b4619adf2d8ffb87a95d5",
+   "front_ts_us": 1532707858012404,
+   "offset_from_start_s": -1.0,
+   "black": false
+  },
+  {
+   "sample": "6af5e5ab29f54423b93c46de651af2d1",
+   "front_ts_us": 1532707858512404,
+   "offset_from_start_s": -0.5,
+   "black": false
+  },
+  {
+   "sample": "bb70d36900964018874d5e2229cc38b3",
+   "front_ts_us": 1532707859012404,
+   "offset_from_start_s": 0.0,
+   "black": true
+  },
+  {
+   "sample": "b0f4863874c84ab696396f9c231b2c20",
+   "front_ts_us": 1532707859512404,
+   "offset_from_start_s": 0.5,
+   "black": false
+  },
+  {
+   "sample": "ef2c3b2cd88b4fce888dbb5a79f15e73",
+   "front_ts_us": 1532707860012404,
+   "offset_from_start_s": 1.0,
+   "black": false
+  },
+  {
+   "sample": "ace97ec1e44f4d81ab19fcda0474d197",
+   "front_ts_us": 1532707860512404,
+   "offset_from_start_s": 1.5,
+   "black": false
+  },
+  {
+   "sample": "2fe1e203cf354553b7f10718f4aba693",
+   "front_ts_us": 1532707861012404,
+   "offset_from_start_s": 2.0,
+   "black": false
+  },
+  {
+   "sample": "8276916d23fd46e9b00d323bd5da712e",
+   "front_ts_us": 1532707861512404,
+   "offset_from_start_s": 2.5,
+   "black": false
+  },
+  {
+   "sample": "2662dcaa93884d889c51b8ceb567bbf0",
+   "front_ts_us": 1532707862012404,
+   "offset_from_start_s": 3.0,
+   "black": false
+  },
+  {
+   "sample": "9a55d2f548644e5eb356abc8af9df69f",
+   "front_ts_us": 1532707862512404,
+   "offset_from_start_s": 3.5,
+   "black": false
+  },
+  {
+   "sample": "206d53b3bb774670886749358f89d85d",
+   "front_ts_us": 1532707863012404,
+   "offset_from_start_s": 4.0,
+   "black": false
+  },
+  {
+   "sample": "827af4bcae3a47839e39ee2da53fb008",
+   "front_ts_us": 1532707863512404,
+   "offset_from_start_s": 4.5,
+   "black": false
+  },
+  {
+   "sample": "39b2b27015ed4607969ec08175799ae0",
+   "front_ts_us": 1532707864012404,
+   "offset_from_start_s": 5.0,
+   "black": false
+  },
+  {
+   "sample": "d35eeb6ffde9481ba3c0264152c57f2f",
+   "front_ts_us": 1532707864512404,
+   "offset_from_start_s": 5.5,
+   "black": false
+  },
+  {
+   "sample": "456f513677ee48fa8a7f608c6253b75f",
+   "front_ts_us": 1532707864912404,
+   "offset_from_start_s": 5.9,
+   "black": false
+  },
+  {
+   "sample": "ce60a4df7d4a4202bfe824763c31f6b5",
+   "front_ts_us": 1532707865362404,
+   "offset_from_start_s": 6.35,
+   "black": false
+  },
+  {
+   "sample": "006b5ecd14a24afc8a324a2688d344b7",
+   "front_ts_us": 1532707865912404,
+   "offset_from_start_s": 6.9,
+   "black": false
+  },
+  {
+   "sample": "3c5a998cfe6440ac80a3308009e78eb5",
+   "front_ts_us": 1532707866412404,
+   "offset_from_start_s": 7.4,
+   "black": false
+  },
+  {
+   "sample": "c4e54f5172394e8e88cb051f53308fec",
+   "front_ts_us": 1532707866912404,
+   "offset_from_start_s": 7.9,
+   "black": false
+  },
+  {
+   "sample": "f43d6578cd544edabda974408d59f189",
+   "front_ts_us": 1532707867412404,
+   "offset_from_start_s": 8.4,
+   "black": false
+  },
+  {
+   "sample": "71c026f1aec04d36aaa87a62d2fe5822",
+   "front_ts_us": 1532707867912404,
+   "offset_from_start_s": 8.9,
+   "black": false
+  },
+  {
+   "sample": "c259d50476a741c5929e7bff4493ebe2",
+   "front_ts_us": 1532707868412404,
+   "offset_from_start_s": 9.4,
+   "black": false
+  },
+  {
+   "sample": "b0880ebb70a94a7ca7754b23d76c5f5e",
+   "front_ts_us": 1532707868912404,
+   "offset_from_start_s": 9.9,
+   "black": false
+  },
+  {
+   "sample": "4a60530a3abb46ef8cbe5b0d27140c39",
+   "front_ts_us": 1532707869412404,
+   "offset_from_start_s": 10.4,
+   "black": false
+  },
+  {
+   "sample": "2232917b834b4495af545152416c9c19",
+   "front_ts_us": 1532707869862404,
+   "offset_from_start_s": 10.85,
+   "black": false
+  },
+  {
+   "sample": "186f6fcecc5141f4a6e347f29e214861",
+   "front_ts_us": 1532707870362404,
+   "offset_from_start_s": 11.35,
+   "black": false
+  },
+  {
+   "sample": "004da2e713534836b7fa2a73e5968664",
+   "front_ts_us": 1532707870862404,
+   "offset_from_start_s": 11.85,
+   "black": false
+  },
+  {
+   "sample": "dad1390d7fb144acb91f9a7139814340",
+   "front_ts_us": 1532707871412404,
+   "offset_from_start_s": 12.4,
+   "black": false
+  },
+  {
+   "sample": "a08e44ec649b42c78330944ea861eb8e",
+   "front_ts_us": 1532707871912404,
+   "offset_from_start_s": 12.9,
+   "black": false
+  },
+  {
+   "sample": "e83d5841f31446848e97872ec12a0058",
+   "front_ts_us": 1532707872362404,
+   "offset_from_start_s": 13.35,
+   "black": false
+  },
+  {
+   "sample": "b2c7290bad5e449ab11cc387e24ec94f",
+   "front_ts_us": 1532707872862404,
+   "offset_from_start_s": 13.85,
+   "black": false
+  },
+  {
+   "sample": "3d4db28847974c73aee76aa5eef2bf21",
+   "front_ts_us": 1532707873362404,
+   "offset_from_start_s": 14.35,
+   "black": false
+  },
+  {
+   "sample": "7d52ce10daf24dbf926bab500745638b",
+   "front_ts_us": 1532707873862404,
+   "offset_from_start_s": 14.85,
+   "black": false
+  },
+  {
+   "sample": "586284c4a5c34a6e92052e03326034b2",
+   "front_ts_us": 1532707874362404,
+   "offset_from_start_s": 15.35,
+   "black": false
+  },
+  {
+   "sample": "945d51b7b09c42e09352cd4f7d286b6f",
+   "front_ts_us": 1532707874862404,
+   "offset_from_start_s": 15.85,
+   "black": false
+  },
+  {
+   "sample": "ef6cc000b29a45eb99b422622479be8e",
+   "front_ts_us": 1532707875362404,
+   "offset_from_start_s": 16.35,
+   "black": false
+  },
+  {
+   "sample": "1d2877d86a454cf18d2572319e0090df",
+   "front_ts_us": 1542193521762460,
+   "offset_from_start_s": -3.0,
+   "black": false
+  },
+  {
+   "sample": "44b6e8f3b73e4ca1960562af98d8fa9e",
+   "front_ts_us": 1542193522262462,
+   "offset_from_start_s": -2.499998,
+   "black": false
+  },
+  {
+   "sample": "9879ad67029542d990dc80466f1fa667",
+   "front_ts_us": 1542193522762460,
+   "offset_from_start_s": -2.0,
+   "black": false
+  },
+  {
+   "sample": "5612eaa87cce48a2b8e2f927d1a614c8",
+   "front_ts_us": 1542193523262460,
+   "offset_from_start_s": -1.5,
+   "black": false
+  },
+  {
+   "sample": "6e349f86e1cc4ab3a8e6dd31d24ba2ac",
+   "front_ts_us": 1542193523762460,
+   "offset_from_start_s": -1.0,
+   "black": false
+  },
+  {
+   "sample": "a75e5f7a69694e80a001f518051c3996",
+   "front_ts_us": 1542193524262460,
+   "offset_from_start_s": -0.5,
+   "black": false
+  },
+  {
+   "sample": "2196e127a0ac482f9ad943a0002847de",
+   "front_ts_us": 1542193524762460,
+   "offset_from_start_s": 0.0,
+   "black": true
+  },
+  {
+   "sample": "1f4e844ce1c34c92a5acf788774c6d76",
+   "front_ts_us": 1542193525262460,
+   "offset_from_start_s": 0.5,
+   "black": false
+  },
+  {
+   "sample": "6f409d42e401418a8d031756c756217a",
+   "front_ts_us": 1542193525762460,
+   "offset_from_start_s": 1.0,
+   "black": false
+  },
+  {
+   "sample": "6083a55b86354745b195682bf024da31",
+   "front_ts_us": 1542193526162460,
+   "offset_from_start_s": 1.4,
+   "black": false
+  },
+  {
+   "sample": "aee71b4142214748b30d37a3475ce7c2",
+   "front_ts_us": 1542193526662460,
+   "offset_from_start_s": 1.9,
+   "black": false
+  },
+  {
+   "sample": "b05719d984e64a0386c96673640c2f27",
+   "front_ts_us": 1542193527162460,
+   "offset_from_start_s": 2.4,
+   "black": false
+  },
+  {
+   "sample": "6905e349303044afad168779f82f7e7b",
+   "front_ts_us": 1542193527662460,
+   "offset_from_start_s": 2.9,
+   "black": false
+  },
+  {
+   "sample": "19d2d7b64d294178b63d0725b8c0cfe1",
+   "front_ts_us": 1542193528162460,
+   "offset_from_start_s": 3.4,
+   "black": false
+  },
+  {
+   "sample": "c144652979ed4ccda866356dfff9ccfa",
+   "front_ts_us": 1542193528612460,
+   "offset_from_start_s": 3.85,
+   "black": false
+  },
+  {
+   "sample": "8561e4ec5fc04a10bf90e7393d2a4771",
+   "front_ts_us": 1542193529112460,
+   "offset_from_start_s": 4.35,
+   "black": false
+  },
+  {
+   "sample": "dbd99e0ccc1a4a3ea51963900d223640",
+   "front_ts_us": 1542193529612460,
+   "offset_from_start_s": 4.85,
+   "black": false
+  },
+  {
+   "sample": "13a9f35b7c1a41a29fa8493a820d945e",
+   "front_ts_us": 1542193530162460,
+   "offset_from_start_s": 5.4,
+   "black": false
+  },
+  {
+   "sample": "8213773a2c0b450cb3de7aa64d49d3ad",
+   "front_ts_us": 1542193530612460,
+   "offset_from_start_s": 5.85,
+   "black": false
+  },
+  {
+   "sample": "b4fa881141e941efa80756a3847ae10f",
+   "front_ts_us": 1542193531112460,
+   "offset_from_start_s": 6.35,
+   "black": false
+  },
+  {
+   "sample": "2acb934a77214675b08db999bc20055a",
+   "front_ts_us": 1542193531662460,
+   "offset_from_start_s": 6.9,
+   "black": false
+  },
+  {
+   "sample": "9e15a479edc849d7a3c5461485ffbaf5",
+   "front_ts_us": 1542193532162483,
+   "offset_from_start_s": 7.400023,
+   "black": false
+  },
+  {
+   "sample": "5b6fc35311da4a62a535ff3140f63c94",
+   "front_ts_us": 1542193532662460,
+   "offset_from_start_s": 7.9,
+   "black": false
+  },
+  {
+   "sample": "85c3aa340fa44b7f80934351637cd4a8",
+   "front_ts_us": 1542193533162460,
+   "offset_from_start_s": 8.4,
+   "black": false
+  },
+  {
+   "sample": "eca9bcdc1d354bb1b4d9973d2706e329",
+   "front_ts_us": 1542193533662460,
+   "offset_from_start_s": 8.9,
+   "black": false
+  },
+  {
+   "sample": "ebd7c151e8e44c23a8b53c240f3d161a",
+   "front_ts_us": 1542193534162460,
+   "offset_from_start_s": 9.4,
+   "black": false
+  },
+  {
+   "sample": "8cb0f0df215845a98f432c6198c4bcd4",
+   "front_ts_us": 1542193534662460,
+   "offset_from_start_s": 9.9,
+   "black": false
+  },
+  {
+   "sample": "1f4d065c8a2640f89cef3159438d7f85",
+   "front_ts_us": 1542193535162460,
+   "offset_from_start_s": 10.4,
+   "black": false
+  },
+  {
+   "sample": "4d9b3a6cfd664f3aaa6920e05250bd96",
+   "front_ts_us": 1542193535662460,
+   "offset_from_start_s": 10.9,
+   "black": false
+  },
+  {
+   "sample": "0b66037a385a4c59a7994773abceba01",
+   "front_ts_us": 1542193536112460,
+   "offset_from_start_s": 11.35,
+   "black": false
+  },
+  {
+   "sample": "917ab65ffff94f578337e944ce5a1980",
+   "front_ts_us": 1542193536612460,
+   "offset_from_start_s": 11.85,
+   "black": false
+  },
+  {
+   "sample": "8ef1f7f6c8214d569ea16b5d1b7faea5",
+   "front_ts_us": 1542193537112460,
+   "offset_from_start_s": 12.35,
+   "black": false
+  },
+  {
+   "sample": "72f5871c34554d41a1d3fa01b0cc823f",
+   "front_ts_us": 1542193537612460,
+   "offset_from_start_s": 12.85,
+   "black": false
+  },
+  {
+   "sample": "58272215812145669a40d09decf3db4e",
+   "front_ts_us": 1542193538112460,
+   "offset_from_start_s": 13.35,
+   "black": false
+  },
+  {
+   "sample": "de1830b0ecc94387a4dc24b17553710d",
+   "front_ts_us": 1542193538612460,
+   "offset_from_start_s": 13.85,
+   "black": false
+  },
+  {
+   "sample": "519a6d2b04b74ec19c4e92b08a82e267",
+   "front_ts_us": 1542193539112460,
+   "offset_from_start_s": 14.35,
+   "black": false
+  },
+  {
+   "sample": "19473167fa77471195952ffb57158922",
+   "front_ts_us": 1542193539662460,
+   "offset_from_start_s": 14.9,
+   "black": false
+  },
+  {
+   "sample": "516d9678d6bf49db82f61450cb3795db",
+   "front_ts_us": 1542193540162460,
+   "offset_from_start_s": 15.4,
+   "black": false
+  },
+  {
+   "sample": "760ed404a1e64e34ad61ff317e33e635",
+   "front_ts_us": 1542193540662512,
+   "offset_from_start_s": 15.900052,
+   "black": false
+  },
+  {
+   "sample": "23e1d5e94b2f44b48cc9f8a27e405a15",
+   "front_ts_us": 1542193541162460,
+   "offset_from_start_s": 16.4,
+   "black": false
+  }
+ ],
+ "PASS": true
+}

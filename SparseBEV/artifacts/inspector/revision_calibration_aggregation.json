@@ -1,0 +1,62 @@
+{
+ "sparsebev": {
+  "calibration": {
+   "tau": 0.5422017574310303,
+   "precision": 0.9865168539325843,
+   "recall": 0.32114118507681055,
+   "n_pred": 445,
+   "tp": 439,
+   "fp": 6
+  },
+  "calibration_matches": true,
+  "csv_rows": 5850,
+  "csv_and_summary_match": true,
+  "missing_scene_counts": [
+   14,
+   26,
+   34
+  ]
+ },
+ "bevformer": {
+  "calibration": {
+   "tau": 0.8792772889137268,
+   "precision": 0.9493087557603687,
+   "recall": 0.3013899049012436,
+   "n_pred": 434,
+   "tp": 412,
+   "fp": 22
+  },
+  "calibration_matches": true,
+  "csv_rows": 5850,
+  "csv_and_summary_match": true,
+  "missing_scene_counts": [
+   14,
+   26,
+   34
+  ]
+ },
+ "streampetr": {
+  "calibration": {
+   "tau": 0.7578224539756775,
+   "precision": 0.9952267303102625,
+   "recall": 0.30504754937820044,
+   "n_pred": 419,
+   "tp": 417,
+   "fp": 2
+  },
+  "calibration_matches": true,
+  "csv_rows": 5850,
+  "csv_and_summary_match": true,
+  "missing_scene_counts": [
+   14,
+   26,
+   34
+  ]
+ },
+ "regression_example": {
+  "tp": 4,
+  "fp": 0,
+  "ign": 20,
+  "n_pred_region": 4
+ }
+}

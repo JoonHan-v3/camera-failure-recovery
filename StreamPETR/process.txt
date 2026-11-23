@@ -1,0 +1,552 @@
+Generator: taks finished.#
+
+Inspector: Member 2 inspection — 2026-11-20T19:30:53.831365+00:00
+
+Verdict: NOT COMPLETE. The shared utilities are a useful prototype; they do not yet establish a verified StreamPETR integration or deliver the real-data outage schedule and input audit required by the study plan (pages 2, 4, and 5).
+
+Validation performed
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py' -v: all 15 synthetic tests passed.
+  • Independently reproduced silent image truncation, acceptance of unknown reset state, acceptance of empty/incomplete audits, and an overly permissive numerical comparison.
+  • This directory contains the study PDF, process.txt, and outage utilities; no detector source, configuration, checkpoint, dataset manifest, saved real input audit, or pilot predictions were present. No real-model inference was validated.
+
+Blocking findings
+
+1. StreamPETR integration is explicitly unverified.
+   Files: outage/streampetr_adapter.py; outage/README.md.
+   The adapter assumes timestamp units, offset direction, dictionary keys, and camera ordering without a pinned loader. It is not registered or wired into an actual detector configuration/runner. The docstring suggests ts_from_sensor_us, but that option does not exist. Synthetic fixtures merely reproduce the assumptions.
+   Required: pin the StreamPETR source/config/checkpoint and verify the actual timestamp representation against nuScenes sample_data. Insert corruption after raw decoding for every consumed keyframe/sweep and before any resize, normalization, or feature caching. Provide a runnable integration command and common decoded prediction output. Until dependencies/data are available, label this blocked/unverified rather than finished.
+
+2. State-reset checks cannot verify model state or resets between runs.
+   Files: outage/state.py:SceneStateGuard; outage/streampetr_adapter.py:CorruptFrontCamera.__call__.
+   The adapter supplies no memory observation or reset action. SceneStateGuard accepts memory_len_before=None, so a complete two-scene sequence passes without inspecting model state. A data-pipeline guard cannot by itself establish ordering/state ownership in the inference process or across workers. No reset-between-conditions or cache-isolation implementation exists here.
+   Required: connect checks to the real model's reset lifecycle in the inference process, inspect its effective memory after reset, reject unknown verification status, and explicitly reset state between runs. Account for fixed-size allocated memory rather than assuming allocated length must be zero. Demonstrate A→B scene isolation, fresh-versus-after-A predictions for B, repeated runs, and condition-separated/recomputed feature caches.
+
+3. Input audit can report success with no coverage or missing images.
+   Files: outage/audit.py:InputAudit.verify, prefix_identical.
+   Reproductions: an empty audit returns []; a clean audit containing a prefix image compared to an empty outage audit also returns []. verify() checks self-reported flags/blackness, but cannot detect a non-target camera or clean-prefix image changed while flagged False. prefix_identical indexes only (scene, camera, timestamp), overwrites repeated consumption, and never checks clean-side omissions. No saved metadata binds the audit to the frozen schedule/run.
+   Required: reconcile records against an expected consumed-image manifest; fail missing/extra records and unobserved scenes. Compare paired clean/outage inputs for ALL unaffected images, including other cameras and restored inputs. Use sample identity, source sample_data/path, and history slot where needed to preserve repeated consumption. Save the schedule, run identity, raw sensor timestamps, actual corrupted files, evaluation timestamps, and restoration offsets. Distinguish recorded coverage from independently verified coverage.
+
+4. Adapter silently drops inputs when list lengths disagree.
+   File: outage/streampetr_adapter.py:CorruptFrontCamera.__call__.
+   Reproduction: two images/timestamps plus one filename produces one output image because zip truncates. The image list is replaced while the remaining metadata is left inconsistent.
+   Required: validate equal nonzero lengths, image validity, timestamp units, and camera correspondence before processing; raise a diagnostic error on mismatch. Add a regression test proving no input disappears silently.
+
+5. No frozen real-scene schedule or timing audit has been delivered.
+   Files: outage/schedule.py; outage/audit.py.
+   The synthetic schedule correctly shares a start and uses half-open boundaries, but there is no real timestamp manifest or persisted schedule. Using keyframe index 6 alone does not prove loader-specific history is available without boundary padding. Current keyframe status is inferred by exact sensor/sample timestamp equality; establish it from nuScenes metadata instead. No restoration-to-evaluation offsets or actual 0–4.5 s follow-up observations are recorded.
+   Required: generate one frozen scene schedule from real timestamps shared across all three adapters and durations; validate actual history requirements, padding, causal sweep selection, and availability of the scheduled follow-up bins. Save skipped-scene reasons and verify non-keyframe front images on both outage boundaries. Validate positive durations, nonnegative follow-up/warm-up, and integer timestamp inputs to prevent invalid configurations being accepted.
+
+6. Repeatability helper has an implicit relative tolerance.
+   File: outage/state.py:predictions_equal.
+   Reproduction: values 1000.0 and 1000.001 compare equal with atol=1e-5 because np.allclose retains its default rtol.
+   Required: make rtol explicit (zero for an absolute-only contract), compare sample coverage/shapes/classes as well as numeric values, and define prediction ordering/tie handling. Save real clean-twice pilot predictions and comparison results for approximately ten scenes, as required on plan page 4.
+
+Acceptance evidence for the next review
+  • Regression tests covering the reproduced failures plus actual loader timestamp contracts, asynchronous camera/keyframe metadata, historical sweeps, restoration boundary, and cache/run isolation.
+  • A pinned, runnable StreamPETR adapter and saved frozen schedule/input audit from real data, including both clean and all three outage durations.
+  • Real pilot evidence for repeatability, fresh scene state, unchanged inputs/predictions before outage, and complete consumed-image coverage. Clearly identify unavailable dependencies or data and leave those checks unverified.
+
+Status: synthetic utilities pass their current tests; Member 2's integration and empirical handoff are not yet accepted.
+#
+
+
+Generator: taks finished.#
+
+Inspector: Second inspection — 2026-11-20T19:33:48.488427+00:00
+
+Trigger: new Generator completion entry ending in #.
+Verdict: IMPROVED, BUT NOT COMPLETE. All 26 current unit tests pass. The README now accurately distinguishes synthetic utility coverage from blocked/unverified integration. No real StreamPETR source/config/checkpoint, nuScenes schedule/audit artifacts, or pilot predictions have been added.
+
+Verified improvements
+  • Unequal adapter input lengths raise rather than silently truncating images.
+  • Empty audits and missing paired records are detected; unmodified/source hashes and history-slot keys are available.
+  • Absolute-microsecond mode, metadata-supplied keyframe flags, schedule persistence, explicit comparison rtol, and toy reset/isolation helpers are present.
+  • Unknown memory state is rejected in the model-checking mode; the pipeline explicitly limits itself to ordering checks.
+
+Remaining findings, with independent reproductions
+
+1. HIGH — No check enforces causal consumption.
+   Files: outage/streampetr_adapter.py; outage/audit.py.
+   A clean sample at timestamp 1000 s with an image offset of +10 s is accepted, and audit.verify() returns []. Records do not preserve the evaluation/sample timestamp needed to prove whether each sensor image is causally available. The plan explicitly requires causal inference and consumed-timestamp checks.
+   Required: record the evaluation time and source metadata/history identity for every consumed image, define and test the pinned loader's causal availability policy (including legitimate asynchronous sensor timing), and reject future history under that policy. Do not substitute a generic rule until actual sample/sensor timestamp semantics are verified.
+
+2. HIGH — Persisted verification silently discards manifest reconciliation.
+   File: outage/audit.py:InputAudit.save and verify.
+   Reproduction: verify(expected_manifest=...) identifies a missing CAM_BACK image; the same object's default verify() returns [], which is precisely what save() writes to its violations field. expected_manifest is optional and is neither retained nor persisted; one logged image in a scheduled scene can consequently produce an apparently clean saved report despite incomplete coverage.
+   Required: retain an independently constructed expected manifest and its identity; pass/store coverage requirements when saving. Saved results must distinguish NOT VERIFIED from PASS if coverage reconciliation was not performed. Preserve missing/extra/duplicate details and validate paired-run configuration/schedule compatibility. compare_runs should also reject duplicates directly or incorporate both audits' verification, because constructing dictionaries collapses duplicates.
+
+3. MEDIUM — Explicit stale state can pass the freshness guard.
+   File: outage/state.py:SceneStateGuard.step.
+   Reproduction: step('a', 1, memory_fresh=np.bool_(False)) returns True. The identity test `is False` only recognizes Python's singleton; numpy booleans and other non-True values bypass it. reset_between_runs already uses a stricter contract.
+   Required: accept only an explicitly validated true freshness value for model verification (or normalize supported scalar boolean types and reject invalid types). Add false/true numpy scalar regression cases. Also commit seen/prev state only after validation succeeds: a failed first call currently adds the scene to seen and makes a corrected retry look like interleaving.
+
+4. MEDIUM — Restoration offsets still use camera exposure time rather than evaluation time.
+   File: outage/audit.py:restoration_offsets.
+   The implementation computes offsets from every logged front keyframe sensor timestamp, including any historical keyframe consumed again as a history slot. Those timestamps need not equal the prediction's annotation/sample timestamp, and repeated history does not represent a new evaluation observation.
+   Required: save both sensor timestamps and unique prediction/evaluation timestamps; compute restoration-to-evaluation offsets once per evaluated sample. Test asynchronous front timestamps and repeated historical keyframe consumption. Verify all requested bins through 4.5 s against the actual evaluation frames.
+
+Outstanding acceptance gate
+  The real integration, model-memory/cache lifecycle, loader-specific warm-up/padding, common frozen real-scene schedule, clean + three-duration input audits, common prediction handoff, and approximately ten-scene repeatability/isolation evidence remain unverified. Preserve that explicit status. Synthetic tests and callable toy checks cannot establish those empirical requirements.
+
+Next review: provide regression evidence for the four issues above and concrete real-run artifacts, or document exact missing dependencies and a reproducible integration procedure without claiming the Member 2 handoff is complete.
+#
+
+
+Generator: taks finished.#
+
+Inspector: Third inspection — 2026-11-20T19:35:23.929041+00:00
+
+Trigger: new Generator completion entry ending in #.
+Verdict: synthetic utility revisions validated; complete Member 2 handoff remains NOT ACCEPTED.
+
+Tests: all 33 current unit tests passed using PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py' -v.
+
+Resolved from second inspection
+  • Explicit causal policy and evaluation timestamps are now recorded; future-image and missing-evaluation-time regression checks exist.
+  • Retained manifests feed saved verification; missing policy/manifest yields NOT VERIFIED. Pair comparison now incorporates duplicate checks and model/schedule checks.
+  • NumPy boolean freshness is normalized, invalid types rejected, and guard state commits after successful validation.
+  • Restoration offsets now use unique evaluated samples; missing-bin diagnostics exist.
+
+Remaining concrete issue
+  MEDIUM: InputAudit.status() reports PASS even when no outage or recovery observations were consumed. Independently reproduced with a one-record prefix-only outage audit, a matching one-record manifest, and causal_tolerance_us=0: status() is PASS while missing_bins() lists every bin from 0.0 through 4.5 s. This does not establish the plan's complete-scene input audit or follow-up requirements.
+  Required: separate input-record consistency status from study-protocol readiness, or incorporate required observation/history/scene coverage into the readiness gate. A local record-consistency PASS must never imply a tested complete outage/recovery run. Independently validate the manifest against complete selected scenes; preserve explicit insufficient-follow-up status rather than silently discarding scenes. Add a regression case for a prefix-only run.
+
+Limits and outstanding evidence
+  The code now clearly labels the real integration BLOCKED / UNVERIFIED, which is appropriate. No pinned detector source/config/checkpoint, actual loader integration, independently generated real-scene manifest/frozen schedule, real clean + 0.5/1/2 s input audits, real memory/cache isolation checks, or approximately ten-scene repeatability predictions are present. These were required in the original plan and remain the acceptance gate; passing toy tests does not fulfill them. A finite-window history check is relevant to shared adapters but must not be substituted for StreamPETR's recurrent-memory checks.
+
+Handoff assessment: shared synthetic utilities show substantial progress; real StreamPETR integration and tested real-data deliverables are still unverified. Continue with the explicit blocked status until concrete artifacts are available.
+#
+
+
+Generator: taks finished.#
+
+Inspector: Fourth inspection — 2026-11-20T19:37:11.017600+00:00
+
+Trigger: Generator completion marker #.
+Validation: all 35 current unit tests passed. The prefix-only false-PASS issue is addressed by separate CONSISTENT versus READY statuses, with regression coverage. The README's earlier Round 2 paragraph still says status() returns PASS; update that stale wording to CONSISTENT.
+
+Remaining correctness finding — MEDIUM
+  File: outage/audit.py:missing_bins/readiness.
+  Bin coverage uses independent inclusive ±0.25 s searches, so a single evaluation at 0.25 s satisfies both 0.0 and 0.5 s. Independently reproduced with post-restoration observations at 0.25, 1.25, 2.25, 3.25, and 4.25 s plus one corrupted input: missing_bins() returns an empty mapping and readiness() returns READY despite only five distinct follow-up evaluations for ten scheduled bins.
+  The plan requires the next adjacent scheduled bin to independently confirm recovery; reusing the same observation could falsely confirm it. Required: assign each unique evaluated sample to at most one bin using a documented deterministic tie rule (or require distinct sample identities per scheduled observation), and preserve missing bins. Add the exact midpoint/sparse-observation regression. The downstream evaluator must apply the same convention.
+
+Acceptance boundary
+  Synthetic utility consistency is improving, but actual StreamPETR integration and real-data deliverables remain unverified. No new real detector/config/checkpoint, frozen nuScenes schedule, real consumed-image audits, or approximately ten-scene pilot predictions are present. Maintain the BLOCKED / UNVERIFIED designation; READY from these local helpers is not proof of detector integration, verified causal-policy provenance, complete history/warm-up, or model-state isolation.
+#
+
+Generator: taks finished.#
+
+
+Inspector: Fifth inspection — 2026-11-21T19:15:45.220619+00:00
+
+Trigger: latest Generator completion entry ending in #.
+Verdict: shared synthetic utilities improved; Member 2 handoff remains NOT ACCEPTED.
+
+Validation
+  • Read the study plan, all six implementation modules, README, and test suite.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py' -v: all 36 tests passed.
+  • The previous sparse-midpoint issue is fixed for distinct evaluated samples: a sample is assigned to only one bin. README now correctly uses CONSISTENT.
+
+Remaining correctness finding — MEDIUM: evaluation identity and timestamps are not validated.
+  File: outage/audit.py (verify, eval_samples, missing_bins).
+  Independent reproduction: log one correctly corrupted front image, then two different sample labels at each of five evaluation offsets (0.25, 1.25, 2.25, 3.25, 4.25 seconds). Retain the matching manifest and causal policy. status() returns CONSISTENT, missing_bins() returns an empty mapping, and readiness() returns READY. Thus only five distinct evaluation times can still satisfy all ten bins if sample labels are malformed or duplicated upstream.
+  A second reproduction adds a CAM_BACK record for an existing (scene, sample), with a different eval_ts_us and a distinct slot/camera key. verify() returns no errors; eval_samples() silently overwrites the earlier timestamp. Input-record order can therefore change the reported restoration offset without any diagnostic.
+  Required: validate one immutable evaluation timestamp per (scene, sample), and validate the mapping between sample identity and timestamp against independent sample metadata. Reject conflicting timestamps, missing sample identities, and multiple evaluation identities at the same scene timestamp for this sequential nuScenes protocol. Do not silently overwrite conflicts. Add regression tests for both reproductions and require complete valid records before reporting readiness.
+  Test-quality note: test_sparse_midpoint_bins currently flags post-restoration images as corrupted. Its NOT READY assertion also passes because the records are invalid. Keep its direct missing-bin assertion, but add a valid corrupted input during the outage and valid unchanged follow-up records so readiness failure specifically exercises insufficient distinct observations.
+
+Outstanding acceptance evidence — HIGH
+  This workspace still contains utility code only: no real StreamPETR detector/config/checkpoint, pinned provenance, real nuScenes frozen schedule, saved clean + 0.5/1/2-second audits, or real pilot predictions. The adapter explicitly marks integration BLOCKED / UNVERIFIED. This is accurate, but it does not satisfy the study plan pages 2, 4, and 5.
+  Required handoff: a runnable pinned integration placed before image preprocessing; loader-specific timestamp, sweep, history/padding, and causal-policy validation; real model scene/run reset and condition-cache isolation checks; independently reconciled consumed-input manifests; saved restoration offsets; and approximately ten-scene clean-twice and A→B isolation evidence. Record exact missing dependency/data locations and reproduction commands if blocked. Preserve the unverified status until actual artifacts exist.
+
+Acceptance decision: the Round 4 fix is accepted as a local utility improvement. Complete StreamPETR integration and the tested real-data outage schedule/input audit are not accepted. READY remains a local audit-helper result, not empirical proof of model integration or memory isolation.
+#
+
+Generator: taks finished.#
+
+
+Inspector: Sixth inspection — 2026-11-21T19:19:14.571262+00:00
+
+Trigger: new Generator completion entry ending in # after the fifth inspection.
+Verdict: fifth-inspection utility fixes ACCEPTED; complete Member 2 handoff remains NOT ACCEPTED pending real integration evidence.
+
+Validation performed
+  • Reviewed the revised InputAudit implementation, README, and regression fixtures.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py' -v: all 39 tests passed.
+
+Accepted corrections
+  • verify() now reports conflicting evaluation timestamps for one (scene, sample), multiple sample labels at one scene evaluation timestamp, and missing sample identities when evaluation timestamps are present.
+  • Independent sample metadata can be supplied and is checked against recorded sample identities/timestamps. readiness() requires this metadata and rejects records missing sample identity or evaluation time.
+  • eval_samples() retains the first timestamp rather than replacing it with later records; conflicting input causes failed verification and NOT READY. Offset helpers alone should still be consumed only after successful verification.
+  • The midpoint regression now uses a valid corrupted outage input and valid unchanged follow-up inputs. It confirms record consistency before checking that sparse follow-up is NOT READY specifically because bins are missing.
+  • Regression tests cover the two fifth-inspection reproductions, metadata mismatch, and missing identity. No additional blocking utility defect was established in this review.
+
+Remaining acceptance gate — HIGH, unchanged
+  The study plan requires actual StreamPETR integration plus a tested shared physical outage schedule and input audit (pages 2, 4, and 5). The workspace still provides synthetic utilities, not a verified detector handoff. README correctly preserves BLOCKED / UNVERIFIED.
+  Provide the pinned detector source/config/checkpoint and environment, a runnable corruption integration before preprocessing, actual loader timestamp/sweep/history/padding checks, and a frozen real-scene schedule shared across durations/models. Save clean and 0.5/1/2-second consumed-input audits reconciled against independent manifests, restoration-to-evaluation offsets, and unchanged prefix/other-camera/restored-input comparisons.
+  Connect state/reset checks to the real inference process and model memory; demonstrate scene ordering, scene-boundary and between-run reset, and condition-separated or recomputed feature caches. Save approximately ten-scene clean-twice predictions and A→B isolation results. Synthetic callable tests do not establish these properties.
+
+Reproducibility improvement for the empirical handoff
+  save() writes manifest_id and computed diagnostics but does not preserve the expected manifest or sample metadata/map identity. Retain these independently generated artifacts beside the saved audit with stable identities/hashes so another member can reproduce coverage and sample-time verification. A saved readiness string alone is not sufficient independent evidence.
+
+Decision: the requested fifth-round code corrections are accepted within their synthetic scope. Do not mark Member 2 complete until the real-data schedule, audits, model integration, and reset evidence are available. If unavailable, document exact missing dependencies and commands needed to reproduce the integration rather than claiming completion.
+#
+
+Generator: taks finished.#
+
+
+Inspector: Seventh inspection — 2026-11-21T19:19:54.587424+00:00
+
+Trigger: new Generator completion entry ending in # after the sixth inspection.
+Verdict: synthetic audit persistence improvement ACCEPTED; real Member 2 handoff remains BLOCKED / UNVERIFIED.
+
+Validation
+  • Reviewed artifact_hashes(), save(), the updated test suite, README reproduction notes, and current file inventory.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 40 tests passed.
+  • Saved audits now include the expected manifest, sample metadata, and stable content hashes. This addresses the sixth-inspection reproducibility request for valid scene/sample keys.
+  • README now lists missing dependencies and an unexecuted integration procedure. It correctly distinguishes intended steps from completed empirical checks.
+
+Acceptance boundary
+  No additional blocking defect was established in this revision. The synthetic shared timestamp-corruption/audit utility changes reviewed so far are accepted within their documented scope. Further synthetic polish is not a substitute for the remaining integration work.
+  The current file inventory still contains no pinned StreamPETR detector/config/checkpoint, real nuScenes schedule or consumed-input audit artifacts, or pilot predictions. Therefore the required real StreamPETR integration, real model state/cache reset checks, and tested real-data outage schedule/input audit cannot be accepted.
+
+Required next evidence
+  1. Pinned runnable detector/config/checkpoint/environment and the actual pre-preprocessing corruption hook, with verified loader timestamp and historical sweep semantics.
+  2. Frozen complete-scene schedule, independently generated input manifest/sample metadata, and saved clean plus 0.5/1/2-second audits showing causal consumption, unchanged unaffected images, and restoration observations through 4.5 seconds.
+  3. Real inference-process scene/run reset and feature-cache isolation evidence, plus approximately ten-scene clean-twice predictions and A→B scene-isolation comparisons.
+  If these dependencies remain unavailable, keep the handoff explicitly blocked. Completion markers alone do not demonstrate the missing empirical deliverables.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Eighth inspection — 2026-11-21T20:52:58.736097+00:00
+
+Trigger: new Generator completion entry ending in # after the seventh inspection.
+Verdict: REAL integration and pilot evidence now exist. Timestamp corruption and pilot input audit receive provisional acceptance; full study configuration acceptance remains conditional on the clean-baseline check and timing-policy handoff below. Earlier statements that detector/data/artifacts were absent no longer apply.
+
+Evidence independently checked
+  • Reviewed run_streampetr.py, mm_pipeline.py, nusc_ref.py, verify_runs.py, isolation.py, the attention shim, updated adapter, detector reset implementation, schedules, pilot reports, run metadata, and reproduction scripts.
+  • Ran the project unittest discovery command: all 42 tests passed.
+  • Independently reran python3 -m outage.verify_runs artifacts/runs v1.0-trainval /tmp/inspector-verification-pilot.json pilot_a pilot_b pilot_d05 pilot_d10 pilot_d20. Clean twice matched exactly across 402 samples; all outage audits were CONSISTENT with zero paired-input errors; expected black-image sets matched the raw-table recomputation (11/21/42 images); prefix predictions matched 60/60 in each condition.
+  • Independently decoded 24 pilot_d05 images from disk using OpenCV and the pinned loader's float32 representation: all source hashes and expected post-corruption hashes matched. This is a sampled independent pixel check, not exhaustive coverage of every saved run.
+  • All arrays in the five saved pilot prediction files are finite. Reviewed saved real-model isolation results: ten scenes alone match their continuous-run predictions, fresh B repeats, B-after-A matches fresh B, and leak/interleaving negative controls were rejected. I did not rerun GPU isolation during the active validation job.
+  • The actual pipeline inserts corruption directly after raw image loading. This pinned test loader consumes six current keyframe camera images and no image sweeps; recurrent history resides in the detector head. Shared corruption code still supports independently timestamped sweep images for other adapters.
+
+Findings and required follow-up
+
+1. HIGH — attention replacement has not yet passed the planned clean-baseline gate.
+   The pure-PyTorch attention shim is a disclosed implementation change. Mini-val numbers are debugging evidence and cannot establish equivalence to the released full-validation configuration. A full-val clean process was active at inspection time; do not describe its predictions, official metrics, or the remaining outage matrix as completed.
+   Required: finish and save the full-val clean result, official evaluation, execution settings and environment, and a declared acceptance tolerance/comparison to the released baseline. If differences are material, investigate before freezing the study configuration. This gate concerns eligibility of the modified inference stack; it does not invalidate the pilot corruption checks already reproduced.
+
+2. MEDIUM — repeatability comparator can falsely accept nonfinite predictions.
+   File: outage/verify_runs.py:pred_diff.
+   Independent reproduction: pred_diff({'s': np.array([[np.nan]])}, {'s': np.array([[1.]])}) returns 0.0. Python max retains the previous finite value when compared with NaN. This helper drives both verification and real-model isolation summaries.
+   Required: reject nonfinite arrays explicitly (and validate prediction schema/classes), return an unambiguous failure, and add a regression. Check the aggregate all_isolated flag also requires both negative controls to have been rejected: currently those booleans are reported separately but are omitted from its conjunction. The saved pilot arrays are finite and both saved controls passed, so this finding does not overturn the observed pilot result.
+
+3. MEDIUM — document causal availability and missing-bin semantics precisely.
+   run_streampetr.py derives causal_tolerance_us from the maximum skew in each selected manifest. This establishes consistency with that manifest, not an independently frozen causal availability policy. Pilot camera-minus-evaluation skew measured directly from records ranges from -46078 to +1867 microseconds. README's statement that cameras lead lidar by 33–43 ms is too broad and does not describe these actual records.
+   Required: distinguish annotation/sample time from inference availability time, save the latter or explicitly define synchronized-sample availability, explain the small positive skew, and freeze/identify the policy before validation acceptance. Do not simply raise tolerance in response to unexpected future timestamps.
+   The 0.0-second bin is missing in one pilot scene for 0.5/1-second outages and two for 2 seconds, as correctly reported. Retain these events and missing bins. Agree and document the downstream rule that missing bin 0 breaks that adjacent recovery pair while later valid adjacent pairs can still establish later onset; it must not automatically discard the whole event or imply permanent failure. Do not change the schedule using validation detection outcomes.
+
+4. LOW — make the reproduction handoff executable and failure-sensitive.
+   run_streampetr.py's docstring uses python -I together with PYTHONPATH; isolated mode ignores PYTHONPATH and can prevent importing the local package/shim. Use the tested script invocation or a verified installed-package command. The matrix shell pipeline lacks pipefail and can hide inference failure behind a successful tail; add fail-fast handling and verify expected artifacts before claiming a condition completed. These are handoff reliability issues, not evidence that current saved pilot runs failed.
+
+Decision
+  The previously missing real integration, frozen schedules, real pilot audits, and reset/isolation artifacts have been delivered and materially advance Member 2's task. Accept the reproduced pilot corruption/audit results with their explicit missing-bin limitations. Resolve the comparator and handoff issues and finish the clean-baseline eligibility check before declaring the modified study configuration verified. Completion of all validation outage inference belongs to the broader run matrix and must be reported separately from Member 2's pilot integration evidence.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Ninth inspection — 2026-11-21T21:05:09.877693+00:00
+
+Trigger: new Generator completion entry ending in # after the eighth inspection.
+Verdict: targeted code fixes accepted; real pilot corruption/audit acceptance remains provisional pending the disclosed clean-baseline gate.
+
+Validation
+  • Reviewed revised verify_runs.py, isolation.py, causal-policy constants/runner usage, README, and artifacts/run_matrix.sh.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • pred_diff now rejects nonfinite values, mismatched/non-2D arrays, nonempty arrays with the wrong column count, and fractional labels. The NaN false-zero reproduction is covered by a regression.
+  • all_isolated now requires both negative controls to have been rejected, alongside equality and leak-sensitivity checks.
+  • The new run_matrix.sh uses set -euo pipefail, checks output files, and checks audit_status. The older scripts are accurately retained as historical producers rather than represented as fixed.
+  • Causal tolerance is now a fixed 50000 us constant checked before inference; README records the actual camera/sample timing range and preserves missing-bin events with later adjacent-pair recovery allowed.
+
+Remaining clarification — MEDIUM
+  audit.py and README say inference availability equals lidar sample time while accepting camera exposures as late as sample + 50000 us. Those two statements cannot both describe physical availability. The inequality is a defined alignment allowance, not proof that a later-exposed image existed at lidar time.
+  Required: define evaluation/annotation time as lidar time and input-bundle availability separately, e.g. at least max(lidar time, consumed sensor exposure times), with unmeasured transport/processing delay disclosed. Alternatively define a fixed sample+50ms inference budget. Keep the frozen 50ms alignment bound and logged raw timestamps; do not modify clean/outage pixel assignment. State that the prediction is evaluated against sample-time annotations. This resolves causality wording without requiring image removal or changing the physical outage schedule.
+
+Remaining baseline gate — HIGH
+  Full-validation clean predictions and official metrics for the attention replacement are still not available in artifacts/runs/val_a at inspection time. Keep this gate OPEN; declare the acceptance comparison/tolerance before examining the final result, document any mismatch, and do not claim the modified stack is validated solely from mini/pilot repeatability. The broader validation outage matrix is separate from Member 2's already reproduced pilot integration evidence.
+
+Minor reproduction corrections
+  • run_streampetr.py's example now places a shell # comment before --split and the continued --condition line. That makes the displayed multiline command invalid when copied. Put the explanation on a separate line and keep the runnable invocation uninterrupted.
+  • run_matrix.sh advertises [tag-suffix] but ignores it and writes fixed output paths. Remove that unused argument from the usage text or implement it so reproduction destinations are predictable.
+  • README's STILL UNVERIFIED / OPEN paragraph is stale about the missing-bin rule and second-reader decoding: the rule is now documented and the Inspector independently decoded 24 images in the eighth review. Keep the limitation explicitly sampled.
+
+Decision: accept the reviewed comparator/isolation/fail-fast changes. Preserve provisional pilot acceptance and the incomplete clean-baseline gate. The next substantive acceptance evidence is official full-val clean evaluation plus a coherent statement of sample-time evaluation versus input availability; another completion marker alone does not close that gate.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Tenth inspection — 2026-11-21T21:05:48.242041+00:00
+
+Trigger: new Generator completion entry ending in # after the ninth inspection.
+Verdict: ninth-inspection documentation corrections ACCEPTED. Pilot StreamPETR integration, shared timestamp corruption, real input audit, and reset/isolation evidence retain provisional acceptance; clean-baseline eligibility remains OPEN.
+
+Validation
+  • Reviewed the revised causal-policy documentation/constants, runnable runner example, matrix usage, README status, and declared baseline gate.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • The timing statement now separates sample-time annotation/evaluation from bundle availability and describes the frozen 50 ms bound as an alignment allowance. Unmeasured transport/processing delays are disclosed; no pixel assignment or schedule change was introduced by this clarification.
+  • The runner example is an uninterrupted shell command. Matrix usage now accurately states the fixed output paths. Stale missing-bin and independent-image-check limitations have been corrected.
+  • README declares a full-val clean acceptance gate: absolute NDS and mAP differences each <= 0.010 from released 0.537 / 0.432, with investigation required otherwise. This is a declared project tolerance, not proof of numerical equivalence between attention implementations.
+
+Outstanding evidence
+  artifacts/runs/val_a still has no completed prediction/run/audit artifacts at inspection time. Therefore no official full-val clean score was independently assessed and the attention-shim gate remains OPEN. Preserve this status until the predictions and official metrics are saved; record actual differences and all settings. If the gate fails, investigate before freezing the modified configuration.
+
+Decision
+  No new blocking code defect was established in this revision. The reviewed ninth-round corrections are accepted. The next substantive inspection should assess the completed clean-baseline artifacts against the declared gate. Full validation outage-matrix completion remains a separate orchestration deliverable; missing follow-up bins must remain explicitly represented under the agreed adjacent-pair rule.
+#
+
+
+Generator: taks finished.#
+
+Inspector: Eleventh inspection — 2026-11-21T22:09:08.952568+00:00
+
+Trigger: new Generator completion entry ending in # after the tenth inspection.
+Verdict: clean-baseline gate FAILED; modified StreamPETR configuration NOT ACCEPTED for study results. Earlier pilot corruption/audit/reset evidence remains accepted within its tested scope.
+
+Validation performed
+  • Read updated README investigation status, full-val run metadata, saved official metrics and underlying metrics_summary.json, evaluation conversion code, and the upstream README baseline row.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • Independently loaded val_a predictions and audit and rebuilt the consumed-image manifest from raw nuScenes tables: 150 scenes, 6019 predictions with exact expected sample coverage, 36114 consumed-image records, zero manifest/verification errors, CONSISTENT / READY for this clean audit, and no nonfinite prediction arrays.
+  • Confirmed official metrics_summary.json and metrics.json agree: NDS 0.5085751858, mAP 0.3894301993. The pinned upstream README reports 0.537 / 0.432 for the selected R50 900-query 90-epoch configuration.
+
+Blocking finding — HIGH
+  Against the predeclared absolute tolerance of 0.010 per metric, NDS differs by -0.0284248142 and mAP by -0.0425698007. Both fail. This is a material clean-baseline mismatch, not a missing-evidence issue anymore. README correctly marks FAILED and does not freeze the configuration. A complete input audit and deterministic predictions do not resolve the accuracy mismatch.
+
+Required investigation evidence
+  • Finish the already-started upstream tools/test.py control on the same frozen infos/checkpoint/environment. Record the exact command, output coverage, full configuration and official metrics. Compare decoded per-sample predictions to val_a as well as aggregate scores: agreement localizes the issue away from the custom runner; disagreement localizes a runner/pipeline/state or conversion difference.
+  • Keep separate checks for native box conventions (especially z origin), class order, score/range filtering, camera paths/order, preprocessing, and scene ordering. Compare native predictions and official submission conversion so a postprocessing mismatch is not misattributed to attention.
+  • If upstream and custom runner agree but both miss the released baseline, investigate shim/environment/data parity with a controlled reference. Matching checkpoint keys establishes structural compatibility, not numerical equivalence. The recorded devkit-version and checkpoint-key checks narrow possibilities but do not isolate root cause by themselves.
+  • Preserve the declared tolerance; do not widen it after observing failure. Any replacement configuration or material numerical correction must pass a new clean check before study freeze. Keep existing outage predictions clearly labeled as generated with the unvalidated configuration.
+
+Acceptance boundary
+  Accept the delivered full-val audit and honest failed-gate disclosure. Do not accept the modified detector configuration as verified, and do not attribute the mismatch to a particular component before controlled comparison. This does not invalidate the reproduced timestamp corruption, unchanged prefix-input/prediction checks, or real-model pilot reset/isolation tests. Full-matrix results and any cross-model conclusions remain conditional on resolving model eligibility.
+
+Next review: completed upstream-control comparison and root-cause evidence, or an explicit unresolved status with the failing artifacts retained. No further synthetic utility polish is required by this inspection.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Twelfth inspection — 2026-11-21T22:24:48.339854+00:00
+
+Trigger: new Generator completion entry ending in # after the eleventh inspection.
+Verdict: upstream-runner comparison ACCEPTED; clean-baseline mismatch remains UNRESOLVED and study configuration remains NOT ACCEPTED.
+
+Validation
+  • Reviewed README investigation updates, upstream comparison report/log, released training log/config artifacts, TF32/shim-mode controls, and run metadata additions.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • Independently loaded both full official submissions (val_a and the upstream results_file identified in artifacts/ref_test/comparison.json). Sample sets matched; all 6019 per-sample result lists were exactly equal as parsed JSON, covering 1148071 boxes. This comparison includes every field in those lists, not merely translation/size/score.
+  • Confirmed the released training log records NDS 0.5369 / mAP 0.4323, consistent with the rounded README target. Rounding cannot explain the observed 0.508575 / 0.389430 result.
+  • Reviewed --no-tf32: it disables both CUDA matmul and cuDNN TF32 before model construction. Future run.json records both flags and GPU identity. No completed val_notf32 metrics were available at inspection time.
+
+What the control establishes
+  The custom runner produces the same official submissions as the upstream path under the same checkpoint, infos, environment, and attention shim. This strongly rules out a custom-runner-only discrepancy in the compared outputs. It does NOT establish parity of components shared by both paths with the authors' released run: shared preprocessing/data, numerical kernels, configuration, or official conversion assumptions can still contribute. Revise README's broad statement that camera paths/preprocessing/etc. are NOT the cause to this narrower supported conclusion.
+  Likewise, do not assert that multi-GPU scene slicing cannot explain a higher published metric without a controlled check; the direction of a metric change is not guaranteed merely from the slicing mechanism. This is an investigation hypothesis, not established exclusion.
+
+Required next evidence
+  • Complete and score the controlled val_notf32 run against the unchanged declared gate. TF32 sensitivity on pilot predictions supports testing the hypothesis; it does not by itself identify the source of the accuracy deficit.
+  • If the gate passes, retain the failed artifacts and report the measured correction explicitly. Freeze the accepted numerical settings, rerun clean-twice/state-isolation checks under those settings, and regenerate paired clean/outage runs with identical settings before study use. Previously verified pixel-assignment/audit logic does not require reinvention.
+  • If the gate fails, retain unresolved status and continue controlled shared-stack comparisons; do not infer FlashAttention equivalence from fp16-vs-fp32 shim agreement. Both modes are replacements, not the released kernel.
+  • Record FLASH_SHIM_MODE (now environment-controlled), shim source identity/hash, and TF32 flags with each numerical experiment so its settings are independently reproducible. A command with <config>/<ckpt> placeholders is explanatory, not the exact invocation; preserve the resolved upstream command and environment.
+
+Decision
+  Accept the upstream comparison as concrete progress and preserve the earlier pilot corruption/reset findings. The model eligibility gate remains FAILED until a corrected, fully scored clean run meets the existing acceptance rule. No new corruption-code change is requested by this review. Continue to label legacy TF32-on prediction artifacts unvalidated for study accuracy.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Thirteenth inspection — 2026-11-21T22:25:26.841160+00:00
+
+Trigger: new Generator completion entry ending in # after the twelfth inspection.
+Verdict: requested investigation wording and future-run provenance improvements ACCEPTED. Baseline mismatch remains unresolved; configuration NOT ACCEPTED for study accuracy.
+
+Validation
+  • Reviewed revised README conclusions, resolved upstream command artifact, val_notf32 settings note, and run_streampetr.py provenance fields.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • README now correctly limits the upstream equality result to custom-runner-only differences and leaves shared-stack parity unproven. Multi-GPU slicing and TF32 are explicitly hypotheses rather than established explanations.
+  • Future run.json includes shim mode, shim implementation SHA256, argv, GPU, and both TF32 flags. The active val_notf32 experiment has a separate settings note because it started before the logging change. Keep that note identified as supplemental provenance, not a retroactive contemporaneous run record.
+  • No completed val_notf32 predictions or official metrics were available in its output directory during this review.
+
+Outstanding gate and next evidence
+  The failed 0.508575 NDS / 0.389430 mAP baseline and the unchanged 0.010 tolerance remain the operative gate. Documentation corrections do not change that result. Complete the controlled TF32-off run and official scoring; preserve the exact settings and compare against the same released target. If successful, repeat clean-twice/isolation checks and generate paired runs under the accepted settings before using them in the study. If unsuccessful, retain explicit unresolved status and continue controlled shared-stack investigation.
+
+Decision: no additional corruption-code changes are requested. Accept these narrowly scoped corrections; continue monitoring for substantive baseline evidence. Prior accepted pilot timestamp/audit/reset observations remain distinct from the unvalidated detector-accuracy configuration.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Fourteenth inspection — 2026-11-21T23:16:45.418446+00:00
+
+Trigger: new Generator completion entry ending in # after the thirteenth inspection.
+Verdict: TF32-off experiment and explicit unresolved status ACCEPTED as investigation evidence; clean-baseline eligibility gate still FAILED. Member 2's reproduced corruption/audit/reset deliverables remain accepted within their tested scope, while the modified detector's study accuracy remains unvalidated.
+
+Validation
+  • Reviewed README investigation updates and completed val_notf32 run/audit/prediction/official-evaluation artifacts.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • Independently read the official metrics_summary.json: NDS 0.5077859073491505; mAP 0.387413778158795. Differences from the declared 0.537 / 0.432 target are -0.0292140927 / -0.0445862218, both outside 0.010 tolerance.
+  • Independently reconciled the saved audit against a fresh raw-nuScenes-table manifest: 150 scenes, exact expected coverage of 6019 prediction samples, zero manifest/verification errors, and no nonfinite prediction arrays.
+  • run.json records tf32_matmul=False and tf32_cudnn=False. Shim mode/hash/argv were not recorded in this older run; the supplemental settings note remains the provenance limitation already disclosed, not a missing-field regression in the newer logger.
+
+Interpretation
+  Disabling TF32 alone did not recover the released accuracy under this shared stack. Relative to val_a, NDS changed by approximately -0.000789 and mAP by -0.002016. Say this directly rather than claiming TF32 has no possible causal contribution or interaction. The README's rounded statement that the change is <=0.002 is slightly inaccurate for mAP; use approximately 0.002 or the actual differences.
+  The failed gate remains an accuracy/configuration eligibility issue, not evidence of missing consumed-input coverage. The completed official results support preserving unresolved status and retaining both failed conditions.
+
+Remaining evidence limitations
+  • README describes a random-input FlashMHA comparison and exhaustive image-decode checks, but this review found no standalone named scripts/reports for those controls in the handoff. Save reproducible commands/scripts, seeds, per-layer absolute/relative errors and pass criteria, and decode inventory/counts before treating those claims as independently checked. These additional controls were not rerun by the Inspector.
+  • Random-input agreement within a stated absolute error supports a limited implementation check; it does not establish equivalence to the released FlashAttention kernel or explain the model-level baseline gap.
+  • A gap at multiple official distance thresholds does not by itself prove localization is not involved. Describe the per-threshold deficit as observed and keep detection/confidence/localization explanations tentative until an isolating diagnostic exists.
+
+Decision and next handoff
+  Preserve the unchanged baseline gate and the UNVALIDATED labels on study prediction artifacts; do not relax tolerance after failure. The twelfth review explicitly allowed an unresolved status with failed artifacts retained, and that has now been delivered. No additional corruption utility changes are required by this inspection. If model eligibility investigation continues, next provide an independently reproducible shared-stack or reference-kernel comparison, or a predeclared replacement configuration with its own verified clean baseline. Keep broader experiment-matrix execution distinct from Member 2's accepted pilot integration/audit/reset evidence.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Fifteenth inspection — 2026-11-21T23:18:02.496916+00:00
+
+Trigger: new Generator completion entry ending in # after the fourteenth inspection.
+Verdict: requested control scripts/reports and wording corrections ACCEPTED within their stated limited scope. No change to the failed clean-baseline gate or prior pilot utility acceptance.
+
+Validation
+  • Reviewed outage/controls/shim_fidelity.py and decode_inventory.py, their saved JSON reports, and README revisions.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • The fidelity report provides seed 0, six per-layer errors/scales, declared numeric thresholds, shim SHA256, torch/GPU, and checkpoint path. Its reported maximum absolute error is 0.0216273 and maximum error relative to output scale is 0.00418863, both inside its declared limited-test criteria.
+  • Decode inventory reports 6019 samples, 36114 images, exactly 6019 per camera, all shapes (900,1600,3), and zero decode/shape failures, with OpenCV version and byte-size summary. This is a decode inventory, not an exhaustive comparison of saved pipeline hashes or dataset identity to the authors' private loader.
+  • I inspected the scripts and reports; I did not rerun these two additional controls in this review. Earlier independent sampled decoding and full submission/manifest checks remain as previously recorded.
+  • README now states the TF32 result as failure of disabling TF32 alone to recover accuracy and leaves detection/confidence/localization explanations unproven.
+
+Limits retained
+  The attention comparison tests trained FlashMHA weights on synthetic inputs against a PyTorch implementation. It does not test the released FlashAttention kernel or prove clean model parity. The complete clean validation score still misses the unchanged 0.010 NDS/mAP gate under both tested TF32 settings. Neither newly supplied report changes that observation.
+
+Decision
+  Accept the fourteenth-round reproducibility corrections. No new blocking corruption, input-audit, or state-reset defect was established. Member 2's tested pilot integration/schedule/audit/reset evidence remains accepted in that scope; detector eligibility for study accuracy remains UNRESOLVED / NOT ACCEPTED, with failed artifacts correctly retained. No further utility-code changes are requested. Future substantive baseline acceptance requires a corrected/reference configuration with a scored clean result meeting the declared gate; preserve separation from broader matrix execution and downstream recovery analysis.
+#
+
+Generator: taks finished.#
+
+Inspector: Sixteenth inspection — 2026-11-22T02:07:13.904774+00:00
+
+Trigger: new Generator completion entry ending in # after the fifteenth inspection.
+Verdict: acceptance status UNCHANGED. Tested pilot timestamp-corruption, schedule/input-audit, and state-reset evidence remain accepted in their documented scope; modified detector accuracy remains UNRESOLVED / NOT ACCEPTED for study results.
+
+Validation
+  • Reviewed the current README baseline/investigation/status sections and available baseline/control artifact paths.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • No newly scored corrected/reference configuration or substantive new baseline evidence was identified in this completion. The reported TF32-on and TF32-off full-val scores are the same failed conditions independently checked in the eleventh/fourteenth inspections.
+  • Current documentation continues to disclose kernel-equivalence limits, sampled independent pixel checks, retained missing follow-up bins, and the unresolved cause of the accuracy gap. No new blocking utility defect was established.
+
+Decision
+  A new completion marker does not close the failed gate. Preserve the existing 0.010 NDS/mAP tolerance and failed artifacts; do not use the modified detector's accuracy results as a verified released-system baseline until a scored correction/reference passes the agreed criterion. No additional corruption/audit/reset code changes or repeated synthetic testing are requested absent a substantive revision. The next useful review artifact is new controlled baseline evidence; until then, maintain the accepted pilot-versus-unvalidated-accuracy distinction already documented.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Seventeenth inspection — 2026-11-22T03:12:54.544091+00:00
+
+Trigger: new Generator completion entry ending in # after the sixteenth inspection.
+Verdict: REAL-FlashAttention clean-baseline gate PASSED and ACCEPTED. Complete Member 2 model-dependent handoff awaits regenerated pilot repeatability/isolation and paired outage evidence under the accepted numerical configuration.
+
+Independent validation
+  • Reviewed the new full-val artifacts, real-kernel build log, runner provenance changes, frozen-settings matrix script, and README disclosures.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • Read the official val_realflash metrics_summary.json: NDS 0.5370423975234109, mAP 0.43323639360322763. Differences from the unchanged 0.537 / 0.432 targets are +0.0000423975 / +0.0012363936, both within 0.010. This closes the previously failed clean-baseline eligibility gate for this configuration only.
+  • Independently rebuilt the raw-nuScenes manifest: 150 scenes, 6019 expected predictions with exact sample coverage, zero consumed-input verification/manifest errors, and no nonfinite prediction arrays.
+  • Confirmed run.json records the site-packages flash_attn module in streampetr_fa and both TF32 flags False. Independently imported torch then flash_attn/flash_attn_cuda in that environment: installed distribution version 0.2.2, compiled extension present. Extension SHA256: 46a7049f3e62136b031134ab75b7310c65debe0c64bac12167d1748b1b225d0b.
+  • Build log records successful wheel build/install; the toolchain/minor-version-check modification is disclosed. No GPU pilot/isolation jobs were rerun by the Inspector during this review.
+
+Accepted scope
+  Accept the real-kernel, TF32-disabled, config-fp16 clean validation result against the predeclared gate. Retain the failed shim artifacts as diagnostics; do not mix their predictions with real-kernel runs. The prior synthetic corruption/audit/state-guard tests and sampled pixel-assignment check remain valid evidence for those utilities.
+
+Remaining Member 2 handoff evidence
+  • Finish the approximately ten-scene real-kernel pilot clean twice plus 0.5/1/2-second runs. Reconcile audits with independently generated manifests/raw-table black sets; show unchanged prefix predictions, all unaffected cameras/inputs, complete expected prediction coverage, and saved restoration offsets/missing bins.
+  • Run the real model state/isolation suite under the same accepted environment/kernel/TF32 settings, including fresh-B repeats, B-after-A equality, per-scene fresh starts, and both effective negative controls. Prior shim-only equality results cannot establish numerical repeatability of the newly accepted configuration.
+  • Keep the documented missing-bin rule and condition-separated/recomputed caches. A successful clean baseline alone does not establish paired-run corruption/reset correctness for the new stack.
+
+Provenance handoff improvement
+  run.json's flash_attn.version is null despite an installed 0.2.2 distribution, and shim mode/hash fields remain populated even when the shim is unused. Record the installed distribution version and loaded CUDA-extension hash (above) or installed wheel identity; mark shim-specific fields unused for real-kernel runs. Retain the exact build command/patch and environment package export so another member can reproduce the disclosed toolchain adjustment. These clarify reproducibility; they do not overturn the independently confirmed baseline pass.
+
+Decision
+  The long-standing clean-baseline gate is now CLOSED AS PASSED for the real-kernel configuration. No further baseline matching is requested absent a material configuration change. Next review should assess the regenerated pilot pair/reset evidence. Full 150-scene outage-matrix completion and downstream recovery statistics remain separate orchestration/evaluation work, not additional baseline gates.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Eighteenth inspection — 2026-11-22T03:14:22.936561+00:00
+
+Trigger: new Generator completion entry ending in # after the seventeenth inspection.
+Verdict: provenance improvements ACCEPTED; real-kernel clean-baseline pass remains accepted. Regenerated model-dependent pilot pair/reset evidence remains pending.
+
+Validation
+  • Reviewed _flash_info(), conditional shim fields, README correction, PROVENANCE.txt, environment exports and build source.
+  • Executed _flash_info() in streampetr_fa with PYTHONPATH=streampetr_src:.: it reports REAL flash-attn, distribution version 0.2.2, the loaded CUDA extension, and SHA256 46a7049f3e62136b031134ab75b7310c65debe0c64bac12167d1748b1b225d0b, matching the independent seventeenth-inspection hash.
+  • Confirmed the flash-attention source commit is d95ee1a95da2b138073b5eef0f09ce4de615ba5e and git diff has no tracked modifications. setup_py.patch is empty. The CUDA-version-check function remains defined in setup.py; the build passed without the previously claimed patch.
+  • Correct the historical seventeenth-inspection wording accordingly: it repeated the submission's then-reported minor-version-check modification, which the current clean source/empty patch do not substantiate. The actual nvcc 11.8 / torch cu111 toolchain combination remains disclosed; baseline pass is unaffected.
+  • Future real-kernel run records mark shim fields unused and include distribution/extension identity. Already-started runs retain older fields and have supplemental provenance explicitly identified as such.
+  • Did not rerun the complete unittest suite for logging/documentation-only changes; the last full run passed 44 tests in the seventeenth inspection. Direct helper execution validates the changed provenance path.
+
+Outstanding handoff
+  The current handoff still says the real-kernel clean-twice, paired 0.5/1/2-second pilot audits/prefix checks, and state/isolation evidence are being regenerated. Do not mark those complete from the accepted clean baseline or legacy shim runs. Submit the completed rf pilot artifacts and real-kernel isolation report with the frozen numerical settings. Preserve missing follow-up bins under the already agreed rule.
+
+Decision: accept these requested provenance corrections. No additional baseline gate or corruption-utility change is introduced. The seventeenth-inspection clean-baseline acceptance stands; final Member 2 model-dependent handoff acceptance awaits the listed pilot pair/reset results.
+#
+
+
+Generator: taks finished.#
+
+
+Inspector: Nineteenth inspection — 2026-11-22T03:40:41.551296+00:00
+
+Trigger: new Generator completion entry ending in # after the eighteenth inspection.
+Verdict: ACCEPT Member 2's scoped integration/pilot handoff — StreamPETR integration, shared timestamp corruption, tested schedule/input audit, and state-reset/isolation checks — under the frozen real-FlashAttention configuration and documented follow-up limitations. This is not a claim that the full study matrix or downstream recovery analysis is complete.
+
+Independent validation
+  • Reviewed the regenerated rf_pilot clean/outage run metadata, saved audits/predictions, verification report, isolation report/log and real-model isolation code.
+  • Ran PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s . -t . -p 'test_*.py': all 44 tests passed.
+  • Independently reran python3 -m outage.verify_runs artifacts/runs v1.0-trainval /tmp/inspector-verification-pilot-rf.json rf_pilot_a rf_pilot_b rf_pilot_d05 rf_pilot_d10 rf_pilot_d20.
+  • Clean twice: exact equality over 402 samples, both audits CONSISTENT, zero paired-input errors.
+  • Outages 0.5/1/2 seconds: every audit CONSISTENT; zero paired-input errors; expected black sets recomputed from raw nuScenes tables match logged sets (11/21/42 front images). Other cameras corrupted: zero. Prefix predictions match clean 60/60 for every condition; all 342 post-start samples differ from clean in each outage run.
+  • Independently checked each of the five prediction files: 402 samples and finite arrays; metadata identifies REAL flash-attn with both TF32 flags False. The accepted full-val clean baseline remains NDS 0.5370424 / mAP 0.4332364, within the unchanged tolerance.
+  • Independently decoded 24 rf_pilot_d05 inputs, including every flagged black image and sampled other inputs, using OpenCV and the loader's float32 representation: zero source-hash or expected post-corruption-hash mismatches. This remains a sampled pixel check, not exhaustive independent re-decoding of all runs.
+
+State/reset evidence assessed
+  artifacts/isolation_pilot_rf.json records the real-kernel module path and TF32 False. All ten scenes run alone match their continuous-run predictions exactly, with fresh model memory observed at scene starts; fresh B repeats and B-after-A comparisons have zero difference. Forced leak changes unguarded predictions (max difference 102.3984375), the guard rejects the leak, and interleaving is rejected; all_isolated=True. Reviewed code explicitly disables both TF32 flags before model construction and requires both controls in the aggregate result. These are saved real-model results reviewed by the Inspector; GPU isolation was not independently rerun in this review.
+
+Known limitations to preserve in the handoff
+  • Missing 0.0-second follow-up bins affect 1/1/2 pilot scenes for 0.5/1/2-second outages. The NOT READY summaries correctly retain this limitation rather than hiding scenes or inventing observations. Accept the tested schedule/audit with these explicit gaps; the downstream evaluator must break affected adjacent recovery pairs while allowing later valid pairs. Do not relabel every event READY or permanently failed.
+  • The 50 ms bound is the frozen sample-alignment allowance, not zero-latency sensor availability. Annotation/evaluation time and bundle availability remain distinct; transport/processing latency is unmeasured.
+  • Legacy shim predictions remain diagnostic and must not be paired with accepted real-kernel predictions. Kernel-discrepancy root cause remains unexplained but is no longer an eligibility blocker for the accepted real-kernel stack.
+
+Handoff decision
+  The required Member 2 pilot integration, tested physical outage scheduling/corruption, input audit, and real state-reset/isolation evidence are now sufficient within the stated scope. No additional blocking defect or Member 2 utility-code change is requested. Preserve pinned source/config/checkpoint, frozen real-kernel/TF32/fp16 settings, independent manifests, audit/offset reports, and reproducible runner commands for the other members.
+  Full 150-scene outage regeneration, final per-condition metrics and recovery statistics remain broader orchestration/evaluation deliverables. Review their actual artifacts when complete; do not claim them complete from this pilot acceptance.
+
+Generator: taks finished.#
+Generator: taks finished.#
+

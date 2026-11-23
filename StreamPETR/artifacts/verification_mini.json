@@ -1,0 +1,135 @@
+{
+ "version": "v1.0-mini",
+ "runs": [
+  "mini_a",
+  "mini_b",
+  "mini_d05",
+  "mini_d10",
+  "mini_d20"
+ ],
+ "causal_policy": "synchronized-sample availability: image sensor ts <= sample (lidar keyframe) ts + 50000 us; observed trainval max skew +49992 us",
+ "max_cam_minus_eval_skew_us": 1204,
+ "min_cam_minus_eval_skew_us": -48349,
+ "clean_twice_max_abs_diff": 0.0,
+ "clean_twice_identical_samples": 404,
+ "clean_audit_a": "CONSISTENT",
+ "clean_audit_b": "CONSISTENT",
+ "clean_a_vs_b_input_errors": 0,
+ "conditions": {
+  "mini_d05": {
+   "duration_s": 0.5,
+   "status": "CONSISTENT",
+   "readiness": "READY",
+   "paired_input_errors": [],
+   "n_paired_errors": 0,
+   "black_inputs_expected_vs_logged_equal": true,
+   "n_black_images": 10,
+   "black_images_per_scene_min_max": [
+    1,
+    1
+   ],
+   "all_black_pixels_verified": true,
+   "other_cameras_corrupted": 0,
+   "prefix_samples": 60,
+   "prefix_predictions_identical": 60,
+   "post_start_samples": 344,
+   "post_start_predictions_changed": 307,
+   "missing_follow_up_bins": {},
+   "restoration_offsets_s_example": {
+    "cc8c0bf57f984915a77078b10eb33198": [
+     0.086,
+     0.585,
+     1.085,
+     1.535,
+     2.034,
+     2.534,
+     3.034,
+     3.584,
+     4.085,
+     4.585,
+     5.087,
+     5.587
+    ]
+   }
+  },
+  "mini_d10": {
+   "duration_s": 1.0,
+   "status": "CONSISTENT",
+   "readiness": "READY",
+   "paired_input_errors": [],
+   "n_paired_errors": 0,
+   "black_inputs_expected_vs_logged_equal": true,
+   "n_black_images": 20,
+   "black_images_per_scene_min_max": [
+    2,
+    2
+   ],
+   "all_black_pixels_verified": true,
+   "other_cameras_corrupted": 0,
+   "prefix_samples": 60,
+   "prefix_predictions_identical": 60,
+   "post_start_samples": 344,
+   "post_start_predictions_changed": 308,
+   "missing_follow_up_bins": {},
+   "restoration_offsets_s_example": {
+    "cc8c0bf57f984915a77078b10eb33198": [
+     0.085,
+     0.585,
+     1.035,
+     1.534,
+     2.034,
+     2.534,
+     3.084,
+     3.585,
+     4.085,
+     4.587,
+     5.087,
+     5.586
+    ]
+   }
+  },
+  "mini_d20": {
+   "duration_s": 2.0,
+   "status": "CONSISTENT",
+   "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+   "paired_input_errors": [],
+   "n_paired_errors": 0,
+   "black_inputs_expected_vs_logged_equal": true,
+   "n_black_images": 42,
+   "black_images_per_scene_min_max": [
+    4,
+    5
+   ],
+   "all_black_pixels_verified": true,
+   "other_cameras_corrupted": 0,
+   "prefix_samples": 60,
+   "prefix_predictions_identical": 60,
+   "post_start_samples": 344,
+   "post_start_predictions_changed": 308,
+   "missing_follow_up_bins": {
+    "bebf5f5b2a674631ab5c88fd1aa9e87a": [
+     0.0
+    ],
+    "e233467e827140efa4b42d2b4c435855": [
+     0.0
+    ]
+   },
+   "restoration_offsets_s_example": {
+    "cc8c0bf57f984915a77078b10eb33198": [
+     0.035,
+     0.534,
+     1.034,
+     1.534,
+     2.084,
+     2.585,
+     3.085,
+     3.587,
+     4.087,
+     4.586,
+     5.086,
+     5.585
+    ]
+   }
+  }
+ }
+}

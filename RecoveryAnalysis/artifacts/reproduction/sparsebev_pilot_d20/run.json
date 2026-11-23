@@ -1,0 +1,127 @@
+{
+ "condition": "2",
+ "scenes": [
+  "129304d659464b0fb3a51c99eaec114a",
+  "3032b651c72e4b5c86d4dea1b4930689",
+  "5c9bd7ead37e4aa9989f7909f3a78baa",
+  "69ee276c40644ddbb7fe21c613cd7689",
+  "73030fb67d3c46cfb5e590168088ae39",
+  "7809330e0345423ab6212787edf3561b",
+  "a6fae4900f8e46cba689b59b5bc8a2ab",
+  "bd916d78cb3149999182fb3ce4eb8a8d",
+  "deab903b0b644d7a984c552968026631",
+  "f55c8c62235146d895f611176fd0a5dc"
+ ],
+ "n_samples": 402,
+ "runtime_s": 172.80163288116455,
+ "latency_median_s": 0.42624521255493164,
+ "peak_gpu_mb": 2652.62939453125,
+ "audit_status": "CONSISTENT",
+ "readiness": "NOT READY: follow-up bins missing in 2 scenes",
+ "violations": [],
+ "causal_tolerance_us": 50000,
+ "causal_policy": "alignment allowance: image sensor ts <= sample (lidar keyframe) ts + 50000 us (fixed sample+50ms inference budget; bundle availability >= max(sample time, latest exposure), delay unmeasured); eval time = sample time; observed trainval max skew +49992 us",
+ "manifest_max_skew_us": 1867,
+ "model_state_fresh_at_scene_starts": [
+  [
+   "73030fb67d3c46cfb5e590168088ae39",
+   true
+  ],
+  [
+   "129304d659464b0fb3a51c99eaec114a",
+   true
+  ],
+  [
+   "5c9bd7ead37e4aa9989f7909f3a78baa",
+   true
+  ],
+  [
+   "7809330e0345423ab6212787edf3561b",
+   true
+  ],
+  [
+   "69ee276c40644ddbb7fe21c613cd7689",
+   true
+  ],
+  [
+   "deab903b0b644d7a984c552968026631",
+   true
+  ],
+  [
+   "a6fae4900f8e46cba689b59b5bc8a2ab",
+   true
+  ],
+  [
+   "f55c8c62235146d895f611176fd0a5dc",
+   true
+  ],
+  [
+   "bd916d78cb3149999182fb3ce4eb8a8d",
+   true
+  ],
+  [
+   "3032b651c72e4b5c86d4dea1b4930689",
+   true
+  ]
+ ],
+ "never_cached_before_own_frame": true,
+ "history_served_from_cache_after_first_frame": true,
+ "max_cache_size_before": 7,
+ "sparsebev_commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+ "mmdet3d_commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876",
+ "ckpt_sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+ "infos_sha256": "13905423b5d5a40d3f8bc0e0a5ab1e759bd8d6d8a9149471f1f1df6079a97a07",
+ "config": "sparsebev_src/configs/r50_nuimg_704x256.py",
+ "config_sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8",
+ "outage_code_sha256": {
+  "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "adapter.py": "7208d4e07ec512ca9b959ac3c2562caf408139b226e088363e6f59674bf271a3",
+  "audit.py": "8bdd25c7311fac431445fdf7252cba01bfe5023846ccc4d3ea4fc30e6a2c7b27",
+  "backbone_hook_probe.py": "156d45283b2ace19a6adac8ca1303335e315940c4340e468589b24784bf2a7de",
+  "build_infos.py": "dcb4bff0d4301546f5b3ccdcc7f9f102cc68496b439f1abc68eca1bfe6418566",
+  "calibrate.py": "c51742c05eace7ecafd7f43966b52816a660ba88d3b24a1e9367ab3f02c2dd16",
+  "check_projection_devkit.py": "ea3820d36b2bdb84974a6d93c01da500472608837990897efeac062eadbd5c44",
+  "check_stats.py": "0f403fee3dcc42b280bd618219d5943aec90d0bea92e3358407d332d39067e9c",
+  "collect_deliverables.py": "6d042dc1138cdd463cb60a6ffed737c569c7482aa1db21e6e0c6aa4684249513",
+  "compat.py": "b0c16f0e348f19669bbca0fe55d1baa2ad76cf529a76aeb02de2e5f16ce65c7b",
+  "confirm_loader_manifest.py": "c3f7ec899f79416fbcf82c9783c431c9f55e465cc27667f42b1b41df6ddfcd73",
+  "corruption.py": "212c58c7ddb2ba5b977fbfeb7b0a0523f99c48b33e74ec00c94d3f34550b7581",
+  "cross_model_check.py": "8b7d82c28fddbeefc514f9761f82414a02a880fb988af987ee783b15832af911",
+  "eval_official.py": "3d80b38ce5d42191a71b87daa5e46a6ad68a47d7bf60edb621fa7cb9332ee388",
+  "evaluator.py": "9b99d179ad542b363672c7da9a28c0b9da419d00cd12683d997d9cfa413aaf00",
+  "event_stats.py": "a35c2159012d931dc47a29a93ab07fe0bb148883382329db59aa4a249b793867",
+  "geometry_regression.py": "77978c1b76a1f5679c8d68ca2380716f805fb3d88eeabdc2cb4833d83ed80490",
+  "gt_tables.py": "9b916b9a96d6a7894679f1f8e5da720815ebf846b4f38b38503692a51e39816f",
+  "input_probe.py": "c436ae3cdb3de15e356611782b51ab06de4edfde52c894449ee89c9ebca13523",
+  "isolation.py": "f9b1f7470e1ccdac39b4ff4ff41040e92a454811a540a560ee440ffc6930b4c2",
+  "make_schedules.py": "f5e2a61d32aeb3d08481ba2777a3f8cb12d9ae07ddae2ac31c4be2631a5d0293",
+  "numerics.py": "a3723bc3dcc37effeaa2a523492f2810818cffecdda4a4a4aa3e63a414b744d2",
+  "nusc_ref.py": "886bcd505df9289f2cc2deb91d0fcaa616c0ec01591b091103273a57807075ad",
+  "online_offline_check.py": "ffc80f04966d68471dd452cd8808b8de87a26c0d165574aec2f30ddc68030626",
+  "run_sparsebev.py": "bd3dafedfa481ae2c9be7fbc0afb6eca3d9429f2a5296706e992100a2aee2b02",
+  "schedule.py": "40b848d2955ed65d04636db9234055a3a0cb778ca45dd3834acdddd6df6b8e3d",
+  "state.py": "b23fd0aca444d8ea28eec17d3cccaf240b00360f2b1267e1331351829400aef2",
+  "streampetr_adapter.py": "447e8fe04983c9d0ff9e402f7163d9e3353807f8c72bafb4553d44d906e1a6b6",
+  "verify_runs.py": "6ca2542d199bb9f6d6e692ff4d5a14201c0625cc90b7ef1cb2b087fe228d9880",
+  "window_check.py": "a94904a82bfbbbf470e309668428682fa73dedf88b16a35e3b5bd9df1ef25f25"
+ },
+ "torch": "1.9.0+cu111",
+ "mmcv": "1.6.0",
+ "cuda_runtime": "11.1",
+ "argv": [
+  "/home/rockhan/Documents/UM/rob535/projects/SparseBEV/outage/run_sparsebev.py",
+  "--split",
+  "pilot",
+  "--condition",
+  "2",
+  "--out",
+  "/home/rockhan/Documents/UM/rob535/projects/RecoveryAnalysis/artifacts/reproduction/sparsebev_pilot_d20",
+  "--no-tf32"
+ ],
+ "cwd_root": "/home/rockhan/Documents/UM/rob535/projects/SparseBEV",
+ "cudnn_benchmark": false,
+ "cudnn_deterministic": true,
+ "tf32_matmul": false,
+ "tf32_cudnn": false,
+ "gpu": "NVIDIA GeForce RTX 3060"
+}

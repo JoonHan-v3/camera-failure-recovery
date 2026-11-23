@@ -1,0 +1,35 @@
+{
+ "sparsebev_code": {
+  "repo": "https://github.com/MCG-NJU/SparseBEV",
+  "commit": "d34105285f6a50aeb49dd62ef1486860650d1aab",
+  "clean_tree": true
+ },
+ "mmdet3d": {
+  "repo": "https://github.com/open-mmlab/mmdetection3d",
+  "tag": "v1.0.0rc6",
+  "commit": "47285b3f1e9dba358e98fcd12e523cfd0769c876"
+ },
+ "config": {
+  "path": "sparsebev_src/configs/r50_nuimg_704x256.py",
+  "sha256": "c6ac620a3231ccdf74d500c1c911ea81d876846a6bfc3f8f9253424aeea867b8"
+ },
+ "checkpoint": {
+  "path": "ckpts/r50_nuimg_704x256.pth -> /mnt/storage/ckpts_shared/sparsebev/r50_nuimg_704x256.pth",
+  "sha256": "1fa2e196973f717407cbbe71a4381731ab21e5152528cdbe2e6586efcb6c0478",
+  "bytes": 178604339,
+  "source": "README gdrive id 1ft34-pxLpHGo2Aw-jowEtCxyXcqszHNn"
+ },
+ "pretrain": {
+  "path": "/home/rockhan/storage/ckpts_shared/sparsebev/cascade_mask_rcnn_r50_fpn_coco-20e_20e_nuim_20201009_124951-40963960.pth",
+  "sha256": "4096396018c0cf59fbe0eb1afe6e269f4676b34460bed5eedde5d7680d58bb4e"
+ },
+ "infos": {
+  "pilot": "13905423b5d5a40d3f8bc0e0a5ab1e759bd8d6d8a9149471f1f1df6079a97a07",
+  "val": "232fe3ba7a903d19fa9086ca55cc10bea24ab43c0b9fdb3f00d9cc752ae494ce"
+ },
+ "schedules": {
+  "train": "becfe1f4421b9625e607c9b171e383f5f6880268214cc09d5ff11f19eec39835",
+  "val": "e2972e46a0f3f84d661c57cb50606c227b2f2453cb16758e07ecd22c58f9621e"
+ },
+ "cuda_ext": "b87a35e03428eb4c463b96a0a13f39b037b75386efd7e62f3f5d7ff7e22d0acd"
+}

@@ -1,0 +1,45 @@
+{
+ "model": "streampetr",
+ "n_frames": 80,
+ "scenes": [
+  "129304d659464b0fb3a51c99eaec114a",
+  "73030fb67d3c46cfb5e590168088ae39"
+ ],
+ "repeats": 3,
+ "batch_size": 1,
+ "condition": "clean",
+ "tf32": false,
+ "latency_ms": {
+  "steady_median": 77.60833400243428,
+  "steady_mean": 77.77577916660961,
+  "steady_p95": 80.17785214397009,
+  "steady_p99": 80.55141426535556,
+  "steady_min": 76.78273199417163,
+  "steady_max": 80.70506299554836,
+  "first_frame_of_scene_median": 77.32850699539995,
+  "per_pass_median": [
+   77.04829150316073,
+   77.38669150421629,
+   78.05173850647407
+  ]
+ },
+ "fps_steady_median": 12.885214105596363,
+ "data_loading_cpu_ms": {
+  "median": 153.0912739908672,
+  "mean": 153.4947512251165,
+  "p95": 159.1057153047586
+ },
+ "end_to_end_ms_median": 230.69960799330147,
+ "peak_allocated_mb": 374.8388671875,
+ "peak_reserved_mb": 540.0,
+ "n_parameters": 37259345,
+ "gpu_smi": "NVIDIA GeForce RTX 3060, 2609 MiB, 12288 MiB, 1987 MHz, 2160 MHz, 151.87 W",
+ "gpu_compute_apps_during_profile": [
+  "411013, 1944 MiB"
+ ],
+ "torch": "1.9.0+cu111",
+ "cuda_runtime": "11.1",
+ "fp16_wrapped": true,
+ "protocol": "warm-up pass discarded; synchronized per-frame forward incl. host->device copy of pre-built inputs; CPU decode excluded (reported separately)",
+ "timestamp_utc": "2026-11-22T20:04:33Z"
+}

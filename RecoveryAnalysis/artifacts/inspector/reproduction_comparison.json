@@ -1,0 +1,20 @@
+{
+ "streampetr": {
+  "n_samples": 402,
+  "predictions_exact_and_finite": true,
+  "n_audit_records": 2412,
+  "audit_records_exact": true
+ },
+ "bevformer": {
+  "n_samples": 402,
+  "predictions_exact_and_finite": true,
+  "n_audit_records": 2412,
+  "audit_records_exact": true
+ },
+ "sparsebev": {
+  "n_samples": 402,
+  "predictions_exact_and_finite": true,
+  "n_audit_records": 2412,
+  "audit_records_exact": true
+ }
+}

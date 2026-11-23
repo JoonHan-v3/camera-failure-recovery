@@ -1,0 +1,49 @@
+{
+ "executed_source": "BEVFormer/bevformer_src/projects/mmdet3d_plugin/bevformer/detectors/bevformer.py",
+ "metadata_changed_after_first_pass": true,
+ "warmup_effective_translation": [
+  [
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   0.11808054703317339,
+   1.9991328530072678,
+   0.0
+  ],
+  [
+   -0.2306156426944881,
+   1.9603124195023156,
+   0.0
+  ],
+  [
+   -0.6025814234501468,
+   1.8996921295030234,
+   0.0
+  ]
+ ],
+ "reused_measured_effective_translation": [
+  [
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   0.11808054703317339,
+   1.9991328530072678,
+   0.0
+  ],
+  [
+   -0.3486961897276615,
+   -0.038820433504952234,
+   0.0
+  ],
+  [
+   -0.37196578075565867,
+   -0.060620289999292254,
+   0.0
+  ]
+ ],
+ "same_effective_inputs": false
+}

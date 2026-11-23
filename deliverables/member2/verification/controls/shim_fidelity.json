@@ -1,0 +1,54 @@
+{
+ "seed": 0,
+ "n_layers": 6,
+ "layers": [
+  {
+   "layer": 0,
+   "max_abs_err": 0.00879526138305664,
+   "mean_abs_err": 0.0007862177444621921,
+   "out_scale": 3.840150833129883,
+   "max_rel_to_scale": 0.0022903426884115737
+  },
+  {
+   "layer": 1,
+   "max_abs_err": 0.012844234704971313,
+   "mean_abs_err": 0.0011498313397169113,
+   "out_scale": 5.073879718780518,
+   "max_rel_to_scale": 0.0025314424891527314
+  },
+  {
+   "layer": 2,
+   "max_abs_err": 0.01498878002166748,
+   "mean_abs_err": 0.001082606497220695,
+   "out_scale": 4.144783020019531,
+   "max_rel_to_scale": 0.0036163002862323176
+  },
+  {
+   "layer": 3,
+   "max_abs_err": 0.015119701623916626,
+   "mean_abs_err": 0.00112922175321728,
+   "out_scale": 4.287587642669678,
+   "max_rel_to_scale": 0.003526388935691191
+  },
+  {
+   "layer": 4,
+   "max_abs_err": 0.01594245433807373,
+   "mean_abs_err": 0.0010888889664784074,
+   "out_scale": 4.581732749938965,
+   "max_rel_to_scale": 0.0034795688024985977
+  },
+  {
+   "layer": 5,
+   "max_abs_err": 0.021627306938171387,
+   "mean_abs_err": 0.0008852776372805238,
+   "out_scale": 5.163330554962158,
+   "max_rel_to_scale": 0.004188634972708985
+  }
+ ],
+ "criterion": "max_abs<=0.05 and max_rel_to_scale<=0.01",
+ "passed": true,
+ "shim_sha256": "94b947e4a2dcc73d4428615d49da92d018b04f012f5bd2c346232de00c25d9f1",
+ "torch": "1.9.0+cu111",
+ "gpu": "NVIDIA GeForce RTX 3060",
+ "checkpoint": "ckpts/stream_petr_r50_flash_704_bs2_seq_90e.pth"
+}

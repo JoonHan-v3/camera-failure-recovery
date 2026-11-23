@@ -1,0 +1,23 @@
+{
+ "infos": "artifacts/trainval_infos/val_infos.pkl",
+ "n_samples": 6019,
+ "n_images": 36114,
+ "per_camera": {
+  "CAM_FRONT": 6019,
+  "CAM_FRONT_RIGHT": 6019,
+  "CAM_FRONT_LEFT": 6019,
+  "CAM_BACK": 6019,
+  "CAM_BACK_LEFT": 6019,
+  "CAM_BACK_RIGHT": 6019
+ },
+ "shapes": {
+  "(900, 1600, 3)": 36114
+ },
+ "failures": 0,
+ "failed_examples": [],
+ "bytes_min": 54586,
+ "bytes_median": 141092,
+ "bytes_max": 313126,
+ "passed": true,
+ "decoder": "cv2 5.1.0"
+}

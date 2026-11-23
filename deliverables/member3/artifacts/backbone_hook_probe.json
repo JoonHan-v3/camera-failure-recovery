@@ -1,0 +1,15 @@
+{
+ "n_frames": 80,
+ "backbone_input_shape": [
+  6,
+  3,
+  256,
+  704
+ ],
+ "duration_s": 2.0,
+ "corrupted": 9,
+ "exact_black": 9,
+ "other_views_identical": true,
+ "uncorrupted_identical": true,
+ "PASS": true
+}
