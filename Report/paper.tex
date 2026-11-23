@@ -37,9 +37,9 @@ features; StreamPETR: propagated object queries; SparseBEV: a window of eight ke
 Our contribution is an event-based protocol: one physical outage schedule shared by all models, black-image injection before preprocessing with an
 audit of every consumed image, per-model operating points fixed on separate pilot scenes, frozen damage and recovery rules that keep right-censored events apart from
 failures, and a paired scene bootstrap. On 150 validation scenes all models lose 9--22 points of front-region recall during the outage, and the pooled loss is back inside
-a 5-point margin at the first bin after restoration, except SparseBEV and StreamPETR after 2\,s outages (7 points). From 0.5\,s on the pooled loss stays within 3 points of zero, although
+a 5-point margin at the first bin after restoration, except SparseBEV and StreamPETR after 2\,s outages (7 points). From 0.5\,s on the pooled loss stays within 3.1 percentage points of zero, although
 SparseBEV's window holds black frames for about 3.5\,s. Failure analysis shows that objects still missed after restoration grow with outage length
-(up to 21\% for StreamPETR) and that precision drops for two of the three models. Code is linked in Section~VII.
+(up to 21\% of continuing, clean-detected objects for StreamPETR) and that precision drops for StreamPETR and SparseBEV (paired intervals exclude zero). Code is linked in Section~VII.
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,7 +59,7 @@ during a bounded outage, or when it ends. We therefore analyze three existing, p
 images are injected before resizing and normalization, and every consumed image is audited.
 \item \textbf{Recovery metrics} on the same eligible objects for paired clean and outage runs, with frozen damage and recovery rules, per-model
 operating points calibrated on separate scenes, and explicit right-censoring of events whose follow-up is incomplete.
-\item A \textbf{quantitative and failure-mode analysis} on 150 nuScenes validation scenes with paired scene-bootstrap intervals and state-isolation controls.
+\item A \textbf{quantitative and failure-mode analysis} on 150 validation scenes with paired scene-bootstrap intervals and state-isolation controls.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -72,12 +72,10 @@ a finite window of past frames. We study one representative of each of the last 
 how long information from one input frame can persist.
 
 \textbf{Robustness benchmarks.} Common-corruption benchmarks \cite{hendrycks2019} were extended to 3D detection: nuScenes-C \cite{dong2023} and RoboBEV \cite{xie2023}
-corrupt every camera frame, and Zhu~\emph{et al.}~\cite{zhu2023} compare BEV and non-BEV detectors under natural and adversarial perturbations. These studies treat a
-corruption as a constant property of a whole sequence.
+corrupt every camera frame, and Zhu~\emph{et al.}~\cite{zhu2023} compare BEV and non-BEV detectors under natural and adversarial perturbations. These studies treat a corruption as constant over a sequence.
 
 \textbf{Sensor failure.} MetaBEV \cite{ge2023} and the LiDAR--camera benchmark of Yu~\emph{et al.}~\cite{yu2023} study missing or corrupted sensors in fusion models,
-and BEVFusion \cite{bevfusion} lets one modality compensate for another. A camera-only system has no second modality, and the \emph{transient}
-nature of a dropout and the role of temporal memory after it ends have received little attention. We address that gap on nuScenes \cite{nuscenes}.
+and BEVFusion \cite{bevfusion} lets one modality compensate for another. A camera-only system has no second modality, and the \emph{transient} nature of a dropout and the role of temporal memory after it ends have received little attention; we address that gap on nuScenes \cite{nuscenes}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{APPROACH}
@@ -92,7 +90,7 @@ only, as its release publishes no mAP).
 \subsection{Outage protocol}
 Each of the 150 nuScenes validation scenes receives one outage (Fig.~\ref{fig:protocol}) that starts at the CAM\_FRONT sensor timestamp of keyframe six, leaving six clean keyframes,
 and lasts $d\in\{0.5,1,2\}$\,s. Every CAM\_FRONT image whose sensor timestamp lies in the half-open window of length $d$ from the start is replaced by an all-black image
-\emph{before} resizing and normalization, so the camera is dark rather than the features. A sample may use images up to 50\,ms later than its own timestamp (a causal allowance). The schedule is frozen,
+\emph{before} resizing and normalization, so the camera is dark rather than the features. A sample may use images up to 50\,ms later than its own timestamp; this is an explicit availability allowance, also applied to BEVFormer's CAN-bus inputs (largest offset 49.9\,ms). The schedule is frozen,
 identical across the three projects, and never changed from detection outcomes. Each consumed image is logged with path, timestamp and pixel hash before and after corruption; the black counts
 (168, 326, 635 on validation) match an independent recount.
 
@@ -105,15 +103,15 @@ identical across the three projects, and never changed from detection outcomes. 
 
 \subsection{Event-based recovery metrics}
 \textbf{Region and operating point.} Evaluation is restricted to the region the outage affects: ground-truth objects with centers in the CAM\_FRONT view within 50\,m, matched to predictions
-one-to-one by score within 2\,m on a single ego ground plane. Each model gets one score threshold (SparseBEV 0.542, StreamPETR 0.758, BEVFormer 0.879), calibrated on ten \emph{pilot}
+one-to-one by score within 2\,m on a single ego ground plane. Eligible ground truth is the ten detection classes with at least one annotated LiDAR or radar point; a prediction matched to an ignored (non-eligible) same-class box is discarded, and an unmatched prediction counts as a false positive only if its center lies in the region. Each model gets one score threshold (SparseBEV 0.542, StreamPETR 0.758, BEVFormer 0.879), calibrated on ten \emph{pilot}
 training-split scenes to the highest precision subject to recall $\ge 0.30$ and $\ge 100$ region predictions, and fixed before any validation outcome was inspected.
+\textbf{Disclosure.} The event rules, threshold procedure and baseline gate were declared before validation event statistics, but the matching geometry was corrected once afterwards. Version~1 matched in the LiDAR sensor's XY plane; an independent review found a match that crossed the 2\,m limit because that plane is tilted about 2.6$^\circ$ against the ego plane, so version~2 uses the ego plane for region and matching. Validation statistics had already been computed with version~1; the pilot thresholds were recalibrated and unchanged, the version-1 outputs were kept, and the addendum is at \url{https://github.com/JoonHan-v3/camera-failure-recovery/blob/main/SparseBEV/artifacts/provenance/EVENT_RULES_DECLARATION.txt}.
 
 \textbf{Loss.} For a phase (during the outage, or a post-restoration bin) the pooled loss is $L=R_{\text{clean}}-R_{\text{outage}}$, with both recalls on the same eligible objects of the paired runs.
 Post-restoration samples are assigned one-to-one to bins 0.0--4.5\,s ($\pm$0.25\,s).
 
 \textbf{Events and censoring.} An event is a (scene, duration) pair, \emph{damaged} if its loss during the outage exceeds 0.05 with at least five eligible objects. Recovery onset is the first
-post-restoration bin with $L\le 0.05$ whose adjacent next bin also qualifies. A missing or insufficient bin breaks the pair, so an event without a confirmable onset is
-\emph{right-censored} (unknown), not a failure, unless every follow-up pair was usable.
+post-restoration bin with $L\le 0.05$ whose adjacent next bin also qualifies. An event without a confirmed onset is \emph{right-censored} at the end of the 4.5\,s window, not a permanent failure. We separate \emph{incomplete} observation (a missing or insufficient bin breaks a pair, so an onset may have been missed) from \emph{complete} observation without confirmation (every pair usable, none qualifying).
 
 \subsection{Uncertainty and controls}
 Intervals are percentile 95\% intervals of a paired complete-scene bootstrap ($B=10{,}000$): scenes are resampled with replacement and \emph{one} weight matrix is shared by all models and durations, preserving the
@@ -165,22 +163,21 @@ Dashed: the 0.05 margin; dotted: boundary between ``during'' and the post-restor
 The pooled curves (Fig.~\ref{fig:results}b--d) return to the margin almost immediately. At the first bin (0.0\,s) the loss is 0.014--0.040 for all models after 0.5\,s and 1\,s outages
 and for BEVFormer after 2\,s; only SparseBEV (0.072) and StreamPETR (0.074) after 2\,s are above the margin, and both are below it from 0.5\,s. From 0.5\,s on, every pooled loss stays within $\pm0.031$,
 with no step when information should leave the memory. This is notable for SparseBEV: its predictions differ from the clean run until the last black frame leaves its window (about 3.5\,s),
-yet its pooled recall shows no loss at 3.0--4.0\,s (0.003, interval $-0.004$ to $0.010$, at 3.5\,s after a 2\,s outage). BEVFormer's recurrent state never returns to bit-identical predictions, but its
-pooled loss is gone from the first bins. These statements concern \emph{recall at a fixed threshold}, not score or box quality. Of 90 model$\times$duration$\times$bin cells from 0.5\,s on, five have an interval excluding zero,
+yet its pooled recall loss at 3.0--4.0\,s stays below 0.015 at the upper interval bound (e.g., 0.003, interval $-0.004$ to $0.010$, at 3.5\,s after a 2\,s outage). BEVFormer's recurrent state never returns to bit-identical predictions, but its
+pooled loss is already inside the margin at the first bin. These statements concern \emph{recall at a fixed threshold}, not score or box quality. Of 90 model$\times$duration$\times$bin cells from 0.5\,s on, five have an interval excluding zero,
 close to the four or five expected by chance.
 
 Per event, 49--80\% of events with enough objects are damaged (Table~\ref{tab:main}); StreamPETR is lowest and SparseBEV and BEVFormer are not statistically distinguishable. Per-event \emph{recovery} cannot be read at face value, however:
-43--77\% of damaged events have incomplete follow-up (a missing or insufficient bin, from 2\,Hz keyframes and the five-object rule), and 80, 51 and 25 of 150 events are insufficient at 0.5, 1 and 2\,s. Where follow-up is complete,
-recovery is confirmed in 209 of 210 events, so the confirmed-by-4\,s fractions (0.91/0.94/0.91 at 0.5\,s down to 0.68/0.61/0.64 at 2\,s for SparseBEV/StreamPETR/BEVFormer) mostly reflect censoring.
+43--77\% of damaged events have incomplete follow-up (a missing or insufficient bin, from 2\,Hz keyframes and the five-object rule), and 80, 51 and 25 of 150 events are insufficient at 0.5, 1 and 2\,s. In the subset with complete follow-up, recovery is confirmed in 209 of 210 events; that subset is selected (every bin has at least five objects), so it does not say how many unconfirmed events would have recovered.
+The overall confirmed-by-4\,s fractions (0.91/0.94/0.91 at 0.5\,s down to 0.68/0.61/0.64 at 2\,s for SparseBEV/StreamPETR/BEVFormer) therefore mix recovery with observability and are not recovery rates.
 Official whole-sequence metrics barely move after 2\,s (NDS 0.556$\to$0.552, 0.537$\to$0.534, 0.355$\to$0.352 for SparseBEV, StreamPETR, BEVFormer): a full-sequence benchmark dilutes a brief single-camera outage.
 
 \subsection{Qualitative example}
-Fig.~\ref{fig:qual} shows an event chosen by a fixed rule on event category, not by eye: SparseBEV through a 2\,s outage. The front input is black, the clean-detected objects (green) are missed (red) during the outage,
-and in the first bins after restoration they are detected again; the BEV panels show the same loss and return in the ground plane.
+Fig.~\ref{fig:qual} shows an event chosen by a fixed rule on event category: SparseBEV through a 2\,s outage. The front input is black, clean-detected objects (green) are missed (red) during the outage and detected again in the first bins after restoration.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.78\textwidth]{figures/fig_qualitative.png}
+\includegraphics[width=0.62\textwidth]{figures/fig_qualitative.png}
 \caption{SparseBEV, 2\,s outage, an event with recovery at the first observed bin. Top: CAM\_FRONT as consumed with projected ground truth. Bottom: BEV in the ego frame.
 Green: detected in both runs; red: missed only in the outage run; grey: missed in both; blue: detected only in the outage run; orange cross: false positive.}
 \label{fig:qual}
@@ -191,48 +188,44 @@ Green: detected in both runs; red: missed only in the outage run; grey: missed i
 
 Pooled recovery is fast, but the aggregate hides several failure modes (Fig.~\ref{fig:failure}).
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_failure.pdf}
+\caption{Failure modes. (a) Share of all continuing, clean-detected objects missed both during the outage and after restoration. (b) Paired change in precision during the outage (outage minus clean).
+(c) Recall loss per class for a 2\,s outage (classes with at least 200 eligible objects). All with 95\% intervals.}
+\label{fig:failure}
+\end{figure*}
+
 \textbf{Misses that persist after restoration.} Take objects that the clean run detects at both the last during-outage sample and the first strictly later sample with a restored front image, and that the outage run missed
-during the outage; 70--95\% are detected again (Table~\ref{tab:main}). The complement, a \emph{persisting miss}, grows with outage length for all three models (Fig.~\ref{fig:failure}a): 2--12\% (SparseBEV), 5--21\% (StreamPETR) and 7--17\% (BEVFormer) of
-continuing, clean-detected objects from 0.5\,s to 2\,s. StreamPETR, with the smallest loss during the outage, has the largest persisting share after 2\,s (0.21), consistent with a query memory that has lost an object's track and must
+during the outage. Of these \emph{missed-during} objects, 70--95\% are detected again (Table~\ref{tab:main}), so 5--30\% remain missed. The same \emph{persisting misses} measured against \emph{all} continuing, clean-detected objects (the denominator of Fig.~\ref{fig:failure}a) grow with outage length for all three models: 2--12\% (SparseBEV), 5--21\% (StreamPETR) and 7--17\% (BEVFormer) from 0.5\,s to 2\,s; for StreamPETR at 2\,s, 38 of 127 missed-during objects (30\%) are 21\% of the 185 continuing objects. StreamPETR, with the smallest loss during the outage, has the largest persisting share after 2\,s, consistent with a query memory that has lost an object's track and must
 re-initialize it; we have not isolated this mechanism. Where the last ``during'' sample is also bin 0.0 by evaluation time, it cannot be compared with itself, so the next restored observation (bin 0.5\,s) is used instead.
 
-\textbf{Precision.} At the fixed threshold, precision falls during a 2\,s outage for SparseBEV (0.940$\to$0.868) and StreamPETR (0.922$\to$0.846) but not BEVFormer (0.902$\to$0.899). StreamPETR's false positives rise (89$\to$100) while true positives fall;
-SparseBEV's are unchanged (77$\to$74), so its fall is mainly missing true positives. The separate intervals overlap, so this is suggestive only.
+\textbf{Precision.} Measured as the paired change $\text{precision}_{\text{outage}}-\text{precision}_{\text{clean}}$ with a scene-bootstrap interval (Fig.~\ref{fig:failure}b), precision falls for StreamPETR at every duration ($-0.061$, $-0.078$, $-0.076$ for 0.5, 1, 2\,s; all intervals exclude zero) and for SparseBEV at 2\,s ($-0.072$, 95\% interval $-0.120$ to $-0.032$), but not clearly for BEVFormer ($-0.003$ at 2\,s, interval $-0.052$ to $0.037$). StreamPETR's false positives rise (89$\to$100 at 2\,s) while true positives fall;
+SparseBEV's are unchanged (77$\to$74), so its fall is mainly missing true positives.
 
 \textbf{Which objects.} Cars dominate the absolute loss as the most numerous front-region class (2\,s: SparseBEV 0.31, StreamPETR 0.19, BEVFormer 0.35; 1,220 objects), followed by barriers and cones.
 Buses lose most for StreamPETR (0.39) but on only 62 objects, and construction vehicles and trailers have fewer than 50 objects, so we flag them rather than rank them.
 
-\textbf{Measurement artifacts.} Censoring of per-event recovery (above), and the 2\,Hz keyframes against 0.5\,s bins, which leave about five objects per bin so that ``loss $\le0.05$'' in practice means ``no object lost''.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/fig_failure.pdf}
-\caption{Failure modes. (a) Share of continuing, clean-detected objects still missed after restoration. (b) Precision for a 2\,s outage, clean (solid) and during the outage (hatched).
-(c) Recall loss per class for a 2\,s outage (classes with at least 200 eligible objects). All with 95\% intervals.}
-\label{fig:failure}
-\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{DISCUSSION}
 
 \textbf{Strengths.} The protocol isolates the transition: identical physical outages across models, audited inputs, paired clean/outage runs on the same objects, operating points fixed
 before validation, frozen event rules, and uncertainty that respects scene-level dependence. The controls (bit-exact repeatability, independent table rebuild, state-isolation and window tests) rule out likely
-artifacts such as a stale feature cache leaking clean content into an outage run, and the treatment of censoring prevents reading unrecovered events as failures.
+artifacts such as a stale feature cache leaking clean content into an outage run.
 
 \textbf{Limitations.} (i) The systems differ in clean recall, thresholds, resolution, pretraining, query counts and history, so this compares complete released systems, not architectures. (ii) A black image is an idealized failure; frozen frames, noise or packet loss
 may behave differently, and a frozen frame could harm a temporal model more. (iii) Pilot scenes come from the training split and may have been seen by the released models. (iv) Per-event analysis is noisy (about one sample per bin per scene, about five objects per sample).
-(v) Recall at a fixed threshold ignores calibration and box quality; intervals cover scene sampling only, with one deterministic run per condition. (vi) The front region is a projection of ground-truth centers; other cameras overlap it and motion is not compensated.
+(v) Recall at a fixed threshold ignores calibration and box quality; intervals cover scene sampling only, with one deterministic run per condition. (vi) The front region is a projection of ground-truth centers; other cameras overlap it.
 
-\textbf{Future work.} Realistic failures (frozen frames, other cameras, simultaneous failures); denser temporal sampling with sweeps for sub-second recovery; score and box-quality recovery and calibration; a second dataset to power the per-event analysis; controlled ablations of one
-temporal mechanism within a codebase (window length, memory reset on dropout) to move from description to cause; and mitigation such as detecting blank input and resetting or masking memory.
+\textbf{Future work.} Realistic failures (frozen frames, other cameras, simultaneous failures); sweeps for sub-second recovery; score and box-quality recovery; a second dataset for the per-event analysis; ablations of one temporal mechanism within a codebase (window length, memory reset) to move from description to cause; and mitigation such as detecting blank input and resetting memory.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{CONCLUSION AND REPRODUCIBILITY}
 
-A front-camera outage costs three different temporal detectors 9--22 points of front-region recall, and recall returns to within five points of the clean level within one bin of restoration, with the pooled loss within 3 points of zero from 0.5\,s on,
+A front-camera outage costs three different temporal detectors 9--22 points of front-region recall, and recall returns to within five points of the clean level within one bin of restoration, with the pooled loss within 3.1 percentage points of zero from 0.5\,s on,
 even though SparseBEV keeps black frames in its window for about 3.5\,s. What remains is concentrated in a minority of objects that stay missed after restoration, in precision for two models, and in events whose follow-up is too short to confirm recovery.
-Code, frozen declarations, the analysis notebook and figures are at \textbf{\url{https://github.com/JoonHan-v3/camera-failure-recovery}}
-(\texttt{Report/report.ipynb} regenerates every figure and table from the saved results).
+Code, frozen declarations, the analysis notebook (\texttt{Report/report.ipynb}, which regenerates every figure and table) and the saved results are at \textbf{\url{https://github.com/JoonHan-v3/camera-failure-recovery}}.
 
 \begin{thebibliography}{99}
 
@@ -260,7 +253,7 @@ Code, frozen declarations, the analysis notebook and figures are at \textbf{\url
 
 \bibitem{ge2023} C. Ge \emph{et al.}, ``MetaBEV: Solving sensor failures for 3D detection and map segmentation,'' in \emph{Proc. IEEE/CVF Int. Conf. Computer Vision (ICCV)}, 2023, pp. 8721--8731.
 
-\bibitem{yu2023} K. Yu \emph{et al.}, ``Benchmarking the robustness of LiDAR-camera fusion for 3D object detection,'' in \emph{Proc. IEEE/CVF Conf. Computer Vision and Pattern Recognition Workshops (CVPRW)}, 2023.
+\bibitem{yu2023} K. Yu \emph{et al.}, ``Benchmarking the robustness of LiDAR-camera fusion for 3D object detection,'' in \emph{Proc. IEEE/CVF Conf. Computer Vision and Pattern Recognition Workshops (CVPRW)}, 2023, pp. 3188--3198.
 
 \bibitem{bevfusion} Z. Liu \emph{et al.}, ``BEVFusion: Multi-task multi-sensor fusion with unified bird's-eye view representation,'' in \emph{Proc. IEEE Int. Conf. Robotics and Automation (ICRA)}, 2023.
 
