@@ -84,7 +84,7 @@ and BEVFusion \cite{bevfusion} lets one modality compensate for another. A camer
 \subsection{Detectors and temporal state}
 We use released checkpoints without retraining: \textbf{BEVFormer-tiny} (R50), whose recurrent BEV is aligned by CAN-bus ego motion;
 \textbf{StreamPETR} (R50, 704\,px) with a propagated query memory; and \textbf{SparseBEV} (R50, 704$\times$256), whose temporal input is the current keyframe plus
-seven previous keyframes and whose feature cache is keyed by file name. Each runs in its own project runner (batch one, TF32 off, deterministic cuDNN); repeated clean runs are
+seven previous keyframes and whose feature cache is keyed by file name. Each runs as released (batch one, TF32 off), with temporal state restarting at each scene start and no reset or masking when the camera goes black; repeated clean runs are
 bit-identical, and each clean baseline reproduces its released score within $\pm 0.010$ NDS (0.3545, 0.537, 0.556; a gate declared before the results; SparseBEV is gated on NDS
 only, as its release publishes no mAP).
 
