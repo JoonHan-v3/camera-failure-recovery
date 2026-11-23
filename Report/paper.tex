@@ -13,6 +13,7 @@
 \usepackage{amssymb}
 \usepackage{booktabs}
 \usepackage{url}
+\usepackage[hidelinks]{hyperref}
 
 \title{\LARGE \bf
 Camera Failure and Recovery in Three Camera-Only 3D Detectors:\\
@@ -105,7 +106,7 @@ identical across the three projects, and never changed from detection outcomes. 
 \textbf{Region and operating point.} Evaluation is restricted to the region the outage affects: ground-truth objects with centers in the CAM\_FRONT view within 50\,m, matched to predictions
 one-to-one by score within 2\,m on a single ego ground plane. Eligible ground truth is the ten detection classes with at least one annotated LiDAR or radar point; a prediction matched to an ignored (non-eligible) same-class box is discarded, and an unmatched prediction counts as a false positive only if its center lies in the region. Each model gets one score threshold (SparseBEV 0.542, StreamPETR 0.758, BEVFormer 0.879), calibrated on ten \emph{pilot}
 training-split scenes to the highest precision subject to recall $\ge 0.30$ and $\ge 100$ region predictions, and fixed before any validation outcome was inspected.
-\textbf{Disclosure.} The event rules, threshold procedure and baseline gate were declared before validation event statistics, but the matching geometry was corrected once afterwards. Version~1 matched in the LiDAR sensor's XY plane; an independent review found a match that crossed the 2\,m limit because that plane is tilted about 2.6$^\circ$ against the ego plane, so version~2 uses the ego plane for region and matching. Validation statistics had already been computed with version~1; the pilot thresholds were recalibrated and unchanged, the version-1 outputs were kept, and the addendum is at \url{https://github.com/JoonHan-v3/camera-failure-recovery/blob/main/SparseBEV/artifacts/provenance/EVENT_RULES_DECLARATION.txt}.
+\textbf{Disclosure.} The event rules, threshold procedure and baseline gate were declared before validation event statistics, but the matching geometry was corrected once afterwards. Version~1 matched in the LiDAR sensor's XY plane; an independent review found a match that crossed the 2\,m limit because that plane is tilted about 2.6$^\circ$ against the ego plane, so version~2 uses the ego plane for region and matching. Validation statistics had already been computed with version~1; the pilot thresholds were recalibrated and unchanged, the version-1 outputs were kept, and the \href{https://github.com/JoonHan-v3/camera-failure-recovery/blob/main/SparseBEV/artifacts/provenance/EVENT_RULES_DECLARATION.txt}{geometry-v2 addendum} is in the repository.
 
 \textbf{Loss.} For a phase (during the outage, or a post-restoration bin) the pooled loss is $L=R_{\text{clean}}-R_{\text{outage}}$, with both recalls on the same eligible objects of the paired runs.
 Post-restoration samples are assigned one-to-one to bins 0.0--4.5\,s ($\pm$0.25\,s).
@@ -177,7 +178,7 @@ Fig.~\ref{fig:qual} shows an event chosen by a fixed rule on event category: Spa
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.62\textwidth]{figures/fig_qualitative.png}
+\includegraphics[width=0.68\textwidth]{figures/fig_qualitative.png}
 \caption{SparseBEV, 2\,s outage, an event with recovery at the first observed bin. Top: CAM\_FRONT as consumed with projected ground truth. Bottom: BEV in the ego frame.
 Green: detected in both runs; red: missed only in the outage run; grey: missed in both; blue: detected only in the outage run; orange cross: false positive.}
 \label{fig:qual}
